@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+
+const images = await  getCollection('images');
+console.log(images);
+const dupliactedImages = images.concat(images);
+---
+
+<div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl p-8">
+    {dupliactedImages.map((image) => (
+      <Image src={image.data.image} alt="" oncontextmenu="return false;"  />
+    ))}
+</div>
