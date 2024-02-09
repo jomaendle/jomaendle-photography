@@ -4,8 +4,11 @@ import { Image } from 'astro:assets';
 
 
 const images = await  getCollection('images');
-console.log(images);
 const dupliactedImages = images.concat(images);
+
+// add image viewer to the page
+
+
 ---
 
 <div class="w-full overflow-y-auto">
