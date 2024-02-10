@@ -2,33 +2,24 @@
 type NavItems = {
     name: string;
     url: string;
-    children?: NavItems[];
 }
 
 const links: NavItems[] = [
     {
-        name: 'Overview',
+        name: 'Start',
         url: '/'
     },
     {
-        name: 'Work',
-        url: '/',
-        children: [{
-            name: 'Portraits',
-            url: '/portraits'
-        },
-            {
-                name: 'Landscapes',
-                url: '/landscapes'
-            }]
+        name: 'Portraits',
+        url: '/portraits'
     },
     {
-        name: 'Featured',
-        url: '/journal'
+        name: 'Landscapes',
+        url: '/landscapes'
     },
     {
-        name: 'About',
-        url: '/about'
+        name: 'FAQ',
+        url: '/faq'
     },
     {
         name: 'Contact',
@@ -37,42 +28,21 @@ const links: NavItems[] = [
 ]
 ---
 
-<header class="py-8 px-16 flex flex-col gap-8">
+<header class="py-8 px-16 flex flex-col gap-12">
     <a href="/" class="flex flex-col leading-5">
-        <span class="text-xl font-light whitespace-nowrap text-gray-500 uppercase" style="letter-spacing: 0.2rem">
+        <span class="text-xl whitespace-nowrap uppercase font-medium" style="letter-spacing: 0.1rem">
             Jo Maendle
         </span>
-        <span class="uppercase text-lg font-bold" style="letter-spacing: 0.1rem">
+        <span class="uppercase text-lg font-thin leading-4" style="letter-spacing: 0.03rem">
             Photography
         </span>
     </a>
 
-    <nav class="flex flex-col gap-2">
+    <nav class="flex flex-col gap-1">
         {links.map(link => (
-            link.children ? (
-                    <details class="py-1 cursor-pointer flex flex-col gap-2 transition-all">
-                        <summary class="text-gray-500 hover:text-gray-900">
-                            <span class="ml-0.5 ">
-                                {link.name}
-                            </span>
-                        </summary>
-                        <ul class="pl-4 flex flex-col gap-1">
-                            {link.children.map(child => (
-                                    <li>
-                                        <a href={child.url} class="text-gray-500 hover:text-gray-900">
-                                            {child.name}
-                                        </a>
-                                    </li>
-                            ))}
-                        </ul>
-
-                    </details>
-
-            ) : (
-                    <a href={link.url} class="py-1 text-gray-500 hover:text-gray-900">
-                        {link.name}
-                    </a>
-            )
+                <a href={link.url} class="py-1 text-hover">
+                    {link.name}
+                </a>
         ))}
     </nav>
 </header>

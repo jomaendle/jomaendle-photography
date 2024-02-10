@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Portrait Photography by Jo Maendle";
+
+const faqs: {
+    title: string;
+    content: string;
+}[] = [{
+    title: "What is your style?",
+    content: "I like to capture the essence of the person I am photographing. I like to take my time and get to know the person before I start taking pictures. I like to take pictures in natural light and I like to take pictures in black and white."
+}, {
+    title: "How much do you charge?",
+    content: "I charge $100 per hour for a portrait session. This includes 10 edited photos. I also offer a package deal for $500 which includes a 2 hour session and 20 edited photos."
+}, {
+    title: "How long does it take to get the photos?",
+    content: "I usually take about a week to edit the photos and then I will send them to you via email."
+}, {
+    title: "Do you offer prints?",
+    content: "Yes, I offer prints. I can print the photos for you or I can send you the digital files and you can print them yourself."
+}, {
+    title: "Do you offer retouching?",
+    content: "Yes, I offer retouching. I can remove blemishes, whiten teeth, and smooth out skin."
+}]
+
+---
+
+<Layout title={title}>
+    <div class="flex flex-col gap-16 p-8">
+        <h1 class="text-3xl">FAQ</h1>
+
+        <div class="flex flex-col gap-8 ">
+            {faqs.map(faq => (
+                    <details>
+                        <summary class="text-xl cursor-pointer text-hover">
+                            <span class="pl-2">{faq.title}</span>
+                        </summary>
+                        <p class="font-thin">{faq.content}</p>
+                    </details>
+            ))}
+        </div>
+    </div>
+</Layout>
+
+<style>
+    details[open] > summary::marker {
+        content: "-";
+    }
+
+    details > summary::marker {
+        content: "+";
+    }
+</style>
