@@ -1,4 +1,5 @@
 ---
+import MobileMenu from "./MobileMenu.astro";
 type NavItems = {
     name: string;
     url: string;
@@ -28,9 +29,9 @@ const links: NavItems[] = [
 ]
 ---
 
-<header class="py-8 px-16 flex flex-col gap-12">
-    <a href="/" class="flex flex-col leading-5">
-        <span class="text-xl whitespace-nowrap uppercase font-medium" style="letter-spacing: 0.1rem">
+<header class="sm:py-8 sm:px-16 p-4 flex sm:flex-col gap-12 sticky sm:static top-0 bg-white">
+    <a href="/" class="flex sm:flex-col items-center gap-2 sm:gap-0 leading-5 text-center sm:text-left">
+        <span class="text-lg sm:text-xl whitespace-nowrap uppercase font-medium" style="letter-spacing: 0.1rem">
             Jo Maendle
         </span>
         <span class="uppercase text-lg font-thin leading-4" style="letter-spacing: 0.03rem">
@@ -38,11 +39,13 @@ const links: NavItems[] = [
         </span>
     </a>
 
-    <nav class="flex flex-col gap-1">
+    <nav class="hidden sm:flex flex-col gap-1">
         {links.map(link => (
                 <a href={link.url} class="py-1 text-hover">
                     {link.name}
                 </a>
         ))}
     </nav>
+
+    <MobileMenu links={links} />
 </header>

@@ -1,0 +1,105 @@
+---
+const {links} = Astro.props;
+---
+
+<style>
+    #mobile-menu {
+        transition: all 0.5s ease;
+        transform: translateX(100%);
+        opacity: 0;
+        background: #efefef;
+    }
+
+    #mobile-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    a.link-item {
+        opacity: 0;
+        animation: fade 0.5s ease forwards;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+
+<div class="flex justify-between sm:hidden">
+    <button id="mobile-menu-button" class="text-2xl z-50">
+        <svg id="menuSvg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+
+        <svg id="closeSvg" class="hidden w-6 h-6" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" >
+            <path d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z"/>
+        </svg>
+    </button>
+</div>
+
+<div id="mobile-menu" class="flex fixed inset-0 bg-gray-100 flex-col z-40 gap-2 p-2">
+    {links.map((link, index) => (
+            <a href={link.url} class="block py-2 px-4 text-xl" key={index} >{link.name}</a>
+    ))}
+</div>
+
+
+<script>
+    import { navigate } from 'astro:transitions/client';
+
+    function attachEventListeners() {
+        const { mobileMenu, closeSvg, menuSvg, allLinks, mobileMenuButton } = getMobileMenuElements();
+
+        mobileMenuButton.addEventListener('click', () => {
+            closeSvg.classList.toggle('hidden');
+            mobileMenu.classList.toggle('open');
+            menuSvg.classList.toggle('hidden');
+            allLinks.forEach((link, index) => {
+                link.style.animationDelay = `${(index + 1) * 0.1}s`;
+                link.classList.toggle('link-item');
+                link.addEventListener('click', onLinkClick);
+            });
+        });
+    }
+
+    function onLinkClick(event) {
+        event.preventDefault();
+
+        const { mobileMenu, closeSvg, menuSvg, allLinks } = getMobileMenuElements();
+        mobileMenu.classList.remove('open');
+
+        setTimeout(() => {
+            navigate(event.target.href).then(() => {
+                closeSvg.classList.add('hidden');
+                menuSvg.classList.remove('hidden');
+                allLinks.forEach((link, index) => {
+                    link.classList.remove('link-item');
+                });
+            });
+        }, 200)
+    }
+
+    function getMobileMenuElements(): {
+        mobileMenuButton: HTMLButtonElement,
+        mobileMenu: HTMLDivElement,
+        closeSvg: SVGElement,
+        menuSvg: SVGElement,
+        allLinks: NodeListOf<HTMLAnchorElement>
+    } {
+        const mobileMenuButton = document.getElementById('mobile-menu-button') as HTMLButtonElement;
+        const mobileMenu = document.getElementById('mobile-menu') as HTMLDivElement;
+        const closeSvg = document.getElementById('closeSvg') as SVGElement;
+        const menuSvg = document.getElementById('menuSvg') as SVGElement;
+        const allLinks = mobileMenu.querySelectorAll('a');
+        return { mobileMenuButton, mobileMenu, closeSvg, menuSvg, allLinks };
+    }
+
+    // Event listeners get destroyed when navigating to a new page
+    // Re-attach them when the new page is loaded
+    document.addEventListener('astro:page-load', attachEventListeners);
+</script>

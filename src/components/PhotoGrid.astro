@@ -6,13 +6,10 @@ import { Image } from 'astro:assets';
 const images = await  getCollection('images');
 const dupliactedImages = images.concat(images);
 
-// add image viewer to the page
-
-
 ---
 
 <div class="w-full overflow-y-auto">
-    <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl p-8 ">
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl card">
         {dupliactedImages.map((image) => (
                 <Image src={image.data.image} alt="" oncontextmenu="return false;"  />
         ))}
