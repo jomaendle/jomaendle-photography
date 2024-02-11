@@ -1,0 +1,4 @@
+[[redirects]]
+from = "/"
+to = "/de/"
+status = 200
