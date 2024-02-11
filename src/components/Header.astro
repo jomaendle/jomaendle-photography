@@ -1,6 +1,11 @@
 ---
+import {getNavItemLink} from "../i18n/utils";
+import {getLangFromUrl, useTranslations} from "../i18n/utils";
 import MobileMenu from "./MobileMenu.astro";
-import {LINKS} from "../models/nav-item";
+import {LINKS, NavItem} from "../models/nav-item";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <header class="sm:py-8 sm:px-16 p-4 flex sm:flex-col gap-12 sticky sm:static top-0 bg-white">
@@ -16,8 +21,8 @@ import {LINKS} from "../models/nav-item";
 
     <nav class="hidden sm:flex flex-col gap-1">
         {LINKS.map(link => (
-                <a href={link.url} class="py-1 text-hover">
-                    {link.name}
+                <a href={getNavItemLink(lang, link)} class="py-1 text-hover">
+                    {t(link.labelKey)}
                 </a>
         ))}
     </nav>

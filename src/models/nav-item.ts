@@ -1,23 +1,25 @@
+import type { ui } from "../i18n/ui.ts";
+
 export type NavItem = {
-  name: string;
+  labelKey: keyof (typeof ui)["de"];
   url: string;
 };
 
 export const LINKS: NavItem[] = [
   {
-    name: "People",
+    labelKey: "nav.people",
     url: "/",
   },
   {
-    name: "Nature",
+    labelKey: "nav.nature",
     url: "/nature",
   },
   {
-    name: "FAQ",
+    labelKey: "nav.FAQ",
     url: "/faq",
   },
   {
-    name: "Contact",
+    labelKey: "nav.contact",
     url: "/contact",
   },
 ];

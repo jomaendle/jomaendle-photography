@@ -1,9 +1,13 @@
 ---
+import {getLangFromUrl, getNavItemLink, useTranslations} from "../i18n/utils";
 import {NavItem} from "../models/nav-item";
 
 const {links}: {
     links: NavItem[]
 } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <style>
@@ -50,7 +54,7 @@ const {links}: {
 
 <div id="mobile-menu" class="flex fixed inset-0 bg-gray-100 flex-col z-40 gap-6 p-2 pt-12">
     {links.map((link: NavItem) => (
-            <a href={link.url} class="block py-2 px-4 text-2xl text-hover">{link.name}</a>
+            <a href={getNavItemLink(lang, link)} class="block py-2 px-4 text-2xl text-hover">{t(link.labelKey)}</a>
     ))}
 
     <hr class="border-t-2 border-gray-300"/>

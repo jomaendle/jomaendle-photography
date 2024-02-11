@@ -1,0 +1,19 @@
+---
+import {getLangFromUrl, useTranslations} from "../../i18n/utils";
+import {getCollection} from "astro:content";
+import Layout from '../../layouts/Layout.astro';
+import PhotoGrid from "../../components/PhotoGrid.astro";
+import LayoutCard from "../../components/LayoutCard.astro";
+
+const images = await getCollection('portrait-images');
+const dupliactedImages = images.concat(images);
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title="Welcome to Astro.">
+    <LayoutCard title={t('nav.people')} subtitle="">
+        <PhotoGrid images={dupliactedImages}/>
+    </LayoutCard>
+</Layout>
