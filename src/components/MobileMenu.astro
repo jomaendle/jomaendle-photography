@@ -1,10 +1,10 @@
 ---
 import {getLangFromUrl, getNavItemLink, useTranslations} from "../i18n/utils";
-import {NavItem} from "../models/nav-item";
+import type {NavItem} from "../models/nav-item";
 
 const {links}: {
     links: NavItem[]
-} = Astro.props;
+} = Astro.props as any;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
