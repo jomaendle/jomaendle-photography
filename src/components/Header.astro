@@ -1,28 +1,6 @@
 ---
 import MobileMenu from "./MobileMenu.astro";
-type NavItems = {
-    name: string;
-    url: string;
-}
-
-const links: NavItems[] = [
-    {
-        name: 'People',
-        url: '/'
-    },
-    {
-        name: 'Nature',
-        url: '/nature'
-    },
-    {
-        name: 'FAQ',
-        url: '/faq'
-    },
-    {
-        name: 'Contact',
-        url: '/contact'
-    }
-]
+import {LINKS} from "../models/nav-item";
 ---
 
 <header class="sm:py-8 sm:px-16 p-4 flex sm:flex-col gap-12 sticky sm:static top-0 bg-white">
@@ -37,12 +15,12 @@ const links: NavItems[] = [
     </a>
 
     <nav class="hidden sm:flex flex-col gap-1">
-        {links.map(link => (
+        {LINKS.map(link => (
                 <a href={link.url} class="py-1 text-hover">
                     {link.name}
                 </a>
         ))}
     </nav>
 
-    <MobileMenu links={links}/>
+    <MobileMenu links={LINKS}/>
 </header>

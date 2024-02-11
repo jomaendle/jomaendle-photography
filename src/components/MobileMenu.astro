@@ -1,5 +1,9 @@
 ---
-const {links} = Astro.props;
+import {NavItem} from "../models/nav-item";
+
+const {links}: {
+    links: NavItem[]
+} = Astro.props;
 ---
 
 <style>
@@ -7,7 +11,7 @@ const {links} = Astro.props;
         transition: all 0.5s ease;
         transform: translateX(100%);
         opacity: 0;
-        background: #efefef;
+        background: #f2f2f2;
     }
 
     #mobile-menu.open {
@@ -31,7 +35,7 @@ const {links} = Astro.props;
 </style>
 
 <div class="flex justify-between sm:hidden">
-    <button id="mobile-menu-button" class="text-2xl z-50">
+    <button id="mobile-menu-button" class="text-2xl z-50 text-hover">
         <svg id="menuSvg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
              xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -44,9 +48,9 @@ const {links} = Astro.props;
     </button>
 </div>
 
-<div id="mobile-menu" class="flex fixed inset-0 bg-gray-100 flex-col z-40 gap-2 p-2">
-    {links.map((link, index) => (
-            <a href={link.url} class="block py-2 px-4 text-xl">{link.name}</a>
+<div id="mobile-menu" class="flex fixed inset-0 bg-gray-100 flex-col z-40 gap-6 p-2 pt-12">
+    {links.map((link: NavItem) => (
+            <a href={link.url} class="block py-2 px-4 text-2xl text-hover">{link.name}</a>
     ))}
 
     <hr class="border-t-2 border-gray-300"/>
@@ -54,7 +58,7 @@ const {links} = Astro.props;
     <a href="https://calendly.com/jo-maendle/erstgespraech"
        rel="noreferrer"
        target="_blank"
-       class="block py-2 px-4 text-xl">Book a free 15 min call</a>
+       class="block py-2 px-4 text-hover text-2xl">Book a free 15 min call</a>
 </div>
 
 
