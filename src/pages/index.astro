@@ -1,8 +1,15 @@
 ---
+import {getCollection} from "astro:content";
 import Layout from '../layouts/Layout.astro';
 import PhotoGrid from "../components/PhotoGrid.astro";
+import LayoutCard from "../components/LayoutCard.astro";
+
+const images = await getCollection('portrait-images');
+const dupliactedImages = images.concat(images);
 ---
 
 <Layout title="Welcome to Astro.">
-    <PhotoGrid />
+    <LayoutCard title="People" subtitle="">
+        <PhotoGrid images={dupliactedImages}/>
+    </LayoutCard>
 </Layout>

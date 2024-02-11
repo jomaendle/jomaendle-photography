@@ -1,17 +1,28 @@
 ---
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+import {Image} from 'astro:assets';
 
+const {images} = Astro.props;
 
-const images = await  getCollection('images');
-const dupliactedImages = images.concat(images);
+const imagesByCategory = images.reduce((acc, image) => {
+    const category = image.data.category || 'Uncategorized';
 
+    if (!acc[category]) {
+        acc[category] = [];
+    }
+    acc[category].push(image);
+    return acc;
+}, {});
 ---
 
-<div class="w-full overflow-y-auto">
-    <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl card">
-        {dupliactedImages.map((image) => (
-                <Image src={image.data.image} alt="" oncontextmenu="return false;"  />
-        ))}
-    </div>
+<!-- render each category separately -->
+<div class="w-full overflow-y-auto h-full">
+    {Object.entries(imagesByCategory).map(([category, images]) => (
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
+                {images.map((image) => (
+                        <Image src={image.data.image} alt="" oncontextmenu="return false;"/>
+                ))}
+            </div>
+
+            <hr class="my-8 border-t-2 border-gray-100"/>
+    ))}
 </div>

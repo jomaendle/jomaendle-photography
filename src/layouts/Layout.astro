@@ -3,7 +3,7 @@ import {getLangFromUrl} from "../i18n/utils";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import {ViewTransitions} from 'astro:transitions';
-import CalendlyButton from "../components/CalendlyButton.astro";
+
 interface Props {
     title: string;
 }
@@ -29,7 +29,6 @@ const lang = getLangFromUrl(Astro.url);
     <slot/>
 </main>
 <Footer/>
-<CalendlyButton/>
 </body>
 </html>
 
@@ -90,6 +89,10 @@ const lang = getLangFromUrl(Astro.url);
 
     .card {
         @apply p-4 sm:p-8;
+    }
+
+    .layout-title {
+        @apply text-4xl font-semibold;
     }
 
 </style>
