@@ -46,7 +46,7 @@ const {links} = Astro.props;
 
 <div id="mobile-menu" class="flex fixed inset-0 bg-gray-100 flex-col z-40 gap-2 p-2">
     {links.map((link, index) => (
-            <a href={link.url} class="block py-2 px-4 text-xl" key={index}>{link.name}</a>
+            <a href={link.url} class="block py-2 px-4 text-xl">{link.name}</a>
     ))}
 
     <hr class="border-t-2 border-gray-300"/>
@@ -96,14 +96,14 @@ const {links} = Astro.props;
     function getMobileMenuElements(): {
         mobileMenuButton: HTMLButtonElement,
         mobileMenu: HTMLDivElement,
-        closeSvg: SVGElement,
-        menuSvg: SVGElement,
+        closeSvg: HTMLElement,
+        menuSvg: HTMLElement,
         allLinks: NodeListOf<HTMLElement>
     } {
         const mobileMenuButton = document.getElementById('mobile-menu-button') as HTMLButtonElement;
         const mobileMenu = document.getElementById('mobile-menu') as HTMLDivElement;
-        const closeSvg = document.getElementById('closeSvg') as SVGElement;
-        const menuSvg = document.getElementById('menuSvg') as SVGElement;
+        const closeSvg = document.getElementById('closeSvg')
+        const menuSvg = document.getElementById('menuSvg');
         const allLinks = mobileMenu.querySelectorAll('a, hr') as NodeListOf<HTMLElement>;
 
         return {mobileMenuButton, mobileMenu, closeSvg, menuSvg, allLinks};

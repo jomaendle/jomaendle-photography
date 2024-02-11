@@ -3,7 +3,21 @@ import {Image} from 'astro:assets';
 
 const {images} = Astro.props;
 
-const imagesByCategory = images.reduce((acc, image) => {
+interface ImageData {
+    category?: string;
+
+    [key: string]: any;
+}
+
+interface ImageI {
+    data: ImageData;
+}
+
+type ImagesByCategory = {
+    [category: string]: ImageI[];
+};
+
+const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
     const category = image.data.category || 'Uncategorized';
 
     if (!acc[category]) {
@@ -14,7 +28,6 @@ const imagesByCategory = images.reduce((acc, image) => {
 }, {});
 ---
 
-<!-- render each category separately -->
 <div class="w-full overflow-y-auto h-full">
     {Object.entries(imagesByCategory).map(([category, images]) => (
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
