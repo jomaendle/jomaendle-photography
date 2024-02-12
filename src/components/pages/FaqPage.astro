@@ -1,0 +1,46 @@
+---
+import {getLangFromUrl,useTranslations} from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import LayoutCard from "../../components/LayoutCard.astro";
+import {FAQ_DE, FAQ_EN} from "../../models/faq";
+
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const title = "Portrait Photography by Jo Maendle";
+const faqs = lang === "en" ? FAQ_EN : FAQ_DE;
+---
+
+<Layout title={title}>
+    <LayoutCard title="FAQ"
+                subtitle={t('faq.subtitle')}>
+        <div class="flex flex-col gap-8 py-8 overflow-y-auto">
+            {faqs.map(faq => (
+                    <details class="max-w-[600px]">
+                        <summary class="text-xl cursor-pointer text-hover ">
+                            <span class="pl-2">{faq.title}</span>
+                        </summary>
+                        <p class="font-light pt-2">{faq.content}</p>
+                    </details>
+            ))}
+        </div>
+    </LayoutCard>
+</Layout>
+
+<script src="../../util/toggle-details.ts"></script>
+
+<style>
+    details {
+        padding: 0.5rem 0.8rem;
+        border-radius: 10px;
+        background-color: #f2f2f2;
+    }
+
+    details[open] > summary::marker {
+        content: "-";
+    }
+
+    details > summary::marker {
+        content: "+";
+    }
+</style>

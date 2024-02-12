@@ -1,0 +1,16 @@
+---
+import {getLangFromUrl,useTranslations} from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import LayoutCard from "../../components/LayoutCard.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<Layout title="Portrait Photography by Jo Maendle">
+    <LayoutCard title={t('nav.contact')}
+                subtitle="Get in touch">
+        <div class="flex flex-col gap-8 ">
+
+        </div>
+    </LayoutCard>
+</Layout>
