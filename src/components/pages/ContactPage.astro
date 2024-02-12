@@ -1,5 +1,5 @@
 ---
-import {getLangFromUrl,useTranslations} from "../../i18n/utils";
+import {getLangFromUrl, useTranslations} from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import LayoutCard from "../../components/LayoutCard.astro";
 
@@ -8,9 +8,26 @@ const t = useTranslations(lang);
 ---
 <Layout title="Portrait Photography by Jo Maendle">
     <LayoutCard title={t('nav.contact')}
-                subtitle="Get in touch">
+                subtitle={t('contact.subtitle')}>
         <div class="flex flex-col gap-8 ">
 
+
+            <a href="https://calendly.com/jo-maendle/erstgespraech"
+               rel="noreferrer"
+               data-skip-router-check
+               target="_blank"
+               class="flex items-center gap-2 text-lg
+                text-blue-500 py-4">
+                <span class="">
+                    {t('cta.call')}
+                </span>
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                     stroke="currentColor"
+                     class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/>
+                </svg>
+            </a>
         </div>
     </LayoutCard>
 </Layout>

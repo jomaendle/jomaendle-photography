@@ -28,7 +28,7 @@ const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
 }, {});
 ---
 
-<div class="w-full overflow-y-auto h-full">
+<div class="w-full overflow-y-auto h-full pb-16">
     {Object.entries(imagesByCategory).map(([category, images]) => (
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
                 {images.map((image) => (
@@ -36,6 +36,6 @@ const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
                 ))}
             </div>
 
-            <hr class="my-8 border-t-2 border-gray-100"/>
+            <hr class="my-8 border-t-2 border-gray-100 last:hidden"/>
     ))}
 </div>

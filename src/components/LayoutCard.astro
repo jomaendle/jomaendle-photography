@@ -5,9 +5,9 @@ const {title, subtitle} = Astro.props;
 <div class="flex flex-col gap-2 card h-full">
     <header class="flex flex-col gap-2">
         <h1 class="layout-title">{title}</h1>
-        <p class="text-gray-500 font-light">
+        {subtitle && <p class="text-gray-500 font-light">
             {subtitle}
-        </p>
+        </p>}
     </header>
 
     <slot/>
