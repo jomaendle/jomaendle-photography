@@ -29,7 +29,7 @@ const groupedFaqs: {
         <div class="flex flex-col gap-8 py-8 overflow-y-auto h-full">
             {Object.entries(groupedFaqs).map(([category, faqs]) => (
                     <details class="max-w-[600px] flex flex-col gap-2 rounded-lg transition-colors">
-                        <summary class="text-lg cursor-pointer text-hover">
+                        <summary class="text-lg cursor-pointer text-hover py-1">
                             <span class="pl-1">{category}</span>
                         </summary>
                         <div class="flex flex-col gap-4 pt-4">
@@ -58,7 +58,6 @@ const groupedFaqs: {
         background-color: #f0f0f0;
     }
 
-   // select the details summary if it has the --webkit-details-marker
     details > summary::-webkit-details-marker {
         display: none;
     }

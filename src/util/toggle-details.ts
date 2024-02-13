@@ -2,60 +2,45 @@ function registerToggleDetailsListener() {
   document.querySelectorAll("details").forEach((details) => {
     details.addEventListener("click", (e) => {
       e.preventDefault();
+
       if (details.hasAttribute("open")) {
-        details.removeAttribute("open");
+        animateDetailsState(details, false);
+        setTimeout(() => {
+          details.removeAttribute("open");
+        }, 300);
       } else {
         details.setAttribute("open", "open");
       }
     });
 
-    details.addEventListener("toggle", () => {
-      animateDetailsState(details);
+    details.addEventListener("toggle", (e: ToggleEvent) => {
+      e.preventDefault();
+      animateDetailsState(details, (e.target as HTMLDetailsElement).open);
     });
   });
 }
 
 registerToggleDetailsListener();
 
-function animateDetailsState(details: HTMLElement) {
-  const open = details.hasAttribute("open");
-  if (open) {
-    animateDetailsOpen(details);
-  } else {
-    animateDetailsClose(details);
-  }
-
-  const content = details.querySelector("summary + *");
+function animateDetailsState(details: HTMLElement, open: boolean) {
+  const content = details.querySelector("summary + *") as HTMLElement;
   if (content) {
-    // Delay the start of the animation until the next repaint
     requestAnimationFrame(() => {
+      content.style.overflow = "hidden";
+      content.style.willChange = "height, opacity";
+      content.style.transition = "height 300ms, opacity 300ms";
+      content.style.zIndex = "10";
+
       content.animate(
         {
           height: [
             `${open ? 0 : content.scrollHeight}px`,
             `${open ? content.scrollHeight : 0}px`,
           ],
+          opacity: [open ? 0 : 1, open ? 1 : 0],
         },
-        { duration: 200, fill: "forwards" },
+        { duration: 300, fill: "forwards" },
       );
-    });
-  }
-}
-
-function animateDetailsOpen(details: HTMLElement) {
-  const content = details.querySelector("summary + *");
-  if (content) {
-    requestAnimationFrame(() => {
-      content.animate({ opacity: [0, 1] }, { duration: 200, fill: "forwards" });
-    });
-  }
-}
-
-function animateDetailsClose(details: HTMLElement) {
-  const content = details.querySelector("summary + *");
-  if (content) {
-    requestAnimationFrame(() => {
-      content.animate({ opacity: [1, 0] }, { duration: 200, fill: "forwards" });
     });
   }
 }
