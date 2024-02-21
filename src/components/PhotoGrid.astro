@@ -19,21 +19,19 @@ type ImagesByCategory = {
     [category: string]: ImageI[];
 };
 
-/*const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
-    const category = image.data.category || 'Uncategorized';
-
-    if (!acc[category]) {
-        acc[category] = [];
+function getUrlForImage(image: ImageI) {
+    if (Astro.url.pathname.includes('nature')) {
+        return `../../${lang}/details/${image.slug}`;
     }
-    acc[category].push(image);
-    return acc;
-}, {});*/
+
+    return `../${lang}/details/${image.slug}`;
+}
 ---
 
 <div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8">
     <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
         {images.map((image: ImageI) => (
-                <a href={`../${lang}/details/${image.slug}`}>
+                <a href={getUrlForImage(image)}>
                     <Image src={image.data.image}
                            transition:name=`media-image-${image.slug}`
                            alt="" oncontextmenu="return false;"/>
