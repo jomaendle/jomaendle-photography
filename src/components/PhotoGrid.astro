@@ -5,6 +5,7 @@ const {images} = Astro.props;
 
 interface ImageData {
     category?: string;
+
     [key: string]: any;
 }
 
@@ -17,7 +18,7 @@ type ImagesByCategory = {
     [category: string]: ImageI[];
 };
 
-const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
+/*const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
     const category = image.data.category || 'Uncategorized';
 
     if (!acc[category]) {
@@ -25,21 +26,17 @@ const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
     }
     acc[category].push(image);
     return acc;
-}, {});
+}, {});*/
 ---
 
 <div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8">
-    {Object.entries(imagesByCategory).map(([category, images]) => (
-            <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
-                {images.map((image: ImageI) => (
-                        <a href={`./details/${image.slug}`}>
-                            <Image src={image.data.image}
-                                   transition:name=`media-image-${image.slug}`
-                                   alt="" oncontextmenu="return false;"/>
-                        </a>
-                ))}
-            </div>
-
-            <hr class="my-8 border-t-2 border-gray-100 last:hidden"/>
-    ))}
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
+        {images.map((image: ImageI) => (
+                <a href={`./details/${image.slug}`}>
+                    <Image src={image.data.image}
+                           transition:name=`media-image-${image.slug}`
+                           alt="" oncontextmenu="return false;"/>
+                </a>
+        ))}
+    </div>
 </div>

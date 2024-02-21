@@ -7,7 +7,6 @@ import LayoutCard from "../../components/LayoutCard.astro";
 import PhotoGrid from "../../components/PhotoGrid.astro";
 
 const images = await getCollection('landscapes');
-/*const duplicated = images.concat(images);*/
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
