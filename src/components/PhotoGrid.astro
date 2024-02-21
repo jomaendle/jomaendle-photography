@@ -1,7 +1,8 @@
 ---
+import {getLangFromUrl} from "../i18n/utils";
 import {Image} from 'astro:assets';
 const {images} = Astro.props;
-
+const lang = getLangFromUrl(Astro.url);
 
 interface ImageData {
     category?: string;
@@ -32,7 +33,7 @@ type ImagesByCategory = {
 <div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8">
     <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
         {images.map((image: ImageI) => (
-                <a href={`./details/${image.slug}`}>
+                <a href={`../${lang}/details/${image.slug}`}>
                     <Image src={image.data.image}
                            transition:name=`media-image-${image.slug}`
                            alt="" oncontextmenu="return false;"/>
