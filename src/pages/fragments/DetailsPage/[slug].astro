@@ -1,0 +1,23 @@
+---
+import {getPhotoDetailsStaticPaths} from "../../../util/details-static-paths";
+import Layout from "../../../layouts/Layout.astro";
+
+interface Props {
+    imageData: any;
+}
+
+const {imageData} = Astro.props;
+
+const image = imageData?.data?.image;
+
+export async function getStaticPaths() {
+    return getPhotoDetailsStaticPaths()
+}
+---
+
+<Layout title="Preview">
+    <p class="pt-8"></p>
+
+    {image && (<img src={image.src} alt={image.format} transition:name=`media-image-${imageData.slug}` width="400"/>)}
+
+</Layout>

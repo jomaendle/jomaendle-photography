@@ -1,0 +1,12 @@
+---
+import {getPhotoDetailsStaticPaths} from "../../../util/details-static-paths";
+import DetailsPage from "../../fragments/DetailsPage/[slug].astro";
+
+const {image} = Astro.props;
+
+export async function getStaticPaths() {
+   return getPhotoDetailsStaticPaths()
+}
+---
+
+<DetailsPage imageData={image}/>

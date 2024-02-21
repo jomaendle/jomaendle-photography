@@ -7,7 +7,7 @@ import LayoutCard from "../../components/LayoutCard.astro";
 import PhotoGrid from "../../components/PhotoGrid.astro";
 
 const images = await getCollection('landscapes');
-const duplicated = images.concat(images);
+/*const duplicated = images.concat(images);*/
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,6 +17,6 @@ const t = useTranslations(lang);
     <LayoutCard title={t('nav.nature')}
                 subtitle={t('nature.subtitle')}>
 
-        <PhotoGrid images={duplicated}/>
+        <PhotoGrid images={images}/>
     </LayoutCard>
 </Layout>

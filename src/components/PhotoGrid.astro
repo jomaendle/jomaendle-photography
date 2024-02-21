@@ -1,16 +1,16 @@
 ---
 import {Image} from 'astro:assets';
-
 const {images} = Astro.props;
+
 
 interface ImageData {
     category?: string;
-
     [key: string]: any;
 }
 
 interface ImageI {
     data: ImageData;
+    slug: string;
 }
 
 type ImagesByCategory = {
@@ -31,8 +31,12 @@ const imagesByCategory: ImagesByCategory = images.reduce((acc, image) => {
 <div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8">
     {Object.entries(imagesByCategory).map(([category, images]) => (
             <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
-                {images.map((image) => (
-                        <Image src={image.data.image} alt="" oncontextmenu="return false;"/>
+                {images.map((image: ImageI) => (
+                        <a href={`./details/${image.slug}`}>
+                            <Image src={image.data.image}
+                                   transition:name=`media-image-${image.slug}`
+                                   alt="" oncontextmenu="return false;"/>
+                        </a>
                 ))}
             </div>
 
