@@ -5,7 +5,7 @@ import {getImage} from 'astro:assets';
 import {getPhotoDetailsStaticPaths} from "../util/details-static-paths";
 
 interface Props {
-    images: CollectionEntry<'portrait-images'>[];
+    images: CollectionEntry<'portrait-images'>[] | CollectionEntry<'landscapes'>[];
 }
 
 export interface ImageI {
@@ -19,12 +19,13 @@ const lang = getLangFromUrl(Astro.url);
 const {images} = Astro.props;
 
 const optimizedImages = images.map(async (image) => {
-    const newImage =  await getImage({
-            src: image.data.image,
-            width: 400,
-            quality: 80,
-            format: 'webp',
-        });
+    const newImage = await getImage({
+        // @ts-ignore
+        src: image.data.image,
+        width: 400,
+        quality: 80,
+        format: 'webp',
+    });
     return {
         ...image,
         data: {
@@ -36,7 +37,7 @@ const optimizedImages = images.map(async (image) => {
 
 const res = await Promise.all(optimizedImages);
 
-function getUrlForImage(image: ImageI) {
+function getUrlForImage(image) {
     if (Astro.url.pathname.includes('nature')) {
         return `../../${lang}/details/${image.slug}`;
     }

@@ -4,7 +4,7 @@ import {getLangFromUrl} from "../i18n/utils";
 
 const currentLang = getLangFromUrl(Astro.url);
 
-function getLangLink(lang) {
+function getLangLink(lang: string) {
     const pathParts = Astro.url.pathname.split('/');
     pathParts[1] = lang;
     return pathParts.join('/');

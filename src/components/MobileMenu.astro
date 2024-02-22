@@ -108,17 +108,18 @@ const t = useTranslations(lang);
         });
     }
 
-    function onLinkClick(event) {
+    function onLinkClick(event: Event) {
         event.preventDefault();
 
         const {mobileMenu, closeSvg, menuSvg, allLinks} = getMobileMenuElements();
         mobileMenu.classList.remove('open');
 
         setTimeout(() => {
-            navigate(event.target.href).then(() => {
+            const target = event.target as HTMLAnchorElement;
+            navigate(target.href).then(() => {
                 closeSvg.classList.add('hidden');
                 menuSvg.classList.remove('hidden');
-                allLinks.forEach((link, index) => {
+                allLinks.forEach((link) => {
                     link.classList.remove('link-item');
                 });
             });
