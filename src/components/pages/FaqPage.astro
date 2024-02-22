@@ -10,7 +10,6 @@ const t = useTranslations(lang);
 const title = "Portrait Photography by Jo Maendle";
 const faqs = lang === "en" ? FAQ_EN : FAQ_DE;
 
-// write a function which groups the faqs by category
 const groupedFaqs: {
     [category: string]: FAQ[];
 } = faqs.reduce((acc, faq) => {

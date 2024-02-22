@@ -6,14 +6,13 @@ import PhotoGrid from "../../components/PhotoGrid.astro";
 import LayoutCard from "../../components/LayoutCard.astro";
 
 const images = await getCollection('portrait-images');
-/*const dupliactedImages = images.concat(images);*/
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
 <Layout title="Welcome to Astro.">
-    <LayoutCard title={t('nav.people')} subtitle={t('people.subtitle')}>
+    <LayoutCard title={t('nav.people')} >
         <PhotoGrid images={images}/>
     </LayoutCard>
 </Layout>

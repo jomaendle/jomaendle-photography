@@ -1,23 +1,40 @@
 ---
 import {getLangFromUrl} from "../i18n/utils";
-import {Image} from 'astro:assets';
-const {images} = Astro.props;
-const lang = getLangFromUrl(Astro.url);
+import type {CollectionEntry} from "astro:content"
+import {getImage} from 'astro:assets';
+import {getPhotoDetailsStaticPaths} from "../util/details-static-paths";
 
-interface ImageData {
-    category?: string;
-
-    [key: string]: any;
+interface Props {
+    images: CollectionEntry<'portrait-images'>[];
 }
 
-interface ImageI {
-    data: ImageData;
+export interface ImageI {
+    data: {
+        image: string;
+    };
     slug: string;
 }
 
-type ImagesByCategory = {
-    [category: string]: ImageI[];
-};
+const lang = getLangFromUrl(Astro.url);
+const {images} = Astro.props;
+
+const optimizedImages = images.map(async (image) => {
+    const newImage =  await getImage({
+            src: image.data.image,
+            width: 400,
+            quality: 80,
+            format: 'webp',
+        });
+    return {
+        ...image,
+        data: {
+            ...image.data,
+            image: newImage
+        },
+    }
+});
+
+const res = await Promise.all(optimizedImages);
 
 function getUrlForImage(image: ImageI) {
     if (Astro.url.pathname.includes('nature')) {
@@ -28,13 +45,13 @@ function getUrlForImage(image: ImageI) {
 }
 ---
 
-<div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8">
-    <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
-        {images.map((image: ImageI) => (
+<div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8 z-0">
+    <div class="grid md:grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
+        {images.map((image) => (
                 <a href={getUrlForImage(image)}>
-                    <Image src={image.data.image}
-                           transition:name=`media-image-${image.slug}`
-                           alt="" oncontextmenu="return false;"/>
+                    <img src={image.data.image.src}
+                         transition:name=`media-image-${image.slug}`
+                         alt="" oncontextmenu="return false;"/>
                 </a>
         ))}
     </div>
