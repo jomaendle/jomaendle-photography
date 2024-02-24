@@ -39,7 +39,7 @@ function getUrlForImage(image) {
 ---
 
 <div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8 z-0">
-    <div class="grid md:grid-cols-2 gap-4 xl:grid-cols-3 max-w-7xl">
+    <div class="grid md:grid-cols-2 gap-4 xl:grid-cols-3">
         {images.map((image) => (
                 <a href={getUrlForImage(image)} class="overflow-hidden">
                     <Image src={image.data.image}
