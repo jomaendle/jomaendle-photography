@@ -7,12 +7,8 @@ export type NavItem = {
 
 export const LINKS: NavItem[] = [
   {
-    labelKey: "nav.people",
+    labelKey: "nav.work",
     url: "/",
-  },
-  {
-    labelKey: "nav.nature",
-    url: "/nature",
   },
   {
     labelKey: "nav.services",

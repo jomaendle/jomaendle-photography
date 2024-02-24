@@ -4,6 +4,7 @@ import {getCollection} from "astro:content";
 import Layout from '../../layouts/Layout.astro';
 import PhotoGrid from "../../components/PhotoGrid.astro";
 import LayoutCard from "../../components/LayoutCard.astro";
+import ImageToggle from "../ImageToggle.astro";
 
 const images = await getCollection('portrait-images');
 
@@ -12,7 +13,9 @@ const t = useTranslations(lang);
 ---
 
 <Layout title="Welcome to Astro.">
-    <LayoutCard title={t('nav.people')} >
+    <LayoutCard>
+        <ImageToggle />
+
         <PhotoGrid images={images}/>
     </LayoutCard>
 </Layout>

@@ -1,0 +1,19 @@
+---
+import {getLangFromUrl, useTranslations} from "../i18n/utils";
+import ToggleButton from "./ToggleButton.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const isNatureActive = Astro.url.pathname.includes('/nature');
+---
+
+<div class="flex gap-4">
+    <a href=`/${lang}`>
+        <ToggleButton title={t('nav.people')} isActive={!isNatureActive}/>
+    </a>
+
+    <a href=`/${lang}/nature`>
+        <ToggleButton title={t('nav.nature')} isActive={isNatureActive}/>
+    </a>
+</div>

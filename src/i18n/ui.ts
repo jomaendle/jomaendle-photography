@@ -7,6 +7,7 @@ export const defaultLang = "de";
 
 export const ui = {
   en: {
+    "nav.work": "Work",
     "nav.people": "Portraits",
     "nav.nature": "Nature",
     "nav.FAQ": "FAQs",
@@ -28,8 +29,13 @@ export const ui = {
       "Ready to book a session or have questions? Contact us today.",
     "cta.call": "Book Your Free Call Now",
     "common.back": "Go Back",
+    "imprint.phone": "Phone",
+    "imprint.umsatzsteuer.title": "Umsatzsteuer-ID",
+    "imprint.umsatzsteuer.desc":
+      "Tax identification number in accordance with §27 a of Umsatzsteuergesetz:",
   },
   de: {
+    "nav.work": "Arbeit",
     "nav.people": "Porträts",
     "nav.nature": "Natur",
     "nav.FAQ": "Häufige Fragen",
@@ -51,5 +57,9 @@ export const ui = {
       "Bereit für eine Buchung oder hast du Fragen? Kontaktiere uns noch heute.",
     "cta.call": "Jetzt kostenloses Gespräch buchen",
     "common.back": "Zurück",
+    "imprint.phone": "Telefon",
+    "imprint.umsatzsteuer.title": "Umsatzsteuer-ID",
+    "imprint.umsatzsteuer.desc":
+      "Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:",
   },
 } as const;

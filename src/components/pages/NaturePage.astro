@@ -5,6 +5,7 @@ import {getCollection} from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import LayoutCard from "../../components/LayoutCard.astro";
 import PhotoGrid from "../../components/PhotoGrid.astro";
+import ImageToggle from "../ImageToggle.astro";
 
 const images = await getCollection('landscapes');
 
@@ -13,8 +14,8 @@ const t = useTranslations(lang);
 ---
 
 <Layout title="Portrait Photography by Jo Maendle">
-    <LayoutCard title={t('nav.nature')}>
-
+    <LayoutCard>
+        <ImageToggle />
         <PhotoGrid images={images}/>
     </LayoutCard>
 </Layout>
