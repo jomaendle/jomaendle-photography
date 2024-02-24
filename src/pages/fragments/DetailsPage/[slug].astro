@@ -1,4 +1,5 @@
 ---
+import {getLangFromUrl,useTranslations} from "../../../i18n/utils";
 import {getPhotoDetailsStaticPaths} from "../../../util/details-static-paths";
 import Layout from "../../../layouts/Layout.astro";
 
@@ -10,14 +11,51 @@ const {imageData} = Astro.props;
 
 const image = imageData?.data?.image;
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 export async function getStaticPaths() {
     return getPhotoDetailsStaticPaths()
 }
 ---
 
 <Layout title="Preview">
-    <p class="pt-8"></p>
+    <div class="h-full flex items-center flex-col justify-center gap-4 px-4 pb-12">
+        <header class="pt-8 self-start">
+            <button id="go-back-button"
+                    class="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-md hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/>
+                </svg>
 
-    {image && (<img src={image.src} alt={image.format} transition:name=`media-image-${imageData.slug}` width="500"/>)}
+                <span>{t('common.back')}</span>
+            </button>
+        </header>
 
+
+        <div class="flex-1 flex items-center justify-center h-full">
+            {image && (
+                    <img src={image.src} alt={image.format} transition:name=`media-image-${imageData.slug}`
+                         width="600"/>)
+            }
+        </div>
+
+    </div>
 </Layout>
+
+<script>
+    if (document) {
+        document.addEventListener('astro:page-load', () => {
+            const button = document.getElementById('go-back-button');
+
+            if (!button) {
+                return;
+            }
+
+            button.addEventListener('click', () => {
+                window.history.back();
+            });
+        });
+    }
+</script>

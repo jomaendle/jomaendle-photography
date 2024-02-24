@@ -1,24 +1,16 @@
 ---
 import {getLangFromUrl} from "../i18n/utils";
 import type {CollectionEntry} from "astro:content"
-import {getImage} from 'astro:assets';
-import {getPhotoDetailsStaticPaths} from "../util/details-static-paths";
+import {getImage, Image} from 'astro:assets';
 
 interface Props {
     images: CollectionEntry<'portrait-images'>[] | CollectionEntry<'landscapes'>[];
 }
 
-export interface ImageI {
-    data: {
-        image: string;
-    };
-    slug: string;
-}
-
 const lang = getLangFromUrl(Astro.url);
 const {images} = Astro.props;
 
-const optimizedImages = images.map(async (image) => {
+/*const optimizedImages = images.map(async (image) => {
     const newImage = await getImage({
         // @ts-ignore
         src: image.data.image,
@@ -35,7 +27,7 @@ const optimizedImages = images.map(async (image) => {
     }
 });
 
-const res = await Promise.all(optimizedImages);
+const res = await Promise.all(optimizedImages);*/
 
 function getUrlForImage(image) {
     if (Astro.url.pathname.includes('nature')) {
@@ -47,11 +39,13 @@ function getUrlForImage(image) {
 ---
 
 <div class="w-full overflow-y-auto h-full pb-16 pr-4 sm:pr-8 z-0">
-    <div class="grid md:grid-cols-2 gap-4 lg:grid-cols-3 max-w-5xl">
+    <div class="grid md:grid-cols-2 gap-4 xl:grid-cols-3 max-w-7xl">
         {images.map((image) => (
-                <a href={getUrlForImage(image)}>
-                    <img src={image.data.image.src}
+                <a href={getUrlForImage(image)} class="overflow-hidden">
+                    <Image src={image.data.image}
+                         class="hover:scale-105 transition-all opacity-0 duration-500"
                          transition:name=`media-image-${image.slug}`
+                           onload="this.classList.remove('opacity-0')"
                          alt="" oncontextmenu="return false;"/>
                 </a>
         ))}

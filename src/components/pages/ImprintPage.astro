@@ -1,0 +1,38 @@
+---
+import {getLangFromUrl, useTranslations} from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import LayoutCard from "../LayoutCard.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<Layout title="Portrait Photography by Jo Maendle">
+    <LayoutCard title={t('nav.imprint')}>
+        <div>
+            <p>Johannes M&auml;ndle<br/>
+                Jo Maendle Photography<br/>
+                Elbstr. 81<br/>
+                28199 Bremen</p>
+
+            <h2 class="text-xl font-medium">Kontakt</h2>
+            <p>Telefon: +49 (0) 15780778443<br/>
+                E-Mail: johannes.maendle@outlook.de</p>
+
+            <h2 class="text-xl font-medium">Umsatzsteuer-ID</h2>
+            <p>Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergesetz:<br/>
+                DE360224988</p>
+
+            <h2 class="text-xl font-medium">Verbraucher&shy;streit&shy;beilegung/Universal&shy;schlichtungs&shy;stelle</h2>
+            <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+                teilzunehmen.
+            </p>
+        </div>
+
+    </LayoutCard>
+</Layout>
+
+<style>
+    p {
+        @apply text-gray-700 font-light pb-8 pt-2;
+    }
+</style>

@@ -15,6 +15,10 @@ export const LINKS: NavItem[] = [
     url: "/nature",
   },
   {
+    labelKey: "nav.services",
+    url: "/services",
+  },
+  {
     labelKey: "nav.FAQ",
     url: "/faq",
   },

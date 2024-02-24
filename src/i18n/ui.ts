@@ -10,7 +10,10 @@ export const ui = {
     "nav.people": "Portraits",
     "nav.nature": "Nature",
     "nav.FAQ": "FAQs",
+    "nav.services": "Services",
     "nav.contact": "Contact Us",
+    "nav.about": "About",
+    "nav.imprint": "Imprint",
     "faq.category.services": "Services",
     "faq.category.booking": "Booking",
     "faq.category.process": "Process",
@@ -24,12 +27,16 @@ export const ui = {
     "contact.subtitle":
       "Ready to book a session or have questions? Contact us today.",
     "cta.call": "Book Your Free Call Now",
+    "common.back": "Go Back",
   },
   de: {
     "nav.people": "Porträts",
     "nav.nature": "Natur",
     "nav.FAQ": "Häufige Fragen",
     "nav.contact": "Kontaktiere Uns",
+    "nav.services": "Leistungen",
+    "nav.about": "Über uns",
+    "nav.imprint": "Impressum",
     "faq.category.services": "Dienstleistungen",
     "faq.category.booking": "Buchung",
     "faq.category.process": "Prozess",
@@ -43,5 +50,6 @@ export const ui = {
     "contact.subtitle":
       "Bereit für eine Buchung oder hast du Fragen? Kontaktiere uns noch heute.",
     "cta.call": "Jetzt kostenloses Gespräch buchen",
+    "common.back": "Zurück",
   },
 } as const;
