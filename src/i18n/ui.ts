@@ -7,9 +7,9 @@ export const defaultLang = "de";
 
 export const ui = {
   en: {
+    "nav.home": "Home",
     "nav.work": "Work",
     "nav.people": "Portraits",
-    "nav.nature": "Nature",
     "nav.FAQ": "FAQs",
     "nav.services": "Services",
     "nav.contact": "Contact Us",
@@ -40,9 +40,9 @@ export const ui = {
     "common.learnMore": "Learn More",
   },
   de: {
+    "nav.home": "Home",
     "nav.work": "Arbeit",
     "nav.people": "Porträts",
-    "nav.nature": "Natur",
     "nav.FAQ": "Häufige Fragen",
     "nav.contact": "Kontaktiere Uns",
     "nav.services": "Leistungen",

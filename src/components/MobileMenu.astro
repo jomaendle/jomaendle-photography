@@ -1,11 +1,7 @@
 ---
 import {getLangFromUrl, getNavItemLink, useTranslations} from "../i18n/utils";
-import type {NavItem} from "../models/nav-item";
+import {MOBILE_LINKS, NavItem} from "../models/nav-item";
 import LanguagePicker from "./LanguagePicker.astro";
-
-const {links}: {
-    links: NavItem[]
-} = Astro.props as any;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -54,7 +50,7 @@ const t = useTranslations(lang);
 </div>
 
 <div id="mobile-menu" class="flex fixed inset-0 bg-gray-100 flex-col z-40 gap-6 p-2 pt-12">
-    {links.map((link: NavItem) => (
+    {MOBILE_LINKS.map((link) => (
             <a href={getNavItemLink(lang, link)} class="block py-2 px-4 text-2xl text-hover">{t(link.labelKey)}</a>
     ))}
 
@@ -91,11 +87,10 @@ const t = useTranslations(lang);
             closeSvg.classList.toggle('hidden');
             mobileMenu.classList.toggle('open');
             menuSvg.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
 
-            // filter out all links with the data-skip-router-check attribute
 
             allLinks.forEach((link, index) => {
-
                 link.style.animationDelay = `${(index + 1) * 0.1}s`;
                 link.classList.toggle('link-item');
 

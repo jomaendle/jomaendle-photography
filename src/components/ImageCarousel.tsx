@@ -29,7 +29,7 @@ export function ImageCarousel({ images }: { images: any[] }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="relative flex gap-3 pt-2 sm:justify-center md:justify-start">
+      <div className="relative flex gap-3 pt-4 sm:justify-center md:justify-start">
         <CarouselPrevious />
         <CarouselNext />
       </div>

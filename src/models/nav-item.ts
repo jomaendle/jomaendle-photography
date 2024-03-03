@@ -19,3 +19,11 @@ export const LINKS: NavItem[] = [
     url: "/contact",
   },
 ];
+
+export const MOBILE_LINKS: NavItem[] = [
+  {
+    url: "/",
+    labelKey: "nav.home",
+  },
+  ...LINKS,
+];

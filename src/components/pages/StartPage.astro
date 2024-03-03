@@ -4,7 +4,7 @@ import {getCollection} from "astro:content";
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from "../../components/LayoutCard.astro";
 import {ImageCarousel} from "../../components/ImageCarousel";
-import CtaButton from "../CtaButton.astro";
+import {Button} from "../ui/button";
 
 const images = await getCollection('portrait-images');
 
@@ -21,16 +21,20 @@ console.log(images);
             <ImageCarousel client:load images={images}/>
 
             <div class="flex flex-col md:justify-center items-center md:items-start text-center md:text-start">
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 max-w-[420px]">{t('start.hero.title')}</h1>
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold my-8 sm:mt-0 sm:mb-4 max-w-[420px]">{t('start.hero.title')}</h1>
                 <p class="text-gray-600 text-pretty">{t('start.hero.subtitle')}</p>
                 <p class="text-gray-600">{t('start.hero.cta')}</p>
 
                 <div class="flex mt-8 gap-3">
                     <a target="_blank" href="https://calendly.com/jo-maendle/erstgespraech">
-                        <CtaButton/>
+                        <Button>
+                            {t('cta.short')}
+                        </Button>
                     </a>
 
-                    <CtaButton labelKey="common.learnMore" variation="outline"/>
+                    <Button variant="outline">
+                        {t('common.learnMore')}
+                    </Button>
                 </div>
             </div>
         </div>

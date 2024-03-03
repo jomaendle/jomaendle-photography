@@ -6,7 +6,7 @@ const {image} = Astro.props;
 
 ---
 
-<div class="bg-gray-50 w-full md:max-h-[50vh] flex flex-col sm:flex-row p-4 gap-8 group ">
+<div class="bg-gray-50 w-full md:max-h-[50vh] flex flex-col sm:flex-row p-4 gap-8 group hover:shadow-lg transition-shadow">
     <img src={image.data.image.src} alt={image.data.image.alt} class="object-cover h-full flex-shrink max-h-[380px]"/>
     <div class="flex flex-col gap-4">
         <h2 class="text-3xl font-medium">
@@ -20,7 +20,7 @@ const {image} = Astro.props;
 
         <div class="flex justify-end">
             <div  class="group-hover:block hidden hover:text-gray-500 button-fade-in">
-                <Button variant="secondary">
+                <Button variant="ghost">
                     <ArrowRight/>
                 </Button>
             </div>

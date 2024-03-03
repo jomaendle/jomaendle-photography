@@ -3,7 +3,7 @@ import {getNavItemLink} from "../i18n/utils";
 import {getLangFromUrl, useTranslations} from "../i18n/utils";
 import MobileMenu from "./MobileMenu.astro";
 import {LINKS} from "../models/nav-item";
-import CtaButton from "./CtaButton.astro";
+import {Button} from "./ui/button";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -28,7 +28,9 @@ const t = useTranslations(lang);
         ))}
 
         <a target="_blank" class="ml-4" href="https://calendly.com/jo-maendle/erstgespraech">
-            <CtaButton/>
+            <Button>
+                {t('cta.short')}
+            </Button>
         </a>
     </nav>
 
