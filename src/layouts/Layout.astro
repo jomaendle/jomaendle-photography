@@ -19,6 +19,7 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="description" content="Astro description"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="stylesheet" href="src/styles.css"/>
     <meta name="generator" content={Astro.generator}/>
     <title>{title}</title>
     <ViewTransitions/>
@@ -87,7 +88,7 @@ const lang = getLangFromUrl(Astro.url);
     }
 
     .card {
-        @apply p-4 sm:p-8 pr-0 sm:pr-0 pb-0 sm:pb-0;
+        @apply p-4 sm:p-8 pr-0 sm:pr-0 ;
     }
 
     .layout-title {

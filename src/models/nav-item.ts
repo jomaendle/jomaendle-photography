@@ -11,12 +11,8 @@ export const LINKS: NavItem[] = [
     url: "/",
   },
   {
-    labelKey: "nav.services",
-    url: "/services",
-  },
-  {
-    labelKey: "nav.FAQ",
-    url: "/faq",
+    labelKey: "nav.about",
+    url: "/about",
   },
   {
     labelKey: "nav.contact",

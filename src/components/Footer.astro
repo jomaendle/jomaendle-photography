@@ -9,20 +9,12 @@ function getNavUrl(lang: string, url: string): string {
     return `/${lang}/${url}`;
 }
 ---
-<footer class="bg-gray-100 sm:bg-transparent flex-col-reverse sm:flex-row text-sm text-gray-500 text-center flex items-center sm:items-start gap-8 sm:text-left p-4 sm:p-8 z-20">
-    <p class="flex-1">
-        &copy; Johannes Maendle 2024
-    </p>
-
-    <div class="flex gap-4">
+<footer class="bg-gray-100 sm:bg-transparent flex-col-reverse sm:flex-row text-sm text-gray-500 text-center flex items-center sm:items-start gap-8 sm:text-left p-4 sm:px-8 z-20">
+    <div class="flex gap-4 flex-1">
         <LanguagePicker/>
 
         <a href={getNavUrl(lang, 'about')} class="text-hover">
             {t('nav.about')}
-        </a>
-
-        <a href={getNavUrl(lang, 'imprint')} class="text-hover">
-            {t('nav.imprint')}
         </a>
     </div>
 </footer>

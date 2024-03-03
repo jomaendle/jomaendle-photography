@@ -3,6 +3,7 @@ import {getNavItemLink} from "../i18n/utils";
 import {getLangFromUrl, useTranslations} from "../i18n/utils";
 import MobileMenu from "./MobileMenu.astro";
 import {LINKS} from "../models/nav-item";
+import CtaButton from "./CtaButton.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -21,10 +22,14 @@ const t = useTranslations(lang);
 
     <nav class="hidden sm:flex gap-4">
         {LINKS.map(link => (
-                <a href={getNavItemLink(lang, link)} class="py-1 text-hover flex items-center">
+                <a href={getNavItemLink(lang, link)} class="py-1 text-hover  flex items-center">
                     {t(link.labelKey)}
                 </a>
         ))}
+
+        <a target="_blank" class="ml-4" href="https://calendly.com/jo-maendle/erstgespraech">
+            <CtaButton/>
+        </a>
     </nav>
 
     <MobileMenu links={LINKS}/>
