@@ -3,6 +3,7 @@ import {getLangFromUrl} from "../i18n/utils";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import {ViewTransitions} from 'astro:transitions';
+import '../styles.css';
 
 interface Props {
     title: string;
@@ -19,7 +20,6 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="description" content="Astro description"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <link rel="stylesheet" href="src/styles.css"/>
     <meta name="generator" content={Astro.generator}/>
     <title>{title}</title>
     <ViewTransitions/>
