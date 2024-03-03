@@ -6,8 +6,8 @@ const {image} = Astro.props;
 
 ---
 
-<div class="bg-gray-50 w-full h-[50vh] flex p-4 gap-8 group">
-    <img src={image.data.image.src} alt={image.data.image.alt} class="object-cover h-full flex-shrink"/>
+<div class="bg-gray-50 w-full md:max-h-[50vh] flex flex-col sm:flex-row p-4 gap-8 group ">
+    <img src={image.data.image.src} alt={image.data.image.alt} class="object-cover h-full flex-shrink max-h-[380px]"/>
     <div class="flex flex-col gap-4">
         <h2 class="text-3xl font-medium">
             A sunny day in the park
