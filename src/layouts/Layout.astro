@@ -26,7 +26,7 @@ const lang = getLangFromUrl(Astro.url);
 </head>
 <body class="flex flex-col">
 <Header/>
-<main class="flex-1 sm:overflow-hidden">
+<main class="flex-1">
     <slot/>
 </main>
 <Footer/>
@@ -88,11 +88,11 @@ const lang = getLangFromUrl(Astro.url);
     }
 
     .card {
-        @apply p-4 sm:p-8 pr-0 sm:pr-0 ;
+        @apply p-4 sm:p-8;
     }
 
     .layout-title {
-        @apply text-3xl  ;
+        @apply text-3xl;
     }
 
 </style>

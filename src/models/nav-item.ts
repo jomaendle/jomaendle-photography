@@ -8,7 +8,7 @@ export type NavItem = {
 export const LINKS: NavItem[] = [
   {
     labelKey: "nav.work",
-    url: "/",
+    url: "/work",
   },
   {
     labelKey: "nav.about",
