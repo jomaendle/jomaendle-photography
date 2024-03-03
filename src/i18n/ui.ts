@@ -11,6 +11,7 @@ export const ui = {
     "nav.work": "Work",
     "nav.people": "Portraits",
     "nav.FAQ": "FAQs",
+    "nav.nature": "Nature",
     "nav.services": "Services",
     "nav.contact": "Contact Us",
     "nav.about": "About",
@@ -42,6 +43,7 @@ export const ui = {
   de: {
     "nav.home": "Home",
     "nav.work": "Arbeit",
+    "nav.nature": "Natur",
     "nav.people": "Porträts",
     "nav.FAQ": "Häufige Fragen",
     "nav.contact": "Kontaktiere Uns",
