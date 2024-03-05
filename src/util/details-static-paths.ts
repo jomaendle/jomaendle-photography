@@ -2,14 +2,14 @@ import { getCollection } from 'astro:content'
 import { clientProjectsKey } from '@/content/config.ts'
 
 export async function getPhotoDetailsStaticPaths() {
-	const allNature = await getCollection(clientProjectsKey)
+	const clientProjects = await getCollection(clientProjectsKey)
 
-	return allNature.map((image) => {
+	return clientProjects.map((project) => {
 		return {
 			params: {
-				slug: image.slug
+				slug: project.slug
 			},
-			props: { image }
+			props: { project }
 		}
 	})
 }
