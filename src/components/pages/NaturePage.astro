@@ -1,21 +1,22 @@
 ---
-import {getLangFromUrl, useTranslations} from "../../i18n/utils";
-import {getCollection} from "astro:content";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils'
+import { getCollection } from 'astro:content'
 
-import Layout from "../../layouts/Layout.astro";
-import LayoutCard from "../../components/LayoutCard.astro";
-import PhotoGrid from "../../components/PhotoGrid.astro";
-import ImageToggle from "../ImageToggle.astro";
+import Layout from '../../layouts/Layout.astro'
+import LayoutCard from '../../components/LayoutCard.astro'
+import PhotoGrid from '../../components/PhotoGrid.astro'
+import ImageToggle from '../ImageToggle.astro'
+import { landscapesKey } from '../../content/config'
 
-const images = await getCollection('landscapes');
+const images = await getCollection(landscapesKey)
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <Layout title="Portrait Photography by Jo Maendle">
-    <LayoutCard>
-        <ImageToggle />
-        <PhotoGrid images={images}/>
-    </LayoutCard>
+	<LayoutCard>
+		<ImageToggle />
+		<PhotoGrid images={images} />
+	</LayoutCard>
 </Layout>

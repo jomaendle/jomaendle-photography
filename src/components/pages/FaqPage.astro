@@ -1,123 +1,122 @@
 ---
-import {getLangFromUrl, useTranslations} from "../../i18n/utils";
-import Layout from "../../layouts/Layout.astro";
-import LayoutCard from "../../components/LayoutCard.astro";
-import {type FAQ, FAQ_DE, FAQ_EN} from "../../models/faq";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils'
+import Layout from '../../layouts/Layout.astro'
+import LayoutCard from '../../components/LayoutCard.astro'
+import { type FAQ, FAQ_DE, FAQ_EN } from '../../models/faq'
 
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const title = "Portrait Photography by Jo Maendle";
-const faqs = lang === "en" ? FAQ_EN : FAQ_DE;
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const title = 'Portrait Photography by Jo Maendle'
+const faqs = lang === 'en' ? FAQ_EN : FAQ_DE
 
 const groupedFaqs: {
-    [category: string]: FAQ[];
+	[category: string]: FAQ[]
 } = faqs.reduce((acc, faq) => {
-    const category = t(`faq.category.${faq.category}` as keyof typeof t);
+	const category = t(`faq.category.${faq.category}` as keyof typeof t)
 
-    if (!acc[category]) {
-        acc[category] = [];
-    }
-    acc[category].push(faq);
-    return acc;
-}, {});
+	if (!acc[category]) {
+		acc[category] = []
+	}
+	acc[category].push(faq)
+	return acc
+}, {})
 ---
+
 <Layout title={title}>
-    <LayoutCard title={t('nav.FAQ')}
-                subtitle={t('faq.subtitle')}>
-        <div class="flex flex-col gap-8 py-8 overflow-y-auto h-full">
-            {Object.entries(groupedFaqs).map(([category, faqs]) => (
-                    <details class="max-w-[600px] flex flex-col gap-2 rounded-lg transition-colors">
-                        <summary class="text-lg cursor-pointer text-hover py-1">
-                            <span class="pl-1">{category}</span>
-                        </summary>
-                        <div class="flex flex-col gap-4 pt-4">
-                            {faqs.map(faq => (
-                                    <div class="max-w-[600px]">
-                                        <p class="">{faq.title}</p>
-                                        <p class="font-light text-gray-500 pt-2">{faq.content}</p>
-                                    </div>
-                            ))}
-                        </div>
-                    </details>
-            ))}
-        </div>
-    </LayoutCard>
+	<LayoutCard title={t('nav.FAQ')} subtitle={t('faq.subtitle')}>
+		<div class="flex h-full flex-col gap-8 overflow-y-auto py-8">
+			{
+				Object.entries(groupedFaqs).map(([category, faqs]) => (
+					<details class="flex max-w-[600px] flex-col gap-2 rounded-lg transition-colors">
+						<summary class="text-hover cursor-pointer py-1 text-lg">
+							<span class="pl-1">{category}</span>
+						</summary>
+						<div class="flex flex-col gap-4 pt-4">
+							{faqs.map((faq) => (
+								<div class="max-w-[600px]">
+									<p class="">{faq.title}</p>
+									<p class="pt-2 font-light text-gray-500">{faq.content}</p>
+								</div>
+							))}
+						</div>
+					</details>
+				))
+			}
+		</div>
+	</LayoutCard>
 </Layout>
 
 <script src="../../util/toggle-details.ts"></script>
 
 <style>
-    details {
-        padding: 0.5rem 0.8rem;
-        background-color: #f7f7f7;
-    }
+	details {
+		padding: 0.5rem 0.8rem;
+		background-color: #f7f7f7;
+	}
 
-    details:hover {
-        background-color: #f0f0f0;
-    }
+	details:hover {
+		background-color: #f0f0f0;
+	}
 
-    details > summary::-webkit-details-marker {
-        display: none;
-    }
+	details > summary::-webkit-details-marker {
+		display: none;
+	}
 
-    details > summary::-moz-list-bullet {
-        display: none;
-    }
+	details > summary::-moz-list-bullet {
+		display: none;
+	}
 
-    details > summary::marker {
-        display: none;
-    }
+	details > summary::marker {
+		display: none;
+	}
 
-    details > summary::before {
-        content: "+";
-        display: inline-block;
-        margin-right: 0.5rem;
-    }
+	details > summary::before {
+		content: '+';
+		display: inline-block;
+		margin-right: 0.5rem;
+	}
 
-    details[open] > summary::before {
-        content: "-";
-    }
+	details[open] > summary::before {
+		content: '-';
+	}
 
-    details > summary {
-        list-style: none;
-        cursor: pointer;
-    }
+	details > summary {
+		list-style: none;
+		cursor: pointer;
+	}
 
-    details > summary:focus {
-        outline: none;
-    }
+	details > summary:focus {
+		outline: none;
+	}
 
-    details > summary::-webkit-details-marker {
-        display: none;
-    }
+	details > summary::-webkit-details-marker {
+		display: none;
+	}
 
-    details > summary::-moz-list-bullet {
-        display: none;
-    }
+	details > summary::-moz-list-bullet {
+		display: none;
+	}
 
-    details > summary::marker {
-        display: none;
-    }
+	details > summary::marker {
+		display: none;
+	}
 
-    details > summary::before {
-        content: "+";
-        display: inline-block;
-        margin-right: 0.5rem;
-    }
+	details > summary::before {
+		content: '+';
+		display: inline-block;
+		margin-right: 0.5rem;
+	}
 
-    details[open] > summary::before {
-        content: "-";
-    }
+	details[open] > summary::before {
+		content: '-';
+	}
 
-    details > summary {
-        list-style: none;
-        cursor: pointer;
-    }
+	details > summary {
+		list-style: none;
+		cursor: pointer;
+	}
 
-    details > summary:focus {
-        outline: none;
-    }
-
-
+	details > summary:focus {
+		outline: none;
+	}
 </style>

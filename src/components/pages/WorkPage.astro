@@ -1,21 +1,19 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import {getCollection} from "astro:content";
-import WorkCard from "../ui/WorkCard.astro";
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import WorkCard from '../ui/WorkCard.astro'
+import { portraitImagesKey } from '../../content/config'
 
-const images = await getCollection('portrait-images');
+const images = await getCollection(portraitImagesKey)
 ---
+
 <Layout title="Jo Maendle Photography">
-    <section class="flex flex-col h-full card gap-8 mx-auto">
-
-
-        <div class="grid lg:grid-cols-2 gap-8">
-            <WorkCard image={images[0]} />
-            <WorkCard image={images[1]} />
-            <WorkCard image={images[2]} />
-            <WorkCard image={images[3]} />
-
-        </div>
-    </section>
-
+	<section class="card mx-auto flex h-full flex-col gap-8">
+		<div class="grid gap-8 lg:grid-cols-2">
+			<WorkCard image={images[0]} />
+			<WorkCard image={images[1]} />
+			<WorkCard image={images[2]} />
+			<WorkCard image={images[3]} />
+		</div>
+	</section>
 </Layout>
