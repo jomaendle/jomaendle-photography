@@ -1,24 +1,25 @@
 ---
+import type { CollectionItem } from '../../content/config'
 import { ArrowRight } from 'lucide-react'
 import { Button } from './button'
+import { type ClientProject } from '../../content/config'
 
-const { image } = Astro.props
+const { project = {} as CollectionItem<ClientProject> } = Astro.props
 ---
 
 <div
 	class="group flex w-full cursor-pointer flex-col gap-8 bg-gray-50 p-4 transition-all hover:scale-[1.01] hover:shadow-xl sm:flex-row md:max-h-[50vh]"
 >
 	<img
-		src={image.data.image.src}
-		alt={image.data.image.alt}
+		src={project.data.titleImage?.src ?? ''}
+		alt={project.data.titleImage?.alt ?? ''}
 		class="h-full max-h-[380px] flex-shrink object-cover"
 	/>
 	<div class="flex flex-col gap-4">
-		<h2 class="text-3xl font-medium">A sunny day in the park</h2>
+		<h2 class="text-3xl font-medium">{project.data.title}</h2>
 
 		<p class="flex-1 text-gray-600">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-			labore et dolore magna aliqua.
+			{project.data.description}
 		</p>
 
 		<div class="flex justify-end">

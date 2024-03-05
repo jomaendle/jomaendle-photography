@@ -1,19 +1,25 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import WorkCard from '../ui/WorkCard.astro'
-import { portraitImagesKey } from '../../content/config'
+import { clientProjectsKey } from '../../content/config'
+import {getLangFromUrl} from "../../i18n/utils";
 
-const images = await getCollection(portraitImagesKey)
+const lang = getLangFromUrl(Astro.url)
+
+const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection(clientProjectsKey)
 ---
 
-<Layout title="Jo Maendle Photography">
+<Layout title="Work - Jo Maendle Photography">
 	<section class="card mx-auto flex h-full flex-col gap-8">
 		<div class="grid gap-8 lg:grid-cols-2">
-			<WorkCard image={images[0]} />
-			<WorkCard image={images[1]} />
-			<WorkCard image={images[2]} />
-			<WorkCard image={images[3]} />
+			{
+				clientProjects.map((project) => (
+					<a href=`/${lang}/details/${project.slug}`>
+						<WorkCard project={project} />
+					</a>
+				))
+			}
 		</div>
 	</section>
 </Layout>

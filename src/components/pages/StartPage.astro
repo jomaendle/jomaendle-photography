@@ -5,7 +5,7 @@ import Layout from '../../layouts/Layout.astro'
 import LayoutCard from '../../components/LayoutCard.astro'
 import { ImageCarousel } from '../../components/ImageCarousel'
 import { Button } from '../ui/button'
-import { collections, portraitImagesKey } from '../../content/config'
+import { portraitImagesKey } from '../../content/config'
 
 const images = await getCollection(portraitImagesKey)
 
@@ -36,9 +36,11 @@ const t = useTranslations(lang)
 						</Button>
 					</a>
 
-					<Button variant="outline">
-						{t('common.learnMore')}
-					</Button>
+					<a href=`/${lang}/work`>
+						<Button variant="outline">
+							{t('common.learnMore')}
+						</Button>
+					</a>
 				</div>
 			</div>
 		</div>
