@@ -1,20 +1,23 @@
 ---
-import {getLangFromUrl, getNavItemLink, useTranslations} from "../i18n/utils";
-import LanguagePicker from "./LanguagePicker.astro";
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+import LanguagePicker from './LanguagePicker.astro'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 function getNavUrl(lang: string, url: string): string {
-    return `/${lang}/${url}`;
+	return `/${lang}/${url}`
 }
 ---
-<footer class="bg-gray-100 sm:bg-transparent flex-col-reverse sm:flex-row text-sm text-gray-500 text-center flex items-center sm:items-start gap-8 sm:text-left p-4 sm:px-8 z-20">
-    <div class="flex gap-4 flex-1">
-        <LanguagePicker/>
 
-        <a href={getNavUrl(lang, 'about')} class="text-hover">
-            {t('nav.about')}
-        </a>
-    </div>
+<footer
+	class="z-20 flex flex-col-reverse items-center gap-8 bg-gray-100 p-4 text-center text-sm text-gray-500 sm:flex-row sm:items-start sm:bg-transparent sm:px-8 sm:text-left"
+>
+	<div class="flex flex-1 gap-4">
+		<LanguagePicker />
+
+		<a href={getNavUrl(lang, 'about')} class="text-hover">
+			{t('nav.about')}
+		</a>
+	</div>
 </footer>
