@@ -7,6 +7,7 @@ import {Image} from 'astro:assets'
 import {type ClientProject, type CollectionItem} from '../../../content/config'
 import {ArrowLeft} from 'lucide-react'
 import {Button} from '../../../components/ui/button'
+import ImageViewModal from "../../../components/ui/ImageViewModal.astro";
 
 interface Props {
     project: CollectionEntry<'client-projects'>
@@ -37,15 +38,19 @@ export async function getStaticPaths() {
         </header>
 
         <section
-                class="flex flex-col-reverse sm:flex-row w-full flex-1 items-center sm:items-start gap-8 bg-gray-50 p-4 shadow-xl">
+                class="flex flex-col-reverse sm:flex-row w-full flex-1 items-center sm:items-start gap-8 lg:gap-12 bg-gray-50 p-4 shadow-xl">
             <Image
                     src={projectData.titleImage as unknown as string}
-                    alt=""
+                    id=`${project.slug}-999`
+                    alt={projectData.title}
                     transition:name=`media-image-${project.slug}`
-                    width="300"
-                    height="400"
-                    class="object-contain"
+                    width="500"
+                    height="800"
+                    quality={90}
+                    class="preview object-contain max-w-[250px]"
             />
+
+            <ImageViewModal index={999} slug={project.slug} image={projectData.titleImage} />
 
             <div class="flex flex-col gap-2">
                 <h1 class="layout-title" transition:name=`project-heading-${project.slug}`>
@@ -75,19 +80,7 @@ export async function getStaticPaths() {
                                 />
                             </div>
 
-
-                            <div id=`${project.slug}-${index}-modal`
-                                 class="fixed inset-0 h-full p-12 z-[100] backdrop-blur-sm hidden items-center justify-center bg-black/50 modal">
-                                <Image
-                                        src={photo as unknown as string}
-                                        alt=""
-                                        transition:name=`media-image-${project.slug}-${index}`
-                                        width="900"
-                                        height="1200"
-                                        class="max-h-full object-contain"
-                                        quality={100}
-                                />
-                            </div>
+                            <ImageViewModal index={index} slug={project.slug} image={photo} />
                         </>
                 ))
             }

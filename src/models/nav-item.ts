@@ -1,29 +1,33 @@
-import type { ui } from "../i18n/ui.ts";
+import type { ui } from '../i18n/ui.ts'
 
 export type NavItem = {
-  labelKey: keyof (typeof ui)["de"];
-  url: string;
-};
+	labelKey: keyof (typeof ui)['de']
+	url: string
+}
 
 export const LINKS: NavItem[] = [
-  {
-    labelKey: "nav.work",
-    url: "/work",
-  },
-  {
-    labelKey: "nav.about",
-    url: "/about",
-  },
-  {
-    labelKey: "nav.contact",
-    url: "/contact",
-  },
-];
+	{
+		labelKey: 'nav.work',
+		url: '/work'
+	},
+	{
+		url: '/services',
+		labelKey: 'nav.services'
+	},
+	{
+		labelKey: 'nav.about',
+		url: '/about'
+	},
+	{
+		labelKey: 'nav.contact',
+		url: '/contact'
+	}
+]
 
 export const MOBILE_LINKS: NavItem[] = [
-  {
-    url: "/",
-    labelKey: "nav.home",
-  },
-  ...LINKS,
-];
+	{
+		url: '/',
+		labelKey: 'nav.home'
+	},
+	...LINKS
+]

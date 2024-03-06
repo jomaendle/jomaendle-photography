@@ -12,8 +12,9 @@ export function ImageCarousel({ images }: { images: any[] }) {
 			opts={{
 				align: 'start'
 			}}
-			className="relative mx-auto flex h-full w-full max-w-lg flex-col justify-center overflow-hidden"
+			className="relative mx-auto flex h-full w-full max-w-lg items-center justify-center gap-4 overflow-hidden"
 		>
+			<CarouselPrevious className={'shrink-0'} />
 			<CarouselContent className="h-full">
 				{images.map((img, index) => (
 					<CarouselItem key={index} className="h-full">
@@ -21,16 +22,14 @@ export function ImageCarousel({ images }: { images: any[] }) {
 							<img
 								src={img.data.image.src}
 								alt=""
+								loading={index === 0 ? 'eager' : 'lazy'}
 								className="h-full w-full object-contain object-left sm:object-center md:object-left"
 							/>
 						</div>
 					</CarouselItem>
 				))}
 			</CarouselContent>
-			<div className="relative flex gap-3 pt-4 sm:justify-center md:justify-start">
-				<CarouselPrevious />
-				<CarouselNext />
-			</div>
+			<CarouselNext className={'shrink-0'} />
 		</Carousel>
 	)
 }

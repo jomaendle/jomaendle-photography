@@ -1,9 +1,120 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import LayoutCard from "../LayoutCard.astro";
----
-<Layout title="Jo Maendle Photography">
-    <LayoutCard title="Services">
+import { getLangFromUrl, useTranslations } from '../../i18n/utils'
+import Layout from '../../layouts/Layout.astro'
+import LayoutCard from '../LayoutCard.astro'
 
-    </LayoutCard>
+interface PhotoShootingOffers {
+	title: string
+	duration: string
+	price: string
+	description: string
+	includes: string[]
+}
+
+const shootings: PhotoShootingOffers[] = [
+	{
+		duration: '1h',
+		price: '49€',
+		title: 'Portrait Shooting',
+		description:
+			'A portrait shooting is perfect for you if you want to have some professional pictures of yourself. Whether you need them for your CV, your social media profiles or just for yourself, I will make sure you get the best pictures possible.',
+		includes: [
+			'1h shooting',
+			'5 edited pictures',
+			'Location of your choice (within 20km of 28199 Bremen)'
+		]
+	},
+	{
+		duration: '2h',
+		price: '89€',
+		title: 'Couple Shooting',
+		description:
+			'A couple shooting is perfect if you and your partner want to have a beautiful memory of your relationship. Whether you are together for a few months or many years, I will make sure you get the best pictures possible.',
+		includes: [
+			'2h shooting',
+			'10 edited pictures',
+			'Location of your choice (within 20km of 28199 Bremen)'
+		]
+	}
+]
+
+const reviews = [
+	{
+		quote:
+			'Ich habe mich sehr wohl gefühlt und die Bilder sind einfach wunderschön geworden. Ich kann Jo nur weiterempfehlen!',
+		name: 'Marie'
+	}
+]
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<Layout title="Jo Maendle Photography">
+	<section class="card mx-auto flex max-w-[90rem] flex-col gap-12">
+		<h1 class="layout-title">{t('nav.services')}</h1>
+
+		<section class="flex gap-12">
+			{
+				shootings.map((options) => (
+					<div class="group flex w-full max-w-[400px] cursor-pointer flex-col gap-3 bg-gray-50 p-4 transition-all hover:scale-[1.01] hover:shadow-xl md:max-h-[50vh]">
+						<h3 class="text-xl font-medium">{options.title}</h3>
+						<p class="text-sm font-medium">
+							{t('common.duration')}: {options.duration}
+						</p>
+						<p class="text-sm font-thin">{options.description}</p>
+
+						<div class="flex flex-col gap-2">
+							<ul class="list-inside list-disc">
+								{options.includes.map((include) => (
+									<li class="text-sm font-thin">{include}</li>
+								))}
+							</ul>
+						</div>
+
+						<p class="mt-2 text-lg font-medium">{options.price}</p>
+					</div>
+				))
+			}
+		</section>
+
+		<section class="mt-20 flex flex-col gap-4">
+			<h2 class="text-xl">Was andere sagen</h2>
+
+			<div class="inline-flex flex-col-reverse gap-4">
+				<div class="flex items-center gap-2">
+					<svg
+						id="Layer_1"
+						data-name="Layer 1"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						width="32"
+						height="32"
+						color="#000000"
+						><defs
+							><style>
+								.cls-6374f8d9b67f094e4896c670-1 {
+									fill: none;
+									stroke: currentColor;
+									stroke-miterlimit: 10;
+								}
+							</style></defs
+						><circle class="cls-6374f8d9b67f094e4896c670-1" cx="12" cy="7.25" r="5.73"
+						></circle><path
+							class="cls-6374f8d9b67f094e4896c670-1"
+							d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05"
+						></path>
+					</svg>
+
+					<p class="text-sm font-thin">Marie</p>
+				</div>
+
+				<p class="secondary-text max-w-xs text-pretty rounded-lg p-2 shadow-lg">
+					"Ich habe mich sehr wohl gefühlt und die Bilder sind einfach wunderschön geworden. Ich
+					kann Jo nur weiterempfehlen!"
+				</p>
+			</div>
+		</section>
+	</section>
 </Layout>

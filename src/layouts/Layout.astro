@@ -83,6 +83,7 @@ const lang = getLangFromUrl(Astro.url)
 				margin: 0;
 				padding: 0;
 				height: 100%;
+				scrollbar-gutter: stable;
 			}
 
 			.text-hover {
@@ -94,11 +95,11 @@ const lang = getLangFromUrl(Astro.url)
 			}
 
 			.layout-title {
-				@apply text-3xl font-medium;
+				@apply text-2xl font-medium;
 			}
 
 			.secondary-text {
-				@apply text-gray-600;
+				@apply text-sm font-thin text-gray-600;
 			}
 		</style>
 	</body>

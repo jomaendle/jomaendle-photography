@@ -5,6 +5,7 @@ export const portraitImagesKey = 'portrait-images' as const
 export const landscapesKey = 'landscapes' as const
 export const clientProjectsKey = 'client-projects' as const
 export const marieDogImagesKey = 'marie' as const
+export const akankshaImagesKey = 'akanksha' as const
 
 // 2. Define your collection(s)
 const imageCollection = defineCollection({
@@ -31,7 +32,8 @@ export const collections = {
 	[portraitImagesKey]: imageCollection,
 	[landscapesKey]: imageCollection,
 	[marieDogImagesKey]: imageCollection,
-	[clientProjectsKey]: clientProjectsCollection
+	[clientProjectsKey]: clientProjectsCollection,
+	[akankshaImagesKey]: imageCollection
 }
 
 interface Image {
