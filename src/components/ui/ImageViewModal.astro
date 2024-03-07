@@ -1,10 +1,9 @@
 ---
 import type { ClientProject, CollectionItem } from '../../content/config'
 import { Image } from 'astro:assets'
-import { IImage } from 'astro/dist/assets/utils/vendor/image-size/types/interface'
 
 interface Props {
-	image: IImage
+	image: any
 	index: number
 	slug: string
 }
