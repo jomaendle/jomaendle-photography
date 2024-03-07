@@ -2,6 +2,8 @@
 import { getLangFromUrl, useTranslations } from '../../i18n/utils'
 import Layout from '../../layouts/Layout.astro'
 import LayoutCard from '../LayoutCard.astro'
+import { Button } from '../../components/ui/button'
+import { ExternalLink } from 'lucide-react'
 
 interface PhotoShootingOffers {
 	title: string
@@ -53,11 +55,10 @@ const t = useTranslations(lang)
 <Layout title="Jo Maendle Photography">
 	<section class="card mx-auto flex max-w-[90rem] flex-col gap-12">
 		<h1 class="layout-title">{t('nav.services')}</h1>
-
-		<section class="flex gap-12">
+		<div class="flex flex-col gap-6 sm:flex-row sm:gap-12">
 			{
 				shootings.map((options) => (
-					<div class="group flex w-full max-w-[400px] cursor-pointer flex-col gap-3 bg-gray-50 p-4 transition-all hover:scale-[1.01] hover:shadow-xl md:max-h-[50vh]">
+					<div class="group flex w-full cursor-pointer flex-col gap-3 bg-gray-50 p-4 transition-all hover:scale-[1.01] hover:shadow-xl sm:max-w-[400px] md:max-h-[50vh]">
 						<h3 class="text-xl font-medium">{options.title}</h3>
 						<p class="text-sm font-medium">
 							{t('common.duration')}: {options.duration}
@@ -76,36 +77,40 @@ const t = useTranslations(lang)
 					</div>
 				))
 			}
-		</section>
+		</div>
 
-		<section class="mt-20 flex flex-col gap-4">
+		<section class="">
 			<h2 class="text-xl">Was andere sagen</h2>
 
 			<div class="inline-flex flex-col-reverse gap-4">
 				<div class="flex items-center gap-2">
-					<svg
-						id="Layer_1"
-						data-name="Layer 1"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						width="32"
-						height="32"
-						color="#000000"
-						><defs
-							><style>
-								.cls-6374f8d9b67f094e4896c670-1 {
-									fill: none;
-									stroke: currentColor;
-									stroke-miterlimit: 10;
-								}
-							</style></defs
-						><circle class="cls-6374f8d9b67f094e4896c670-1" cx="12" cy="7.25" r="5.73"
-						></circle><path
-							class="cls-6374f8d9b67f094e4896c670-1"
-							d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05"
-						></path>
-					</svg>
+					<div
+						class="aspect-square overflow-hidden rounded-full border border-gray-200 p-1 shadow-md"
+					>
+						<svg
+							id="Layer_1"
+							data-name="Layer 1"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							width="36"
+							height="36"
+							color="#000000"
+							><defs
+								><style>
+									.cls-6374f8d9b67f094e4896c670-1 {
+										fill: none;
+										stroke: currentColor;
+										stroke-miterlimit: 10;
+									}
+								</style></defs
+							><circle class="cls-6374f8d9b67f094e4896c670-1" cx="12" cy="7.25" r="5.73"
+							></circle><path
+								class="cls-6374f8d9b67f094e4896c670-1"
+								d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05"
+							></path>
+						</svg>
+					</div>
 
 					<p class="text-sm font-thin">Marie</p>
 				</div>
@@ -116,5 +121,49 @@ const t = useTranslations(lang)
 				</p>
 			</div>
 		</section>
-	</section>
-</Layout>
+
+		<section class="">
+			<h2 class="text-xl">Du hast noch Fragen?</h2>
+			<p class="text-sm font-thin">
+				In unserem FAQ findest du Antworten auf die häufigsten Fragen. <br />
+				<a href="/faq" class="link-hover">
+					<Button variant="link"> Hier geht's zum FAQ </Button>
+				</a>
+			</p>
+		</section>
+
+		<section>
+			<h2 class="text-xl">Kontakt</h2>
+			<p class="text-sm font-thin">
+				Falls du noch weitere Fragen hast, kannst du ein unverbindliches Gespräch mit mir buchen,
+				oder mir eine E-Mail schreiben.
+			</p>
+
+			<a
+				href="https://calendly.com/jo-maendle/erstgespraech"
+				rel="noreferrer"
+				data-skip-router-check
+				target="_blank"
+			>
+				<Button variant="link">
+					<div class="flex items-center gap-2">
+						<span>
+							{t('cta.call')}
+						</span>
+						<ExternalLink size={16} />
+					</div>
+				</Button>
+			</a>
+		</section>
+
+		<style>
+			section > section {
+				@apply flex flex-col gap-2;
+
+				& > h2 {
+					@apply font-medium;
+				}
+			}
+		</style>
+	</section></Layout
+>

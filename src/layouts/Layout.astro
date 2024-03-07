@@ -90,12 +90,16 @@ const lang = getLangFromUrl(Astro.url)
 				@apply text-gray-500 transition-colors hover:text-gray-900;
 			}
 
+			.link-hover {
+				@apply text-blue-500 transition-colors hover:text-blue-900;
+			}
+
 			.card {
 				@apply p-4 sm:p-8;
 			}
 
 			.layout-title {
-				@apply text-2xl font-medium;
+				@apply text-xl font-medium sm:text-2xl;
 			}
 
 			.secondary-text {
