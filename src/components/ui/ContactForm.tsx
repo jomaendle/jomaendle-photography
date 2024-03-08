@@ -13,9 +13,15 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		const myForm = event.target;
-		const formData = new FormData(myForm);
-		const formDataAsUrlParams = new URLSearchParams(formData as any).toString();
+		const message = document.getElementById('message') as HTMLTextAreaElement;
+		const email = document.getElementById('email') as HTMLInputElement;
+		const name = document.getElementById('name') as HTMLInputElement;
+
+		const formDataAsUrlParams = new URLSearchParams({
+			name: name.value,
+			email: email.value,
+			message: message.value
+		}).toString();
 
 		fetch('/', {
 			method: 'POST',
@@ -60,8 +66,8 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 					>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
-							<Label htmlFor="first-name">Name</Label>
-							<Input id="first-name" placeholder="Enter your name" required />
+							<Label htmlFor="name">Name</Label>
+							<Input id="name" placeholder="Enter your name" required />
 						</div>
 						<div className="space-y-2">
 							<Label htmlFor="email">Email</Label>
