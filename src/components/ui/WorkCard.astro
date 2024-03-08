@@ -7,9 +7,7 @@ import { type ClientProject } from '../../content/config';
 const { project = {} as CollectionItem<ClientProject> } = Astro.props;
 ---
 
-<div
-	class="group flex w-full cursor-pointer flex-col gap-4 bg-gray-50 p-4 transition-all hover:scale-[1.01] hover:shadow-xl sm:flex-row sm:gap-8 md:max-h-[50vh]"
->
+<div class="card-layout group flex w-full flex-col gap-4 p-4 sm:flex-row sm:gap-8 md:max-h-[50vh]">
 	<img
 		src={project.data.titleImage?.src ?? ''}
 		alt={project.data.titleImage?.alt ?? ''}

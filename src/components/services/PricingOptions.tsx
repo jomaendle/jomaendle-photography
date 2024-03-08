@@ -58,14 +58,14 @@ export default function PricingOptions() {
 			</div>
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{shootings.map((shooting, index) => (
-					<div className="flex flex-col overflow-hidden rounded-lg border">
+					<div className="card-layout flex cursor-pointer flex-col gap-4 overflow-hidden sm:gap-8">
 						<div className="bg-gray-50 p-6">
 							<h3 className="text-xl font-bold">{shooting.title}</h3>
 							<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
 								For individuals getting started
 							</p>
 						</div>
-						<div className="grid gap-4 bg-white p-6">
+						<div className="grid flex-1 gap-4 bg-white p-6">
 							<h1 className="text-3xl font-semibold">{shooting.price}</h1>
 
 							<ul>

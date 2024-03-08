@@ -2,23 +2,20 @@
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../LayoutCard.astro';
-import { Button } from '../../components/ui/button';
+import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import CustomerReview from '../services/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
-import ContactForm from '../ui/ContactForm';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
 <Layout title="Jo Maendle Photography">
-	<section class="card mx-auto flex max-w-[90rem] flex-col gap-20">
-		<section class="pb-12 pt-8 md:bg-gray-100">
+	<section class="card mx-auto mb-12 flex max-w-[90rem] flex-col gap-20">
+		<section class="rounded-lg px-4 pb-12 pt-8 md:bg-gray-100">
 			<PricingOptions />
 		</section>
-
-		<div></div>
 
 		<section>
 			<CustomerReview />
