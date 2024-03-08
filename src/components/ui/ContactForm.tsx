@@ -15,11 +15,12 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 
 		const myForm = event.target;
 		const formData = new FormData(myForm);
+		const formDataAsUrlParams = new URLSearchParams(formData as any).toString();
 
 		fetch('/', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: new URLSearchParams(formData).toString()
+			body: formDataAsUrlParams
 		})
 			.then(() => console.log('Form successfully submitted'))
 			.catch((error) => alert(error));
