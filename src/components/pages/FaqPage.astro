@@ -1,25 +1,25 @@
 ---
-import { getLangFromUrl, useTranslations } from '../../i18n/utils'
-import Layout from '../../layouts/Layout.astro'
-import LayoutCard from '../../components/LayoutCard.astro'
-import { type FAQ, FAQ_DE, FAQ_EN } from '../../models/faq'
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+import LayoutCard from '../../components/LayoutCard.astro';
+import { type FAQ, FAQ_DE, FAQ_EN } from '../../models/faq';
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
-const title = 'Portrait Photography by Jo Maendle'
-const faqs = lang === 'en' ? FAQ_EN : FAQ_DE
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const title = 'Portrait Photography by Jo Maendle';
+const faqs = lang === 'en' ? FAQ_EN : FAQ_DE;
 
 const groupedFaqs: {
-	[category: string]: FAQ[]
+	[category: string]: FAQ[];
 } = faqs.reduce((acc, faq) => {
-	const category = t(`faq.category.${faq.category}` as keyof typeof t)
+	const category = t(`faq.category.${faq.category}` as keyof typeof t);
 
 	if (!acc[category]) {
-		acc[category] = []
+		acc[category] = [];
 	}
-	acc[category].push(faq)
-	return acc
-}, {})
+	acc[category].push(faq);
+	return acc;
+}, {});
 ---
 
 <Layout title={title}>

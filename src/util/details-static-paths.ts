@@ -1,8 +1,8 @@
-import { getCollection } from 'astro:content'
-import { clientProjectsKey } from '@/content/config.ts'
+import { getCollection } from 'astro:content';
+import { clientProjectsKey } from '@/content/config.ts';
 
 export async function getPhotoDetailsStaticPaths() {
-	const clientProjects = await getCollection(clientProjectsKey)
+	const clientProjects = await getCollection(clientProjectsKey);
 
 	return clientProjects.map((project) => {
 		return {
@@ -10,6 +10,6 @@ export async function getPhotoDetailsStaticPaths() {
 				slug: project.slug
 			},
 			props: { project }
-		}
-	})
+		};
+	});
 }

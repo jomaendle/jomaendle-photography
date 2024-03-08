@@ -1,20 +1,20 @@
 ---
 interface Props {
-    title: string;
-    isActive: boolean;
+	title: string;
+	isActive: boolean;
 }
 
-const {title, isActive}: Props = Astro.props;
+const { title, isActive }: Props = Astro.props;
 
 const classList = [
-    'px-4',
-    'py-1.5',
-    'rounded-full',
-    'transition-colors',
-    isActive ? 'bg-gray-800 hover:bg-gray-900 text-white' : 'bg-gray-100 hover:bg-gray-200'
+	'px-4',
+	'py-1.5',
+	'rounded-full',
+	'transition-colors',
+	isActive ? 'bg-gray-800 hover:bg-gray-900 text-white' : 'bg-gray-100 hover:bg-gray-200'
 ].join(' ');
 ---
 
 <button class={classList}>
-    {title}
+	{title}
 </button>

@@ -1,3 +1,3 @@
 ---
-image: "./couple.jpg"
+image: './couple.jpg'
 ---

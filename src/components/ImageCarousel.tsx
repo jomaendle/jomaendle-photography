@@ -4,7 +4,7 @@ import {
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious
-} from '@/components/ui/carousel'
+} from '@/components/ui/carousel';
 
 export function ImageCarousel({ images }: { images: any[] }) {
 	return (
@@ -15,7 +15,7 @@ export function ImageCarousel({ images }: { images: any[] }) {
 			className="relative mx-auto flex h-full w-full max-w-lg items-center justify-center gap-4 overflow-hidden"
 		>
 			<CarouselPrevious className={'shrink-0'} />
-			<CarouselContent className="h-full">
+			<CarouselContent className="h-full shrink-0">
 				{images.map((img, index) => (
 					<CarouselItem key={index} className="h-full">
 						<div className="aspect-[2:3] flex h-full max-h-[700px] items-center justify-center">
@@ -31,5 +31,5 @@ export function ImageCarousel({ images }: { images: any[] }) {
 			</CarouselContent>
 			<CarouselNext className={'shrink-0'} />
 		</Carousel>
-	)
+	);
 }

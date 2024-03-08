@@ -1,4 +1,4 @@
 ---
-image: "./waves_2.jpg"
+image: './waves_2.jpg'
 category: 'waves'
 ---

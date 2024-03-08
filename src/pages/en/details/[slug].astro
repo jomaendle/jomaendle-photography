@@ -1,11 +1,11 @@
 ---
-import DetailsPage from '../../fragments/DetailsPage/[slug].astro'
-import { getPhotoDetailsStaticPaths } from '../../../util/details-static-paths'
+import DetailsPage from '../../fragments/DetailsPage/[slug].astro';
+import { getPhotoDetailsStaticPaths } from '../../../util/details-static-paths';
 
-const { project } = Astro.props
+const { project } = Astro.props;
 
 export async function getStaticPaths() {
-	return getPhotoDetailsStaticPaths()
+	return getPhotoDetailsStaticPaths();
 }
 ---
 

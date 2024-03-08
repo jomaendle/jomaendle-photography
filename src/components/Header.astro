@@ -1,12 +1,12 @@
 ---
-import { getNavItemLink } from '../i18n/utils'
-import { getLangFromUrl, useTranslations } from '../i18n/utils'
-import MobileMenu from './MobileMenu.astro'
-import { LINKS } from '../models/nav-item'
-import { Button } from './ui/button'
+import { getNavItemLink } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import MobileMenu from './MobileMenu.astro';
+import { LINKS } from '../models/nav-item';
+import { Button } from './ui/button';
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <header class="sticky top-0 z-20 flex gap-12 bg-white p-4 sm:p-8 sm:pb-4">
@@ -25,10 +25,13 @@ const t = useTranslations(lang)
 		</span>
 	</a>
 
-	<nav class="hidden gap-8 sm:flex">
+	<nav class="hidden gap-4 md:flex lg:gap-8">
 		{
 			LINKS.map((link) => (
-				<a href={getNavItemLink(lang, link)} class="text-hover flex  items-center py-1">
+				<a
+					href={getNavItemLink(lang, link)}
+					class="text-hover flex items-center whitespace-nowrap py-1"
+				>
 					{t(link.labelKey)}
 				</a>
 			))

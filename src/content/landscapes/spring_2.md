@@ -1,4 +1,4 @@
 ---
-image: "./spring_2.jpg"
+image: './spring_2.jpg'
 category: 'spring'
 ---

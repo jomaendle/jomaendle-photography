@@ -1,9 +1,9 @@
 export const languages = {
 	en: 'English',
 	de: 'Deutsch'
-}
+};
 
-export const defaultLang = 'de'
+export const defaultLang = 'de';
 
 export const ui = {
 	en: {
@@ -32,7 +32,7 @@ export const ui = {
 		'imprint.umsatzsteuer.title': 'Umsatzsteuer-ID',
 		'imprint.umsatzsteuer.desc':
 			'Tax identification number in accordance with §27 a of Umsatzsteuergesetz:',
-		'start.hero.title': 'Portrait Photography',
+		'start.hero.title': 'Outdoor and Portrait Photography',
 		'start.hero.subtitle': 'We capture the moments that matter to you.',
 		'start.hero.cta': 'Book your session today.',
 		'common.learnMore': 'Learn More',
@@ -66,11 +66,11 @@ export const ui = {
 		'imprint.umsatzsteuer.title': 'Umsatzsteuer-ID',
 		'imprint.umsatzsteuer.desc':
 			'Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:',
-		'start.hero.title': 'Porträt Fotografie',
+		'start.hero.title': 'Outdoor und Porträt Fotografie',
 		'start.hero.subtitle': 'Wir fangen die Momente ein, die für dich wichtig sind.',
 		'start.hero.cta': 'Buche noch heute deinen Termin.',
 		'common.learnMore': 'Mehr Erfahren',
 		'common.duration': 'Dauer',
 		'common.price': 'Preis'
 	}
-} as const
+} as const;

@@ -1,12 +1,12 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils'
-import LanguagePicker from './LanguagePicker.astro'
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import LanguagePicker from './LanguagePicker.astro';
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 function getNavUrl(lang: string, url: string): string {
-	return `/${lang}/${url}`
+	return `/${lang}/${url}`;
 }
 ---
 
