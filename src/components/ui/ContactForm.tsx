@@ -10,9 +10,20 @@ function Separator() {
 }
 
 export default function ContactForm({ translatedCta }: { translatedCta: string }) {
-	function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
-		console.log(event.type, event.target);
-	}
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
+		const myForm = event.target;
+		const formData = new FormData(myForm);
+
+		fetch('/', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams(formData).toString()
+		})
+			.then(() => console.log('Form successfully submitted'))
+			.catch((error) => alert(error));
+	};
 
 	return (
 		<div className="space-y-4">
@@ -40,12 +51,13 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 				</CardHeader>
 				<CardContent>
 					<form
-						className="space-y-4"
 						data-netlify="true"
-						method="POST"
+						className="space-y-4"
+						method="post"
 						name="contact"
-						onInput={handleSubmit}
+						onSubmit={handleSubmit}
 					>
+						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
 							<Label htmlFor="first-name">Name</Label>
 							<Input id="first-name" placeholder="Enter your name" required />
@@ -58,7 +70,7 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 							<Label htmlFor="message">Message</Label>
 							<Textarea className="min-h-[100px]" id="message" placeholder="Enter your message" />
 						</div>
-						<Button>Send message</Button>
+						<Button type="submit">Send message</Button>
 					</form>
 				</CardContent>
 			</Card>
