@@ -3,8 +3,6 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
 import ContactForm from '../../components/ui/ContactForm';
-import { ArrowUpRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const lang = getLangFromUrl(Astro.url);
 const translationFn = useTranslations(lang);
@@ -12,6 +10,13 @@ const translationFn = useTranslations(lang);
 
 <Layout title="Portrait Photography by Jo Maendle">
 	<div class="card mx-auto max-w-[700px]">
+		<form method="post" name="contact" hidden data-netlify="true">
+			<input type="hidden" name="form-name" value="contact" />
+			<input id="name" placeholder="Enter your name" required />
+			<input id="email" placeholder="Enter your email" type="email" required />
+			<textarea className="min-h-[100px]" id="message" placeholder="Enter your message"></textarea>
+			<button type="submit">Send message</button>
+		</form>
 		<ContactForm client:load translatedCta={translationFn('cta.call')} />
 	</div>
 </Layout>
