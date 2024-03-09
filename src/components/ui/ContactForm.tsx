@@ -81,7 +81,6 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 						method="post"
 						name="contact"
 						onSubmit={handleSubmit}
-						onChange={onInputChange}
 					>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
