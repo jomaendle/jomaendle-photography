@@ -4,11 +4,10 @@ description: 'This project was a fun one. We had the opportunity to work with a 
 images:
   - '../portrait-images/couple3.jpg'
   - '../portrait-images/couple2.jpg'
-  - '../portrait-images/couple4.jpg'
   - '../portrait-images/couple5.jpg'
-  - '../portrait-images/woman.jpg'
-  - '../portrait-images/man.jpg'
   - '../portrait-images/man3.jpg'
   - '../portrait-images/man4.jpg'
+  - '../portrait-images/man.jpg'
+  - '../portrait-images/woman.jpg'
 titleImage: '../portrait-images/couple.jpg'
 ---

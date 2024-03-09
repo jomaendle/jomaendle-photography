@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import CustomerReview from '../services/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
+import ProcessDescription from '../services/ProcessDescription';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -18,7 +19,11 @@ const t = useTranslations(lang);
 		</section>
 
 		<section>
-			<CustomerReview />
+			<ProcessDescription client:load />
+		</section>
+
+		<section>
+			<CustomerReview client:load />
 		</section>
 	</section>
 </Layout>
