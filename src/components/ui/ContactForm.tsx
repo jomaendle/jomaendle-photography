@@ -15,18 +15,21 @@ const encode = (data) => {
 };
 
 export default function ContactForm({ translatedCta }: { translatedCta: string }) {
-	const handleSubmit = (event) => {
-		event.preventDefault();
-
+	function getFormData() {
 		const message = document.getElementById('message') as HTMLTextAreaElement;
 		const email = document.getElementById('email') as HTMLInputElement;
 		const name = document.getElementById('name') as HTMLInputElement;
 
-		const formDataAsUrlParams = {
+		return {
 			name: name.value,
 			email: email.value,
 			message: message.value
 		};
+	}
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const formDataAsUrlParams = getFormData();
 
 		fetch('/', {
 			method: 'POST',
@@ -35,6 +38,16 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 		})
 			.then(() => console.log('Form successfully submitted', formDataAsUrlParams))
 			.catch((error) => alert(error));
+	};
+
+	const onInputChange = (event: Event) => {
+		const input = event.target as HTMLInputElement | HTMLTextAreaElement;
+		const isValid = input.checkValidity();
+		if (!isValid) {
+			input.classList.add('border-red-500');
+		} else {
+			input.classList.remove('border-red-500');
+		}
 	};
 
 	return (
@@ -62,7 +75,14 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 					<CardTitle>Contact us</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<form className="space-y-4" method="post" name="contact" onSubmit={handleSubmit}>
+					<form
+						id="contact-form"
+						className="space-y-4"
+						method="post"
+						name="contact"
+						onSubmit={handleSubmit}
+						onChange={onInputChange}
+					>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
 							<Label htmlFor="name">Name</Label>
