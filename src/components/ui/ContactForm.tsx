@@ -33,7 +33,7 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams })
 		})
-			.then(() => console.log('Form successfully submitted'))
+			.then(() => console.log('Form successfully submitted', formDataAsUrlParams))
 			.catch((error) => alert(error));
 	};
 
@@ -62,13 +62,7 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 					<CardTitle>Contact us</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<form
-						data-netlify="true"
-						className="space-y-4"
-						method="post"
-						name="contact"
-						onSubmit={handleSubmit}
-					>
+					<form className="space-y-4" method="post" name="contact" onSubmit={handleSubmit}>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
 							<Label htmlFor="name">Name</Label>

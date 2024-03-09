@@ -10,13 +10,13 @@ const translationFn = useTranslations(lang);
 
 <Layout title="Portrait Photography by Jo Maendle">
 	<div class="card mx-auto max-w-[700px]">
-		<form method="post" name="contact" hidden data-netlify="true">
-			<input type="hidden" name="form-name" value="contact" />
-			<input id="name" placeholder="Enter your name" required />
-			<input id="email" placeholder="Enter your email" type="email" required />
-			<textarea class="min-h-[100px]" id="message" placeholder="Enter your message"></textarea>
-			<button type="submit">Send message</button>
+		<form method="post" name="contact" hidden data-netlify="true" netlify-honeypot="bot-field">
+			<input id="name" placeholder="Enter your name" name="name" required />
+			<input id="email" placeholder="Enter your email" name="email" type="email" required />
+			<textarea class="min-h-[100px]" id="message" name="message" placeholder="Enter your message"
+			></textarea>
 		</form>
+
 		<ContactForm client:load translatedCta={translationFn('cta.call')} />
 	</div>
 </Layout>
