@@ -7,6 +7,13 @@ import { Button } from './ui/button';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const isCurrent = (link) => {
+	const currentPath = Astro.url.pathname;
+	const linkPath = getNavItemLink(lang, link);
+	return currentPath === linkPath;
+};
+
 ---
 
 <header class="sticky top-0 z-20 flex gap-12 bg-white p-4 sm:p-8 sm:pb-4">
@@ -30,7 +37,7 @@ const t = useTranslations(lang);
 			LINKS.map((link) => (
 				<a
 					href={getNavItemLink(lang, link)}
-					class="text-hover flex items-center whitespace-nowrap py-1"
+					class=`flex items-center whitespace-nowrap underline-offset-4 py-1 ${isCurrent(link) ? 'text-primary underline' : 'text-hover'}`
 				>
 					{t(link.labelKey)}
 				</a>

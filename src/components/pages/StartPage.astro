@@ -17,7 +17,6 @@ const t = useTranslations(lang);
 	<LayoutCard>
 		<div
 			class="relative flex h-full w-full grid-cols-2 flex-col-reverse gap-8 overflow-hidden md:grid md:gap-12 lg:gap-20 xl:gap-24"
-			style="min-height: 75vh;"
 		>
 			<div class="shrink-0">
 				<ImageCarousel client:load images={images} />
@@ -33,15 +32,15 @@ const t = useTranslations(lang);
 				<p class="text-gray-600">{t('start.hero.cta')}</p>
 
 				<div class="mt-8 flex gap-3">
-					<a target="_blank" href="https://calendly.com/jo-maendle/erstgespraech">
+					<a href=`/${lang}/work`>
 						<Button>
-							{t('cta.short')}
+							{t('start.hero.exploreWork')}
 						</Button>
 					</a>
 
-					<a href=`/${lang}/work`>
+					<a href=`/${lang}/services`>
 						<Button variant="outline">
-							{t('common.learnMore')}
+							{t('start.hero.exploreService')}
 						</Button>
 					</a>
 				</div>

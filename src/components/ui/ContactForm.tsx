@@ -8,6 +8,12 @@ function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
 }
 
+const encode = (data) => {
+	return Object.keys(data)
+		.map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+		.join('&');
+};
+
 export default function ContactForm({ translatedCta }: { translatedCta: string }) {
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -16,16 +22,16 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 		const email = document.getElementById('email') as HTMLInputElement;
 		const name = document.getElementById('name') as HTMLInputElement;
 
-		const formDataAsUrlParams = new URLSearchParams({
+		const formDataAsUrlParams = {
 			name: name.value,
 			email: email.value,
 			message: message.value
-		}).toString();
+		};
 
 		fetch('/', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: formDataAsUrlParams
+			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams })
 		})
 			.then(() => console.log('Form successfully submitted'))
 			.catch((error) => alert(error));

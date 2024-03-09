@@ -35,7 +35,8 @@ export const ui = {
 		'start.hero.title': 'Outdoor and Portrait Photography',
 		'start.hero.subtitle': 'We capture the moments that matter to you.',
 		'start.hero.cta': 'Book your session today.',
-		'common.learnMore': 'Learn More',
+		'start.hero.exploreWork': 'Explore Our Work',
+		'start.hero.exploreService': 'View Services',
 		'common.duration': 'Duration',
 		'common.price': 'Price'
 	},
@@ -69,7 +70,8 @@ export const ui = {
 		'start.hero.title': 'Outdoor und Porträt Fotografie',
 		'start.hero.subtitle': 'Wir fangen die Momente ein, die für dich wichtig sind.',
 		'start.hero.cta': 'Buche noch heute deinen Termin.',
-		'common.learnMore': 'Mehr Erfahren',
+		'start.hero.exploreWork': 'Arbeit entdecken',
+		'start.hero.exploreService': 'Leistungen ansehen',
 		'common.duration': 'Dauer',
 		'common.price': 'Preis'
 	}
