@@ -14,7 +14,7 @@ const translationFn = useTranslations(lang);
 			<input type="hidden" name="form-name" value="contact" />
 			<input id="name" placeholder="Enter your name" required />
 			<input id="email" placeholder="Enter your email" type="email" required />
-			<textarea className="min-h-[100px]" id="message" placeholder="Enter your message"></textarea>
+			<textarea class="min-h-[100px]" id="message" placeholder="Enter your message"></textarea>
 			<button type="submit">Send message</button>
 		</form>
 		<ContactForm client:load translatedCta={translationFn('cta.call')} />
