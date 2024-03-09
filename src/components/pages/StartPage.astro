@@ -3,8 +3,8 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
-import { ImageCarousel } from '../../components/ImageCarousel';
-import { Button } from '../ui/button';
+import { ImageCarousel } from '@/components/ImageCarousel';
+import { Button } from '@/components/ui/button';
 import { portraitImagesKey } from '../../content/config';
 
 const images = await getCollection(portraitImagesKey);
@@ -17,6 +17,7 @@ const t = useTranslations(lang);
 	<LayoutCard>
 		<div
 			class="relative flex h-full w-full grid-cols-2 flex-col-reverse gap-8 overflow-hidden md:grid md:gap-12 lg:gap-20 xl:gap-24"
+			style="min-height: 75vh;"
 		>
 			<div class="shrink-0">
 				<ImageCarousel client:load images={images} />

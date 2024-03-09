@@ -3,7 +3,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
-import { type SyntheticEvent, useState } from 'react';
 
 function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
