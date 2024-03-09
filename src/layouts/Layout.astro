@@ -3,6 +3,8 @@ import { getLangFromUrl } from '../i18n/utils';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { ViewTransitions } from 'astro:transitions';
+import { Toaster } from '@/components/ui/sonner';
+
 import '../styles.css';
 
 interface Props {
@@ -25,11 +27,6 @@ const lang = getLangFromUrl(Astro.url);
 		<ViewTransitions />
 	</head>
 	<body class="flex flex-1 flex-col">
-		<Header />
-		<main class="min-h-[75vh] flex-1">
-			<slot />
-		</main>
-		<Footer />
 		<style is:global>
 			@font-face {
 				font-family: 'Outfit';
@@ -110,5 +107,12 @@ const lang = getLangFromUrl(Astro.url);
 				@apply text-sm font-thin text-gray-600;
 			}
 		</style>
+
+		<Header />
+		<main class="min-h-[75vh] flex-1">
+			<slot />
+		</main>
+		<Footer />
+		<Toaster client:load />
 	</body>
 </html>

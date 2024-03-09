@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
+import { toast } from 'sonner';
 
 function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
@@ -27,8 +28,24 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 		};
 	}
 
+	function isFormValid() {
+		const form = document.getElementById('contact-form') as HTMLFormElement;
+		return form.checkValidity();
+	}
+
+	function resetForm() {
+		const form = document.getElementById('contact-form') as HTMLFormElement;
+		form.reset();
+	}
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		if (!isFormValid()) {
+			toast.error('Please fill out all required fields');
+			return;
+		}
+
 		const formDataAsUrlParams = getFormData();
 
 		fetch('/', {
@@ -36,8 +53,16 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams })
 		})
-			.then(() => console.log('Form successfully submitted', formDataAsUrlParams))
-			.catch((error) => alert(error));
+			.then(() => {
+				toast.success('Message sent successfully', {
+					duration: 6000,
+					closeButton: true
+				});
+				resetForm();
+			})
+			.catch((error) => {
+				toast.error('An error occurred while sending the message');
+			});
 	};
 
 	const onInputChange = (event: Event) => {
