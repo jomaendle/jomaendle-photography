@@ -6,16 +6,26 @@ interface PhotoShootingOffers {
 	price: string;
 	description: string;
 	includes: string[];
+	cta: string;
+	targetGroup: string;
+	isBusiness?: boolean;
 }
 
 const shootings: PhotoShootingOffers[] = [
 	{
 		duration: '1h',
 		price: '149€',
-		title: 'Portrait - Starter',
+		title: 'Portrait - Basic',
 		description:
 			'A portrait shooting is perfect for you if you want to have some professional pictures of yourself. Whether you need them for your CV, your social media profiles or just for yourself, I will make sure you get the best pictures possible.',
-		includes: ['1h outdoor shooting', '7 edited pictures', 'Outdoor location nearby Bremen']
+		includes: [
+			'1h outdoor shooting',
+			'1 person',
+			'7 edited pictures',
+			'Outdoor location nearby Bremen'
+		],
+		cta: 'Start with Basic',
+		targetGroup: 'individuals'
 	},
 	{
 		duration: '2h',
@@ -23,15 +33,30 @@ const shootings: PhotoShootingOffers[] = [
 		title: 'Portrait - Premium',
 		description:
 			'A couple shooting is perfect if you and your partner want to have a beautiful memory of your relationship. Whether you are together for a few months or many years, I will make sure you get the best pictures possible.',
-		includes: ['2h outdoor shooting', '15 edited pictures', 'Outdoor location nearby Bremen']
+		includes: [
+			'2h outdoor shooting',
+			'2 people',
+			'15 edited pictures',
+			'Outdoor location nearby Bremen'
+		],
+		cta: 'Start with Premium',
+		targetGroup: 'couples, families or professionals'
 	},
 	{
 		duration: '30min',
-		price: '299€/month',
-		title: 'For Business',
+		price: '399€',
+		title: 'Business',
 		description:
 			'A portrait shooting is perfect for you if you want to have some professional pictures of yourself. Whether you need them for your CV, your social media profiles or just for yourself, I will make sure you get the best pictures possible.',
-		includes: ['2 shootings per month', '20 edited pictures per month', 'Location of your choice']
+		includes: [
+			'Multiple shootings per month',
+			'Up to 10 people',
+			'Up to 30 edited pictures per month',
+			'Location of your choice'
+		],
+		cta: 'Start with Business',
+		targetGroup: 'social media personalities & businesses',
+		isBusiness: true
 	}
 ];
 
@@ -46,15 +71,19 @@ export default function PricingOptions() {
 			</div>
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{shootings.map((shooting, index) => (
-					<div className="card-layout flex cursor-pointer flex-col gap-4 overflow-hidden sm:gap-8">
+					<div
+						className={`card-layout flex cursor-pointer flex-col gap-4 overflow-hidden sm:gap-8`}
+						key={index}
+					>
 						<div className="bg-gray-50 p-6">
 							<h3 className="text-xl font-bold">{shooting.title}</h3>
-							<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-								For individuals getting started
-							</p>
+							<p className="mt-1 text-sm text-gray-500">For {shooting.targetGroup}</p>
 						</div>
 						<div className="grid flex-1 gap-4 bg-white p-6">
-							<h1 className="text-3xl font-semibold">{shooting.price}</h1>
+							<h2 className="text-3xl font-semibold">
+								{shooting.price}
+								{shooting.isBusiness && <p className="inline text-base ">/month</p>}
+							</h2>
 
 							<ul>
 								{shooting.includes.map((include, index) => (
@@ -65,7 +94,7 @@ export default function PricingOptions() {
 							</ul>
 
 							<Button size="sm" variant="outline">
-								Start with Starter
+								{shooting.cta}
 							</Button>
 						</div>
 					</div>

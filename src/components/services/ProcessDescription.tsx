@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 const shootingSteps = [
 	{
 		title: 'Get in touch',
@@ -30,28 +28,15 @@ export default function ProcessDescription() {
 
 			<div className="flex max-w-xs flex-col gap-12 md:max-w-none md:flex-row ">
 				{shootingSteps.map((step, index) => (
-					<motion.div
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 1 }}
-						viewport={{
-							margin: '-200px',
-							once: true
-						}}
-						key={index}
-						transition={{
-							duration: 1
-						}}
-					>
-						<div className="flex flex-col items-center">
-							<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
-								{index + 1}
-							</div>
-							<div className="mt-4 text-center">
-								<h3 className="text-xl font-bold">{step.title}</h3>
-								<p className="mt-2 max-w-md text-pretty text-gray-500">{step.description}</p>
-							</div>
+					<div className="flex flex-col items-center" key={index}>
+						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
+							{index + 1}
 						</div>
-					</motion.div>
+						<div className="mt-4 text-center">
+							<h3 className="text-xl font-bold">{step.title}</h3>
+							<p className="mt-2 max-w-md text-pretty text-gray-500">{step.description}</p>
+						</div>
+					</div>
 				))}
 			</div>
 		</div>
