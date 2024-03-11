@@ -10,46 +10,34 @@ interface PhotoShootingOffers {
 
 const shootings: PhotoShootingOffers[] = [
 	{
-		duration: '30min',
-		price: '29€',
-		title: 'Outdoor Portrait - Starter',
-		description:
-			'A portrait shooting is perfect for you if you want to have some professional pictures of yourself. Whether you need them for your CV, your social media profiles or just for yourself, I will make sure you get the best pictures possible.',
-		includes: [
-			'30min shooting',
-			'3 edited pictures',
-			'Location of your choice (within 20km of 28199 Bremen)'
-		]
-	},
-	{
 		duration: '1h',
-		price: '49€',
-		title: 'Outdoor Portrait - Basic',
+		price: '149€',
+		title: 'Portrait - Starter',
 		description:
 			'A portrait shooting is perfect for you if you want to have some professional pictures of yourself. Whether you need them for your CV, your social media profiles or just for yourself, I will make sure you get the best pictures possible.',
-		includes: [
-			'1h shooting',
-			'7 edited pictures',
-			'Location of your choice (within 20km of 28199 Bremen)'
-		]
+		includes: ['1h outdoor shooting', '7 edited pictures', 'Outdoor location nearby Bremen']
 	},
 	{
 		duration: '2h',
-		price: '99€',
-		title: 'Outdoor Portrait - Premium',
+		price: '249€',
+		title: 'Portrait - Premium',
 		description:
 			'A couple shooting is perfect if you and your partner want to have a beautiful memory of your relationship. Whether you are together for a few months or many years, I will make sure you get the best pictures possible.',
-		includes: [
-			'2h shooting',
-			'15 edited pictures',
-			'Location of your choice (within 20km of 28199 Bremen)'
-		]
+		includes: ['2h outdoor shooting', '15 edited pictures', 'Outdoor location nearby Bremen']
+	},
+	{
+		duration: '30min',
+		price: '299€/month',
+		title: 'For Business',
+		description:
+			'A portrait shooting is perfect for you if you want to have some professional pictures of yourself. Whether you need them for your CV, your social media profiles or just for yourself, I will make sure you get the best pictures possible.',
+		includes: ['2 shootings per month', '20 edited pictures per month', 'Location of your choice']
 	}
 ];
 
 export default function PricingOptions() {
 	return (
-		<div className="grid items-center gap-6 md:mx-auto md:max-w-5xl">
+		<div className="grid w-full items-center gap-6 md:mx-auto md:max-w-5xl lg:gap-12">
 			<div className="text-center">
 				<h1 className="text-3xl font-bold tracking-tight">Photography Services</h1>
 				<p className="mt-2 max-w-2xl text-gray-500 sm:text-lg md:mx-auto lg:text-gray-400">

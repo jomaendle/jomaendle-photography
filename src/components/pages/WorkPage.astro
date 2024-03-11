@@ -9,21 +9,7 @@ const lang = getLangFromUrl(Astro.url)
 
 const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection(clientProjectsKey)
 ---
-<style>
-    .animated-card {
-        animation: fadeIn 0.5s ease-in-out forwards;
-    }
 
-    @keyframes fadeIn {
-				from {
-						opacity: 0;
-				}
-        to {
-            opacity: 1;
-        }
-    }
-
-</style>
 
 <Layout title="Work - Jo Maendle Photography">
 	<section class="card mx-auto max-w-[90rem] flex h-full flex-col gap-8">
@@ -38,11 +24,3 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 		</div>
 	</section>
 </Layout>
-
-<script>
-	const animatedCards = document.querySelectorAll<HTMLElement>('.animated-card')
-	animatedCards.forEach((card, index) => {
-		card.style.animationDelay = (index * 0.5) + 's'
-		card.style.opacity = '0'
-	})
-</script>

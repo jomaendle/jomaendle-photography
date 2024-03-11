@@ -1,7 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 
 const reviews = [
+	{
+		name: 'Walwala',
+		rating: 5,
+		quote:
+			'We really loved the shoot hope the pictures will turn out good. [...] I really like the pictures! They are perfect. The texture, contrast, brightness, everything is perfect'
+	},
 	{
 		quote:
 			'One of the greatest photographer in Bremen. Very nice and friendly and yet very professional.',
@@ -46,7 +53,7 @@ export default function CustomerReview() {
 				once: true
 			}}
 		>
-			<div className="mx-auto grid w-full max-w-5xl gap-6">
+			<div className="mx-auto grid w-full max-w-5xl gap-6 lg:gap-12">
 				<div className="flex flex-col items-center gap-2 text-center">
 					<h2 className="text-3xl font-bold">Customer Reviews</h2>
 					<div className="flex items-center gap-2">
@@ -54,7 +61,7 @@ export default function CustomerReview() {
 						<span className="text-2xl font-bold">{getAverageRating().toFixed(1)}</span>
 					</div>
 					<p className="text-sm text-gray-500 dark:text-gray-400">
-						Average Rating based on {reviews.length} reviews from
+						Average Rating based on {reviews.length} personal reviews and from
 						<a
 							href="https://maps.app.goo.gl/zfsgASCDqqe2e6pJ6"
 							target="_blank"
@@ -68,26 +75,26 @@ export default function CustomerReview() {
 					</p>
 				</div>
 
-				<div className="mx-auto h-0.5 w-full bg-gray-100"></div>
-
-				<div className="grid gap-6">
+				<div className="grid items-start gap-6 md:grid-cols-2">
 					{reviews.map((review, index) => (
-						<div key={index}>
-							<div className="flex flex-col gap-2">
+						<Card key={index}>
+							<CardHeader>
 								<div className="flex items-center gap-0.5">
 									{getStars(review.rating)}
 									<span className="ml-0.5 text-sm text-gray-500">{review.rating.toFixed(1)}</span>
 								</div>
-								<div className="text-sm leading-loose text-gray-500">
-									<p>{review.quote}</p>
-								</div>
-								<p className="text-sm">{review.name}</p>
-							</div>
+							</CardHeader>
 
-							{index < reviews.length - 1 && (
-								<div className="mx-auto h-0.5 w-full bg-gray-100"></div>
-							)}
-						</div>
+							<CardContent className="flex flex-col gap-4">
+								{review.quote && (
+									<div className="text-sm leading-loose text-gray-500 empty:hidden">
+										<p className="leading-5">{review.quote}</p>
+									</div>
+								)}
+
+								<p className="text-sm">{review.name}</p>
+							</CardContent>
+						</Card>
 					))}
 				</div>
 			</div>
