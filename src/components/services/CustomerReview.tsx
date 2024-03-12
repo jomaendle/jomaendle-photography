@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 
 const reviews = [
@@ -42,63 +41,51 @@ function getAverageRating() {
 
 export default function CustomerReview() {
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			whileInView={{ opacity: 1 }}
-			transition={{
-				duration: 1
-			}}
-			viewport={{
-				margin: '-200px',
-				once: true
-			}}
-		>
-			<div className="mx-auto grid w-full max-w-5xl gap-6 lg:gap-12">
-				<div className="flex flex-col items-center gap-2 text-center">
-					<h2 className="text-3xl font-bold">Customer Reviews</h2>
-					<div className="flex items-center gap-2">
-						{getStars(getAverageRating())}
-						<span className="text-2xl font-bold">{getAverageRating().toFixed(1)}</span>
-					</div>
-					<p className="text-sm text-gray-500 dark:text-gray-400">
-						Average Rating based on {reviews.length} personal reviews and from
-						<a
-							href="https://maps.app.goo.gl/zfsgASCDqqe2e6pJ6"
-							target="_blank"
-							rel="nofollow"
-							className="px-1"
-						>
-							<Button variant="link" size="link">
-								Google Maps
-							</Button>
-						</a>
-					</p>
+		<div className="mx-auto grid w-full max-w-5xl gap-6 lg:gap-12">
+			<div className="flex flex-col items-center gap-2 text-center">
+				<h2 className="text-3xl font-bold">Customer Reviews</h2>
+				<div className="flex items-center gap-2">
+					{getStars(getAverageRating())}
+					<span className="text-2xl font-bold">{getAverageRating().toFixed(1)}</span>
 				</div>
-
-				<div className="grid items-start gap-6 md:grid-cols-2">
-					{reviews.map((review, index) => (
-						<Card key={index}>
-							<CardHeader>
-								<div className="flex items-center gap-0.5">
-									{getStars(review.rating)}
-									<span className="ml-0.5 text-sm text-gray-500">{review.rating.toFixed(1)}</span>
-								</div>
-							</CardHeader>
-
-							<CardContent className="flex flex-col gap-4">
-								{review.quote && (
-									<div className="text-sm leading-loose text-gray-500 empty:hidden">
-										<p className="leading-5">{review.quote}</p>
-									</div>
-								)}
-
-								<p className="text-sm">{review.name}</p>
-							</CardContent>
-						</Card>
-					))}
-				</div>
+				<p className="text-sm text-gray-500 dark:text-gray-400">
+					Average Rating based on {reviews.length} personal reviews and from
+					<a
+						href="https://maps.app.goo.gl/zfsgASCDqqe2e6pJ6"
+						target="_blank"
+						rel="nofollow"
+						className="px-1"
+					>
+						<Button variant="link" size="link">
+							Google Maps
+						</Button>
+					</a>
+				</p>
 			</div>
-		</motion.div>
+
+			<div className="grid items-start gap-6 md:grid-cols-2">
+				{reviews.map((review, index) => (
+					<Card key={index}>
+						<CardHeader>
+							<div className="flex items-center gap-0.5">
+								{getStars(review.rating)}
+								<span className="ml-0.5 text-sm text-gray-500">{review.rating.toFixed(1)}</span>
+							</div>
+						</CardHeader>
+
+						<CardContent className="flex flex-col gap-4">
+							{review.quote && (
+								<div className="text-sm leading-loose text-gray-500 empty:hidden">
+									<p className="leading-5">{review.quote}</p>
+								</div>
+							)}
+
+							<p className="text-sm">{review.name}</p>
+						</CardContent>
+					</Card>
+				))}
+			</div>
+		</div>
 	);
 }
 

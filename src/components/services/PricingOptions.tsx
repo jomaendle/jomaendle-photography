@@ -35,9 +35,9 @@ const shootings: PhotoShootingOffers[] = [
 			'A couple shooting is perfect if you and your partner want to have a beautiful memory of your relationship. Whether you are together for a few months or many years, I will make sure you get the best pictures possible.',
 		includes: [
 			'2h outdoor shooting',
-			'2 people',
+			'Up to 2 people',
 			'15 edited pictures',
-			'Outdoor location nearby Bremen'
+			'Outdoor location nearby Bremen, Hamburg or Oldenburg'
 		],
 		cta: 'Start with Premium',
 		targetGroup: 'couples, families or professionals'
