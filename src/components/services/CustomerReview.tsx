@@ -3,6 +3,13 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 
 const reviews = [
 	{
+		name: 'Robin',
+		rating: 5,
+		quote:
+			'It feels like Johannes has known you all his life, as he has a great eye for capturing the perfect photo at every moment! It was a great day with lots of fun, great conversations and above all great pictures! Highly recommended.'
+	},
+
+	{
 		name: 'Walwala',
 		rating: 5,
 		quote:

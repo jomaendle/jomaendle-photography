@@ -2,6 +2,7 @@
 import { getLangFromUrl, getNavItemLink, useTranslations } from '../i18n/utils';
 import { MOBILE_LINKS } from '../models/nav-item';
 import LanguagePicker from './LanguagePicker.astro';
+import { X, Menu } from 'lucide-react';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,56 +20,24 @@ const t = useTranslations(lang);
 		transform: translateY(0);
 		opacity: 1;
 	}
-
-	a.link-item,
-	hr.link-item,
-	div#langPicker.link-item {
-		opacity: 0;
-		animation: fade 0.5s ease-in forwards;
-	}
-
-	@keyframes fade {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
 </style>
 
 <div class="flex justify-between md:hidden">
 	<button id="mobile-menu-button" class="text-hover z-50 text-2xl">
-		<svg
-			id="menuSvg"
-			class="h-6 w-6"
-			fill="none"
-			stroke="currentColor"
-			viewBox="0 0 24 24"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				d="M4 6h16M4 12h16m-7 6h7"></path>
-		</svg>
+		<span id="menuSvg">
+			<Menu />
+		</span>
 
-		<svg
-			id="closeSvg"
-			class="hidden h-6 w-6"
-			stroke="currentColor"
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 50 50"
-		>
-			<path
-				d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z"
-			></path>
-		</svg>
+		<span id="closeSvg" class="hidden">
+			<X />
+		</span>
 	</button>
 </div>
 
-<div id="mobile-menu" class="fixed inset-0 z-40 flex flex-col gap-6 bg-gray-100 p-2 pt-12">
+<div
+	id="mobile-menu"
+	class="fixed inset-0 z-40 flex h-full w-full flex-col gap-6 bg-gray-200 p-2 pt-12"
+>
 	{
 		MOBILE_LINKS.map((link) => (
 			<a href={getNavItemLink(lang, link)} class="text-hover block px-4 py-2 text-2xl">
@@ -86,10 +55,7 @@ const t = useTranslations(lang);
 		target="_blank"
 		class="text-hover flex items-center gap-2 px-4 py-2 text-lg"
 	>
-		<span class="flex-1">
-			{t('cta.call')}
-		</span>
-
+		<span class="flex-1">{t('cta.call')}</span>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
@@ -104,7 +70,6 @@ const t = useTranslations(lang);
 				d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
 		</svg>
 	</a>
-
 	<div id="langPicker" class="flex flex-1 items-end justify-center pb-4">
 		<LanguagePicker />
 	</div>
@@ -114,7 +79,11 @@ const t = useTranslations(lang);
 	import { navigate } from 'astro:transitions/client';
 
 	function attachEventListeners() {
-		const { mobileMenu, closeSvg, menuSvg, allLinks, mobileMenuButton } = getMobileMenuElements();
+		const mobileMenuButton = document.getElementById('mobile-menu-button');
+		const mobileMenu = document.getElementById('mobile-menu');
+		const closeSvg = document.getElementById('closeSvg');
+		const menuSvg = document.getElementById('menuSvg');
+		const allLinks = mobileMenu.querySelectorAll('a, hr, div#langPicker');
 
 		mobileMenuButton.addEventListener('click', () => {
 			closeSvg.classList.toggle('hidden');
@@ -123,55 +92,29 @@ const t = useTranslations(lang);
 			document.body.classList.toggle('overflow-hidden');
 
 			allLinks.forEach((link, index) => {
-				link.style.animationDelay = `${(index + 1) * 0.1}s`;
-				link.classList.toggle('link-item');
-
-				if (link.hasAttribute('data-skip-router-check')) return;
-
-				if (link.tagName !== 'A') return;
-
-				link.addEventListener('click', onLinkClick);
+				link.animate(
+					{ opacity: [1] },
+					{ duration: 500, delay: (index + 1) * 200, fill: 'forwards' }
+				);
+				if (link.tagName === 'A' && !link.hasAttribute('data-skip-router-check')) {
+					link.addEventListener('click', onLinkClick);
+				}
 			});
 		});
-	}
 
-	function onLinkClick(event: Event) {
-		event.preventDefault();
-
-		const { mobileMenu, closeSvg, menuSvg, allLinks } = getMobileMenuElements();
-		mobileMenu.classList.remove('open');
-
-		setTimeout(() => {
-			const target = event.target as HTMLAnchorElement;
-			navigate(target.href).then(() => {
-				closeSvg.classList.add('hidden');
-				menuSvg.classList.remove('hidden');
-				allLinks.forEach((link) => {
-					link.classList.remove('link-item');
+		function onLinkClick(event) {
+			event.preventDefault();
+			mobileMenu.classList.remove('open');
+			setTimeout(() => {
+				const target = event.target;
+				navigate(target.href).then(() => {
+					closeSvg.classList.add('hidden');
+					menuSvg.classList.remove('hidden');
+					allLinks.forEach((link) => (link.style.opacity = '0'));
 				});
-			});
-		}, 200);
+			}, 200);
+		}
 	}
 
-	function getMobileMenuElements(): {
-		mobileMenuButton: HTMLButtonElement;
-		mobileMenu: HTMLDivElement;
-		closeSvg: HTMLElement;
-		menuSvg: HTMLElement;
-		allLinks: NodeListOf<HTMLElement>;
-	} {
-		const mobileMenuButton = document.getElementById('mobile-menu-button') as HTMLButtonElement;
-		const mobileMenu = document.getElementById('mobile-menu') as HTMLDivElement;
-		const closeSvg = document.getElementById('closeSvg');
-		const menuSvg = document.getElementById('menuSvg');
-		const allLinks = mobileMenu.querySelectorAll(
-			'a, hr, div#langPicker'
-		) as NodeListOf<HTMLElement>;
-
-		return { mobileMenuButton, mobileMenu, closeSvg, menuSvg, allLinks };
-	}
-
-	// Event listeners get destroyed when navigating to a new page
-	// Re-attach them when the new page is loaded
 	document.addEventListener('astro:page-load', attachEventListeners);
 </script>

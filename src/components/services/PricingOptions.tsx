@@ -72,7 +72,7 @@ export default function PricingOptions() {
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{shootings.map((shooting, index) => (
 					<div
-						className={`card-layout flex cursor-pointer flex-col gap-4 overflow-hidden sm:gap-8`}
+						className={`card-layout flex cursor-pointer flex-col gap-4 overflow-hidden bg-gray-50 sm:gap-8`}
 						key={index}
 					>
 						<div className="bg-gray-50 p-6">

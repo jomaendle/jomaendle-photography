@@ -76,5 +76,5 @@
 }
 
 .card-layout {
-  @apply cursor-pointer bg-gray-50 transition-all hover:scale-[1.01] hover:shadow-xl rounded-md shadow-md;
+  @apply cursor-pointer transition-all hover:scale-[1.01] hover:shadow-xl rounded-md shadow-md;
 }

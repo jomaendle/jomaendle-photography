@@ -13,7 +13,7 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 
 <Layout title="Work - Jo Maendle Photography">
 	<section class="card mx-auto max-w-[90rem] flex h-full flex-col gap-8">
-		<div class="grid gap-8 lg:grid-cols-2">
+		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 			{
 				clientProjects.map((project) => (
 					<a href=`/${lang}/details/${project.slug}` class="animated-card">
