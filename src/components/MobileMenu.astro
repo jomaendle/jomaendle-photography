@@ -83,7 +83,9 @@ const t = useTranslations(lang);
 		const mobileMenu = document.getElementById('mobile-menu');
 		const closeSvg = document.getElementById('closeSvg');
 		const menuSvg = document.getElementById('menuSvg');
-		const allLinks = mobileMenu.querySelectorAll('a, hr, div#langPicker');
+		const allLinks = mobileMenu.querySelectorAll(
+			'a, hr, div#langPicker'
+		) as NodeListOf<HTMLElement>;
 
 		mobileMenuButton.addEventListener('click', () => {
 			closeSvg.classList.toggle('hidden');
