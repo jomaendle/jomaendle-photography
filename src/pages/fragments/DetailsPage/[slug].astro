@@ -27,55 +27,34 @@ export async function getStaticPaths() {
 ---
 
 <Layout title="Preview">
-    <div class="flex h-full flex-col items-center justify-center gap-8 px-4 pb-12 sm:px-8 max-w-[90rem] mx-auto">
-        <header class="self-start py-2 w-full sticky top-[48px] md:top-[82px] z-20 bg-white">
-            <Button id="go-back-button" variant="ghost">
+    <div class="flex h-full flex-col items-center justify-center gap-8  pb-12 max-w-[90rem] mx-auto">
+        <header class="self-start py-2 w-full flex items-center">
+            <Button id="go-back-button" variant="ghost" className="absolute z-10">
                 <div class="flex items-center gap-2">
                     <ArrowLeft/>
                     <span>{t('common.back')}</span>
                 </div>
             </Button>
+
+            <h1 class="layout-title flex-1 text-center">
+                {projectData.title}
+            </h1>
         </header>
 
-        <section
-                class="flex flex-col-reverse sm:flex-row w-full flex-1 items-center sm:items-start gap-8 lg:gap-12 bg-gray-50 p-4 shadow-xl">
-            <Image
-                    src={projectData.titleImage as unknown as string}
-                    id=`${project.slug}-999`
-                    alt={projectData.title}
-                    transition:name=`media-image-${project.slug}`
-                    width="500"
-                    height="800"
-                    quality={90}
-                    class="preview object-contain max-w-[250px]"
-            />
-
-            <ImageViewModal index={999} slug={project.slug} image={projectData.titleImage} />
-
-            <div class="flex flex-col gap-2">
-                <h1 class="layout-title" transition:name=`project-heading-${project.slug}`>
-                    {projectData.title}
-                </h1>
-                <p class="secondary-text max-w-xl text-pretty" transition:name=`project-subtitle-${project.slug}`>
-                    {projectData.description}
-                </p>
-            </div>
-        </section>
-
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 mt-8">
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
             {
-                projectData.images.map((photo, index) => (
+                [projectData.titleImage,...projectData.images].map((photo, index) => (
                         <>
-                            <div class="overflow-hidden">
+                            <div class="overflow-hidden flex items-center">
                                 <Image
                                         id=`${project.slug}-${index}`
                                         src={photo as unknown as string}
                                         alt=""
-                                        class="preview object-conver hover:scale-[1.02] transition-transform"
+                                        class="preview object-conver hover:scale-[1.02] transition-transform h-full object-cover"
                                         transition:name=`media-image-${project.slug}-${index}`
-                                        width="500"
-                                        height="500"
-                                        quality={90}
+                                        width="700"
+                                        height="1000"
+                                        quality={98}
 
                                 />
                             </div>

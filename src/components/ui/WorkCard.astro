@@ -8,23 +8,21 @@ import { type ClientProject } from '../../content/config';
 const { project = {} as CollectionItem<ClientProject> } = Astro.props;
 ---
 
-<div
-	class="card-layout group relative flex aspect-[4/5] max-h-[350px] w-full gap-4 overflow-hidden sm:max-h-[500px]"
->
+<div class="group relative flex h-full w-full gap-4 overflow-hidden">
 	<Image
 		src={project.data.titleImage}
 		alt={project.data.titleImage?.alt ?? ''}
 		loading="lazy"
 		widths={[240, 540, 720, project.data.titleImage.width]}
 		sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${project.data.titleImage.width}px`}
-		transition:name=`media-image-${project.slug}`
+		transition:name=`media-image-${project.slug}-0`
 		class="h-full w-full flex-shrink object-cover object-top"
 	/>
 	<div
 		class="button-fade-in absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/70 to-60% group-hover:flex sm:hidden sm:gap-4"
 	>
 		<div class="flex h-full items-end justify-end p-2 text-white sm:py-4">
-			<h2 class="layout-title leading-2 flex-1" transition:name=`project-heading-${project.slug}`>
+			<h2 class="layout-title leading-2 flex-1">
 				{project.data.title}
 			</h2>
 
