@@ -1,18 +1,33 @@
 ---
+import type { ImageContent } from '../../content/config';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { getCollection } from 'astro:content';
+import { getCollection, CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
+
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { Button } from '@/components/ui/button';
 import { portraitImagesKey } from '../../content/config';
+import { GetImageResult } from 'astro';
 
-const images = await getCollection(portraitImagesKey);
+const imagesFromCollection = await getCollection<ImageContent>(portraitImagesKey);
+
+const optimizedMobileImages: GetImageResult[] = await Promise.all(
+	imagesFromCollection.map(
+		async (image) =>
+			await getImage({
+				src: image.data.image,
+				width: 600,
+				quality: 'high'
+			})
+	)
+);
+
+console.log(optimizedMobileImages);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// optimize images
 ---
 
 <Layout title="Jo Maendle Photography">
@@ -21,7 +36,7 @@ const t = useTranslations(lang);
 			class="relative flex h-full w-full grid-cols-2 flex-col-reverse gap-8 overflow-hidden md:grid md:gap-12 lg:gap-20 xl:gap-24"
 		>
 			<div class="shrink-0">
-				<ImageCarousel client:load images={images} />
+				<ImageCarousel client:load images={optimizedMobileImages} />
 			</div>
 
 			<div

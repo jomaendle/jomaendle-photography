@@ -12,8 +12,8 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 
 
 <Layout title="Work - Jo Maendle Photography">
-	<section class="sm:py-8 py-4 mx-auto max-w-[90rem] flex h-full flex-col gap-8">
-		<div class="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+	<section class="card mx-auto max-w-[90rem] flex h-full flex-col gap-8">
+		<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 			{
 				clientProjects.map((project) => (
 					<a href=`/${lang}/details/${project.slug}` class="animated-card">

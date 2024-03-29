@@ -5,8 +5,9 @@ import {
 	CarouselNext,
 	CarouselPrevious
 } from '@/components/ui/carousel';
+import type { GetImageResult } from 'astro';
 
-export function ImageCarousel({ images }: { images: any[] }) {
+export function ImageCarousel({ images }: { images: GetImageResult[] }) {
 	return (
 		<Carousel
 			opts={{
@@ -20,11 +21,14 @@ export function ImageCarousel({ images }: { images: any[] }) {
 					<CarouselItem key={index} className="h-full">
 						<div className="aspect-[2:3] flex h-full max-h-[700px] items-center justify-center">
 							<img
-								src={img.data.image.src}
+								src={img.src}
 								alt=""
+								width={img.options.width}
+								height={img.options.height}
 								loading={index === 0 ? 'eager' : 'lazy'}
 								className="h-full w-full object-contain object-left sm:object-center md:object-left"
 							/>
+							<slot />
 						</div>
 					</CarouselItem>
 				))}
