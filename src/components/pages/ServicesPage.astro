@@ -1,21 +1,36 @@
 ---
+import type { PhotoShootingOffersTranslated } from '../services/pricing-data';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import Layout from '../../layouts/Layout.astro';
-import LayoutCard from '../LayoutCard.astro';
-import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
 import CustomerReview from '../services/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
 import ProcessDescription from '../services/ProcessDescription';
+import { OFFERS } from '../services/pricing-data';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const translatedShootings: PhotoShootingOffersTranslated[] = OFFERS.map((offer) => {
+	return {
+		...offer,
+		title: t(offer.title),
+		description: t(offer.description),
+		targetGroup: t(offer.targetGroup),
+		cta: t(offer.cta),
+		includes: offer.includes.map((include) => t(include))
+	};
+});
 ---
 
 <Layout title="Jo Maendle Photography">
 	<section class="card mx-auto mb-12 flex max-w-[90rem] flex-col gap-20 md:gap-40">
 		<section>
-			<PricingOptions />
+			<PricingOptions
+				client:load
+				shootings={translatedShootings}
+				title={t('pricing.title')}
+				subtitle={t('pricing.subtitle')}
+			/>
 		</section>
 
 		<section>
