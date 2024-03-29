@@ -1,4 +1,6 @@
 ---
+import type { ProcessDescriptionTranslated } from '../services/process-data';
+import { SHOOTING_PROCESS } from '../services/process-data';
 import type { PhotoShootingOffersTranslated } from '../services/pricing-data';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import Layout from '../../layouts/Layout.astro';
@@ -20,6 +22,15 @@ const translatedShootings: PhotoShootingOffersTranslated[] = OFFERS.map((offer) 
 		includes: offer.includes.map((include) => t(include))
 	};
 });
+
+const translatedShootingDescription: ProcessDescriptionTranslated[] = SHOOTING_PROCESS.map(
+	(step) => {
+		return {
+			title: t(step.title),
+			description: t(step.description)
+		};
+	}
+);
 ---
 
 <Layout title="Jo Maendle Photography">
@@ -34,7 +45,12 @@ const translatedShootings: PhotoShootingOffersTranslated[] = OFFERS.map((offer) 
 		</section>
 
 		<section>
-			<ProcessDescription client:load />
+			<ProcessDescription
+				client:load
+				title={t('process.title')}
+				subtitle={t('process.subtitle')}
+				shootingSteps={translatedShootingDescription}
+			/>
 		</section>
 
 		<section>

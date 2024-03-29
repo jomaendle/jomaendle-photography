@@ -1,28 +1,20 @@
-const shootingSteps = [
-	{
-		title: 'Get in touch',
-		description:
-			'Contact me and we will discuss your needs and ideas and agree on a date and location for the shoot.'
-	},
-	{
-		title: 'The shoot',
-		description:
-			'We will meet at the agreed location and spend a between 1 and 2 hours capturing the images we need.'
-	},
-	{
-		title: 'Delivery',
-		description:
-			'I will deliver the final images to you within 7 days in the format and resolution we agreed on.'
-	}
-];
+import type { ProcessDescriptionTranslated } from '@/components/services/process-data.ts';
 
-export default function ProcessDescription() {
+export default function ProcessDescription({
+	shootingSteps,
+	title,
+	subtitle
+}: {
+	title: string;
+	subtitle: string;
+	shootingSteps: ProcessDescriptionTranslated[];
+}) {
 	return (
 		<div className="mx-auto grid w-full max-w-5xl justify-center gap-6 lg:gap-12">
 			<div>
-				<h2 className="text-center text-3xl font-bold">Process</h2>
+				<h2 className="text-center text-3xl font-bold">{title}</h2>
 				<p className="mt-2 max-w-2xl text-center text-gray-500 sm:text-lg md:mx-auto lg:text-gray-400">
-					How the shooting works.
+					{subtitle}
 				</p>
 			</div>
 

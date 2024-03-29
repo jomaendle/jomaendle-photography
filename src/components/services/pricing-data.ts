@@ -1,5 +1,5 @@
 import { type TranslationKey } from '@/i18n/utils.ts';
-import { offer1, offer2 } from '@/i18n/pricing.i18n.ts';
+import { offer1, offer2 } from '@/i18n/translations/pricing.i18n.ts';
 
 export interface PhotoShootingOffersBase {
 	title: TranslationKey;

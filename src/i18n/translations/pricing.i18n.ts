@@ -55,7 +55,7 @@ export const pricing = {
 	de: {
 		'pricing.title': 'Leistungen',
 		'pricing.subtitle':
-			'Wähle eine unserer Fotografie-Dienstleistungen, die deinen Bedürfnissen und deinem Budget entsprechen.',
+			'Wähle eine meiner Fotografie-Dienstleistungen, die deinen Bedürfnissen und deinem Budget entsprechen.',
 		'pricing.cta': 'Jetzt buchen',
 		'pricing.offering1.title': 'Portrait - Basic',
 		'pricing.offering1.description':
