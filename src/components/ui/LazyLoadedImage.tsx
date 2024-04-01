@@ -14,8 +14,6 @@ function LazyLoadedImage({ lowResSrc, originalImage, width, height, alt, id }) {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach(async (entry) => {
 				if (entry.isIntersecting && !isHighResLoaded) {
-					console.log('Intersection observed', loadImagesRecord);
-
 					const id = entry.target.id;
 
 					if (!id) {
@@ -26,7 +24,6 @@ function LazyLoadedImage({ lowResSrc, originalImage, width, height, alt, id }) {
 						setHighResImg(loadImagesRecord.get(id));
 						return;
 					}
-					console.log('Loading high res image...', entry.target.id);
 
 					const optimizedQualityImage = await getImage({
 						src: originalImage,
@@ -81,7 +78,7 @@ function LazyLoadedImage({ lowResSrc, originalImage, width, height, alt, id }) {
 				alt={alt}
 				decoding="async"
 				loading="lazy"
-				className={`z-10 h-full w-full flex-shrink object-cover object-top ${isHighResLoaded ? 'fade-in-animation' : 'opacity-0'}`}
+				className={`preview z-10 h-full w-full flex-shrink object-cover object-top ${isHighResLoaded ? 'fade-in-animation' : 'opacity-0'}`}
 				style={{ transition: `opacity 1s ease-in-out` }}
 			/>
 		</div>

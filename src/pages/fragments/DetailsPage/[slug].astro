@@ -1,157 +1,153 @@
 ---
-import {getLangFromUrl, useTranslations} from '../../../i18n/utils'
-import {getPhotoDetailsStaticPaths} from '../../../util/details-static-paths'
-import Layout from '../../../layouts/Layout.astro'
-import {type CollectionEntry} from 'astro:content'
-import { getImage, Image } from 'astro:assets'
-import {type ClientProject, type CollectionItem} from '../../../content/config'
-import {ArrowLeft} from 'lucide-react'
-import {Button} from '../../../components/ui/button'
-import ImageViewModal from "../../../components/ui/ImageViewModal.astro";
-import LazyLoadedImage from '../../../components/ui/LazyLoadedImage'
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { getPhotoDetailsStaticPaths } from '../../../util/details-static-paths';
+import Layout from '../../../layouts/Layout.astro';
+import { type CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
+import {
+	type ClientProject,
+	clientProjectsKey,
+	type CollectionItem
+} from '../../../content/config';
+import { ArrowLeft } from 'lucide-react';
+import { Button } from '../../../components/ui/button';
+import ImageViewModal from '../../../components/ui/ImageViewModal.astro';
+import LazyLoadedImage from '../../../components/ui/LazyLoadedImage';
 
 interface Props {
-    project: CollectionEntry<'client-projects'>
+	project: CollectionEntry<'client-projects'>;
 }
 
-const {project: projectProp} = Astro.props
+const { project } = Astro.props;
 
-const project: CollectionItem<ClientProject> = projectProp as unknown as CollectionItem<ClientProject>
-const projectData: ClientProject = project.data
+const projectData: ClientProject = project.data;
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 export async function getStaticPaths() {
-    return getPhotoDetailsStaticPaths()
+	return getPhotoDetailsStaticPaths();
 }
 
- async function getLowResImages() {
-    const images = [projectData.titleImage,...projectData.images];
-    const result = images.map(async (image) => getImage({
-        src: image,
-        quality: 10,
-        width: 90,
-        height: 90,
-    }))
+async function getLowResImages() {
+	const images = [projectData.titleImage, ...projectData.images];
+	const result = images.map(async (image) =>
+		getImage({
+			src: image,
+			quality: 10,
+			width: 90,
+			height: 90
+		})
+	);
 
-    return await Promise.all(result)
+	return await Promise.all(result);
 }
 
-const lowResImgs = await getLowResImages()
-
+const lowResImgs = await getLowResImages();
 ---
 
 <Layout title="Preview">
-    <div class="flex h-full flex-col items-center justify-center gap-8 px-4 sm:px-8  pb-12 max-w-[90rem] mx-auto">
-        <header class="self-start py-2 w-full flex items-center">
-            <Button id="go-back-button" variant="ghost" className="absolute z-10">
-                <div class="flex items-center gap-2">
-                    <ArrowLeft/>
-                    <span>{t('common.back')}</span>
-                </div>
-            </Button>
+	<div
+		class="mx-auto flex h-full max-w-[90rem] flex-col items-center justify-center gap-8 px-4 pb-12 sm:px-8"
+	>
+		<header class="flex w-full items-center self-start py-2">
+			<Button id="go-back-button" variant="ghost" className="absolute z-10">
+				<div class="flex items-center gap-2">
+					<ArrowLeft />
+					<span>{t('common.back')}</span>
+				</div>
+			</Button>
 
-            <h1 class="layout-title flex-1 text-center">
-                {projectData.title}
-            </h1>
-        </header>
+			<h1 class="layout-title flex-1 text-center">
+				{projectData.title}
+			</h1>
+		</header>
 
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {
-                [projectData.titleImage,...projectData.images].map((photo, index) => (
-                        <>
-                            <div class="overflow-hidden min-h-[600px] flex items-center">
-                                <Image
-                                        id=`${project.slug}-${index}`
-                                        src={photo as unknown as string}
-                                        alt=""
-                                        class="preview object-conver hover:scale-[1.02] transition-transform h-full object-cover"
-                                        transition:name=`media-image-${project.slug}-${index}`
-                                        width="700"
-                                        height="1000"
-                                        quality={98}
+		<section class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				[projectData.titleImage, ...projectData.images].map((photo, index) => (
+					<>
+						<div class="flex min-h-[600px] items-center overflow-hidden">
+							<LazyLoadedImage
+								client:visible
+								id={`${project.slug}-${index}`}
+								lowResSrc={lowResImgs[index].src}
+								originalImage={photo}
+								width={photo.width / 4}
+								height={photo.height / 4}
+							/>
+						</div>
 
-                                />-->
-                                <LazyLoadedImage
-                                  client:visible
-                                  id={`${project.slug}-${index}`}
-                                  lowResSrc={lowResImgs[index].src}
-                                  originalImage={photo}
-                                  width={photo.width / 4}
-                                  height={photo.height / 4}
-                                />
-                            </div>
-
-                            <ImageViewModal index={index} slug={project.slug} image={photo} />
-                        </>
-                ))
-            }
-        </section>
-    </div>
+						<ImageViewModal index={index} slug={project.slug} images={projectData.images} />
+					</>
+				))
+			}
+		</section>
+	</div>
 </Layout>
 
-
 <script>
-    if (document) {
-        document.addEventListener('astro:page-load', () => {
-            const button = document.getElementById('go-back-button');
-            const allImages = document.querySelectorAll('img.preview')
+	if (document) {
+		document.addEventListener('astro:page-load', () => {
+			const button = document.getElementById('go-back-button');
+			const allImages = document.querySelectorAll('img.preview');
 
-            allImages.forEach((image) => {
-                image.addEventListener('click', (event) => {
-                    const modalId = (event.target as HTMLElement).id + '-modal'
-                    const modal = document.getElementById(modalId)
+			allImages.forEach((image) => {
+				image.addEventListener('click', (event) => {
+					const modalId = (event.target as HTMLElement).id + '-modal';
+					const modal = document.getElementById(modalId);
 
-                    if (!modal.hasAttribute('data-listener')) {
-                        modal.addEventListener('click', () => {
-                            toggleModal(modalId, false)
-                        })
-                        modal.setAttribute('data-listener', 'true')
-                    }
+					if (!modal.hasAttribute('data-listener')) {
+						modal.addEventListener('click', () => {
+							toggleModal(modalId, false);
+						});
+						modal.setAttribute('data-listener', 'true');
+					}
 
-                    toggleModal(modalId, true)
-                })
-            })
+					toggleModal(modalId, true);
+				});
+			});
 
-            if (!button) {
-                return
-            }
+			if (!button) {
+				return;
+			}
 
-            button.addEventListener('click', () => {
-                window.history.back()
-            })
-        })
-    }
+			button.addEventListener('click', () => {
+				window.history.back();
+			});
+		});
+	}
 
-    function toggleModal(modalId: string, show: boolean = true) {
-        const modal = document.getElementById(modalId)
+	function toggleModal(modalId: string, show: boolean = true) {
+		const modal = document.getElementById(modalId);
 
-        if (show) {
-            modal.classList.add('flex')
-            modal.classList.remove('hidden')
-            document.body.classList.add('overflow-hidden')
-            animateModal(modal)
-        } else {
-            animateModal(modal, false)
+		if (show) {
+			modal.classList.add('flex');
+			modal.classList.remove('hidden');
+			document.body.classList.add('overflow-hidden');
+			animateModal(modal);
+		} else {
+			animateModal(modal, false);
 
-            setTimeout(() => {
-                modal.classList.add('hidden')
-                modal.classList.remove('flex')
-                document.body.classList.remove('overflow-hidden')
-            }, 300)
+			setTimeout(() => {
+				modal.classList.add('hidden');
+				modal.classList.remove('flex');
+				document.body.classList.remove('overflow-hidden');
+			}, 300);
+		}
+	}
 
-        }
-    }
-
-    // write a function which animates the modal in and out when the image is clicked using the WA API
-    function animateModal(modal: HTMLElement, show: boolean = true) {
-        modal.animate({
-            opacity: show ? [0, 1] : [1, 0]
-        }, {
-            duration: 350,
-            easing: 'ease-in-out',
-            fill: 'forwards'
-        })
-    }
+	// write a function which animates the modal in and out when the image is clicked using the WA API
+	function animateModal(modal: HTMLElement, show: boolean = true) {
+		modal.animate(
+			{
+				opacity: show ? [0, 1] : [1, 0]
+			},
+			{
+				duration: 350,
+				easing: 'ease-in-out',
+				fill: 'forwards'
+			}
+		);
+	}
 </script>

@@ -1,8 +1,6 @@
 ---
-import type { ImageContent } from '../../content/config';
+import { getStoredImages } from '../../state/images.service';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { getCollection, CollectionEntry } from 'astro:content';
-import { getImage } from 'astro:assets';
 
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
@@ -11,18 +9,7 @@ import { Button } from '@/components/ui/button';
 import { portraitImagesKey } from '../../content/config';
 import { GetImageResult } from 'astro';
 
-const imagesFromCollection = await getCollection<ImageContent>(portraitImagesKey);
-
-const optimizedMobileImages: GetImageResult[] = await Promise.all(
-	imagesFromCollection.map(
-		async (image) =>
-			await getImage({
-				src: image.data.image,
-				width: 600,
-				quality: 'high'
-			})
-	)
-);
+const optimizedMobileImages: GetImageResult[] = await getStoredImages(portraitImagesKey);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
