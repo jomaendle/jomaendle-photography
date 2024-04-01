@@ -1,7 +1,7 @@
 ---
 import { ArrowRight } from 'lucide-react';
 import { Button } from './button';
-import { getImage, Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import LazyLoadedImage from './LazyLoadedImage';
 
 const { project } = Astro.props;
@@ -47,6 +47,7 @@ const lowResImg = await getImage({
 		client:load
 		id={`${project.slug}`}
 		lowResSrc={lowResImg.src}
+		alt={project.data.title}
 		originalImage={project.data.titleImage}
 		width={project.data.titleImage.width / 4}
 		height={project.data.titleImage.height / 4}

@@ -3,8 +3,8 @@ import CustomerReview from '../services/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
 import ProcessDescription from '../services/ProcessDescription';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
-import { OFFERS, PhotoShootingOffersTranslated } from './pricing-data';
-import { ProcessDescriptionTranslated, SHOOTING_PROCESS } from './process-data';
+import { OFFERS, type PhotoShootingOffersTranslated } from './pricing-data';
+import { type ProcessDescriptionTranslated, SHOOTING_PROCESS } from './process-data';
 import Layout from '../../../layouts/Layout.astro';
 
 const lang = getLangFromUrl(Astro.url);

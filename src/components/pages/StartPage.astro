@@ -7,9 +7,8 @@ import LayoutCard from '../../components/LayoutCard.astro';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { Button } from '@/components/ui/button';
 import { portraitImagesKey } from '../../content/config';
-import { GetImageResult } from 'astro';
 
-const optimizedMobileImages: GetImageResult[] = await getStoredImages(portraitImagesKey);
+const optimizedMobileImages = await getStoredImages(portraitImagesKey);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

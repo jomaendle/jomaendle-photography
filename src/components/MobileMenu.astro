@@ -104,11 +104,11 @@ const t = useTranslations(lang);
 			});
 		});
 
-		function onLinkClick(event) {
+		function onLinkClick(event: Event) {
 			event.preventDefault();
 			mobileMenu.classList.remove('open');
 			setTimeout(() => {
-				const target = event.target;
+				const target = event.target as HTMLAnchorElement;
 				navigate(target.href).then(() => {
 					closeSvg.classList.add('hidden');
 					menuSvg.classList.remove('hidden');

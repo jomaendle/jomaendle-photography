@@ -9,7 +9,7 @@ function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
 }
 
-const encode = (data) => {
+const encode = (data: unknown) => {
 	return Object.keys(data)
 		.map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
 		.join('&');
@@ -60,19 +60,9 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 				});
 				resetForm();
 			})
-			.catch((error) => {
+			.catch(() => {
 				toast.error('An error occurred while sending the message');
 			});
-	};
-
-	const onInputChange = (event: Event) => {
-		const input = event.target as HTMLInputElement | HTMLTextAreaElement;
-		const isValid = input.checkValidity();
-		if (!isValid) {
-			input.classList.add('border-red-500');
-		} else {
-			input.classList.remove('border-red-500');
-		}
 	};
 
 	return (

@@ -4,11 +4,6 @@ import { getPhotoDetailsStaticPaths } from '../../../util/details-static-paths';
 import Layout from '../../../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
-import {
-	type ClientProject,
-	clientProjectsKey,
-	type CollectionItem
-} from '../../../content/config';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 import ImageViewModal from '../../../components/ui/ImageViewModal.astro';
@@ -20,7 +15,7 @@ interface Props {
 
 const { project } = Astro.props;
 
-const projectData: ClientProject = project.data;
+const projectData = project.data;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -33,7 +28,7 @@ async function getLowResImages() {
 	const images = [projectData.titleImage, ...projectData.images];
 	const result = images.map(async (image) =>
 		getImage({
-			src: image,
+			src: image as any,
 			quality: 10,
 			width: 90,
 			height: 90
@@ -75,6 +70,7 @@ const lowResImgs = await getLowResImages();
 								originalImage={photo}
 								width={photo.width / 4}
 								height={photo.height / 4}
+								alt="Project Image"
 							/>
 						</div>
 
