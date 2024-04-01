@@ -1,4 +1,4 @@
-import type { ProcessDescriptionTranslated } from '@/components/services/process-data.ts';
+import type { ProcessDescriptionTranslated } from '@/components/pages/services/process-data.ts';
 
 export default function ProcessDescription({
 	shootingSteps,

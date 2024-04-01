@@ -24,8 +24,6 @@ const optimizedMobileImages: GetImageResult[] = await Promise.all(
 	)
 );
 
-console.log(optimizedMobileImages);
-
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---

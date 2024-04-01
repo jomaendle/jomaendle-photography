@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { type PhotoShootingOffersTranslated } from '@/components/services/pricing-data.ts';
+import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
 
 export default function PricingOptions({
 	title,

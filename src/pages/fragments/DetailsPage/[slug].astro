@@ -3,11 +3,12 @@ import {getLangFromUrl, useTranslations} from '../../../i18n/utils'
 import {getPhotoDetailsStaticPaths} from '../../../util/details-static-paths'
 import Layout from '../../../layouts/Layout.astro'
 import {type CollectionEntry} from 'astro:content'
-import {Image} from 'astro:assets'
+import { getImage, Image } from 'astro:assets'
 import {type ClientProject, type CollectionItem} from '../../../content/config'
 import {ArrowLeft} from 'lucide-react'
 import {Button} from '../../../components/ui/button'
 import ImageViewModal from "../../../components/ui/ImageViewModal.astro";
+import LazyLoadedImage from '../../../components/ui/LazyLoadedImage'
 
 interface Props {
     project: CollectionEntry<'client-projects'>
@@ -24,6 +25,21 @@ const t = useTranslations(lang)
 export async function getStaticPaths() {
     return getPhotoDetailsStaticPaths()
 }
+
+ async function getLowResImages() {
+    const images = [projectData.titleImage,...projectData.images];
+    const result = images.map(async (image) => getImage({
+        src: image,
+        quality: 10,
+        width: 90,
+        height: 90,
+    }))
+
+    return await Promise.all(result)
+}
+
+const lowResImgs = await getLowResImages()
+
 ---
 
 <Layout title="Preview">
@@ -45,7 +61,7 @@ export async function getStaticPaths() {
             {
                 [projectData.titleImage,...projectData.images].map((photo, index) => (
                         <>
-                            <div class="overflow-hidden flex items-center">
+                            <div class="overflow-hidden min-h-[600px] flex items-center">
                                 <Image
                                         id=`${project.slug}-${index}`
                                         src={photo as unknown as string}
@@ -56,6 +72,14 @@ export async function getStaticPaths() {
                                         height="1000"
                                         quality={98}
 
+                                />-->
+                                <LazyLoadedImage
+                                  client:visible
+                                  id={`${project.slug}-${index}`}
+                                  lowResSrc={lowResImgs[index].src}
+                                  originalImage={photo}
+                                  width={photo.width / 4}
+                                  height={photo.height / 4}
                                 />
                             </div>
 
