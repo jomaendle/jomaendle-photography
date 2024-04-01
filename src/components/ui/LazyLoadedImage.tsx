@@ -25,16 +25,15 @@ function LazyLoadedImage({ lowResSrc, originalImage, width, height, alt, id }) {
 						return;
 					}
 
-					console.log('Loading high res image', window.location.origin);
 					const imgSrc = import.meta.env.PROD
 						? `${window.location.origin}/${originalImage.src}`
 						: originalImage;
 
 					const optimizedQualityImage = await getImage({
 						src: imgSrc,
-						width: width,
-						height: height,
-						quality: 94
+						width: width / 2,
+						height: height / 2,
+						quality: 80
 					});
 
 					loadImagesRecord.set(id, optimizedQualityImage);
