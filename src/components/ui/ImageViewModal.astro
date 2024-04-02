@@ -11,7 +11,7 @@ const { images }: Props = Astro.props;
 
 <div
 	id="modal"
-	class="modal fixed inset-0 z-[100] hidden h-full items-center justify-center bg-black/50 p-12 backdrop-blur-sm"
+	class="modal fixed inset-0 z-[100] hidden h-full items-center justify-center bg-black/70 p-2 backdrop-blur-md sm:p-12"
 >
-	<ImageCarousel client:load images={images} />
+	<ImageCarousel client:load images={images} showCloseOnMobile={true} />
 </div>

@@ -29,9 +29,9 @@ async function getLowResImages() {
 	const result = images.map(async (image) =>
 		getImage({
 			src: image as any,
-			quality: 10,
-			width: 90,
-			height: 90
+			quality: 'mid',
+			width: image.width / 2,
+			height: image.height / 2
 		})
 	);
 
@@ -45,15 +45,15 @@ const lowResImgs = await getLowResImages();
 	<div
 		class="mx-auto flex h-full max-w-[90rem] flex-col items-center justify-center gap-8 px-4 pb-12 sm:px-8"
 	>
-		<header class="flex w-full items-center self-start py-2">
-			<Button id="go-back-button" variant="ghost" className="absolute z-10">
+		<header class="flex w-full items-center self-start pb-2 pt-7">
+			<Button id="go-back-button" variant="ghost" className="z-10 sm:absolute">
 				<div class="flex items-center gap-2">
 					<ArrowLeft />
 					<span>{t('common.back')}</span>
 				</div>
 			</Button>
 
-			<h1 class="layout-title flex-1 text-center">
+			<h1 class="flex-1 text-center text-xl">
 				{projectData.title}
 			</h1>
 		</header>
@@ -62,7 +62,7 @@ const lowResImgs = await getLowResImages();
 			{
 				[projectData.titleImage, ...projectData.images].map((photo, index) => (
 					<>
-						<div class="flex min-h-[600px] items-center overflow-hidden">
+						<div class="flex  aspect-[2/3] items-center overflow-hidden">
 							<LazyLoadedImage id={`${project.slug}-${index}`} image={photo} />
 						</div>
 					</>
@@ -70,11 +70,13 @@ const lowResImgs = await getLowResImages();
 			}
 		</section>
 
-		<ImageViewModal slug={project.slug} images={projectData.images} />
+		<ImageViewModal slug={project.slug} images={lowResImgs} />
 	</div>
 </Layout>
 
 <script>
+	import { toggleModal } from '../../../util/modal.util';
+
 	if (document) {
 		document.addEventListener('astro:page-load', () => {
 			const button = document.getElementById('go-back-button');
@@ -104,38 +106,5 @@ const lowResImgs = await getLowResImages();
 				window.history.back();
 			});
 		});
-	}
-
-	function toggleModal(modalId: string, show: boolean = true) {
-		const modal = document.getElementById(modalId);
-
-		if (show) {
-			modal.classList.add('flex');
-			modal.classList.remove('hidden');
-			document.body.classList.add('overflow-hidden');
-			animateModal(modal);
-		} else {
-			animateModal(modal, false);
-
-			setTimeout(() => {
-				modal.classList.add('hidden');
-				modal.classList.remove('flex');
-				document.body.classList.remove('overflow-hidden');
-			}, 300);
-		}
-	}
-
-	// write a function which animates the modal in and out when the image is clicked using the WA API
-	function animateModal(modal: HTMLElement, show: boolean = true) {
-		modal.animate(
-			{
-				opacity: show ? [0, 1] : [1, 0]
-			},
-			{
-				duration: 350,
-				easing: 'ease-in-out',
-				fill: 'forwards'
-			}
-		);
 	}
 </script>
