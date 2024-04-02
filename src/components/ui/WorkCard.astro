@@ -1,57 +1,13 @@
 ---
 import { ArrowRight } from 'lucide-react';
 import { Button } from './button';
-import { getImage } from 'astro:assets';
-import LazyLoadedImage from './LazyLoadedImage';
+import LazyLoadedImage from './LazyLoadedImage.astro';
 
 const { project } = Astro.props;
-
-const lowResImg = await getImage({
-	src: project.data.titleImage,
-	quality: 10,
-	width: 90,
-	height: 90
-});
 ---
 
-<style>
-	.fade-in-animation {
-		animation: fadeIn 0.3s ease-in-out;
-	}
-
-	.fade-out-blur {
-		animation: fadeOutBlur 1s ease-in-out;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	@keyframes fadeOutBlur {
-		from {
-			filter: blur(30px);
-		}
-		to {
-			filter: blur(0px);
-		}
-	}
-</style>
-
 <div class="group relative flex h-full w-full gap-4 overflow-hidden">
-	<LazyLoadedImage
-		client:load
-		id={`${project.slug}`}
-		lowResSrc={lowResImg.src}
-		alt={project.data.title}
-		originalImage={project.data.titleImage}
-		width={project.data.titleImage.width / 4}
-		height={project.data.titleImage.height / 4}
-	/>
+	<LazyLoadedImage id={`${project.slug}`} image={project.data.titleImage} />
 
 	<div
 		class="fade-in-animation absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/70 to-60% group-hover:flex sm:hidden sm:gap-4"

@@ -7,7 +7,7 @@ import { getImage } from 'astro:assets';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 import ImageViewModal from '../../../components/ui/ImageViewModal.astro';
-import LazyLoadedImage from '../../../components/ui/LazyLoadedImage';
+import LazyLoadedImage from '../../../components/ui/LazyLoadedImage.astro';
 
 interface Props {
 	project: CollectionEntry<'client-projects'>;
@@ -58,20 +58,12 @@ const lowResImgs = await getLowResImages();
 			</h1>
 		</header>
 
-		<section class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+		<section class="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
 			{
 				[projectData.titleImage, ...projectData.images].map((photo, index) => (
 					<>
 						<div class="flex min-h-[600px] items-center overflow-hidden">
-							<LazyLoadedImage
-								client:visible
-								id={`${project.slug}-${index}`}
-								lowResSrc={lowResImgs[index].src}
-								originalImage={photo}
-								width={photo.width / 4}
-								height={photo.height / 4}
-								alt="Project Image"
-							/>
+							<LazyLoadedImage id={`${project.slug}-${index}`} image={photo} />
 						</div>
 
 						<ImageViewModal index={index} slug={project.slug} images={projectData.images} />

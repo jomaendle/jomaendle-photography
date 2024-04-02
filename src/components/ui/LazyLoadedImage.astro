@@ -1,0 +1,99 @@
+---
+import { getImage, Image } from 'astro:assets';
+
+interface Props {
+	id: string;
+	image: any;
+}
+
+const { id, image } = Astro.props;
+
+const lowResImg = await getImage({
+	src: image,
+	quality: 8,
+	width: 60,
+	height: 60
+});
+
+const optimizedQualityImage = await getImage({
+	src: image,
+	width: 600,
+	quality: 75
+});
+---
+
+<style>
+	.fade-in-animation {
+		animation: fadeIn 0.3s ease-in-out;
+	}
+
+	.fade-out-blur {
+		animation: fadeOutBlur 1s ease-in-out;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeOutBlur {
+		from {
+			filter: blur(30px);
+		}
+		to {
+			filter: blur(0px);
+		}
+	}
+</style>
+
+<jomae-photo>
+	<div
+		class={`z-0 h-full w-full bg-cover bg-center blur-[30px]`}
+		style={{
+			backgroundImage: `url(${lowResImg?.src})`,
+			transition: 'all 1s ease'
+		}}
+	>
+		<Image
+			id={id}
+			src={optimizedQualityImage.src}
+			width={image.width}
+			height={image.height}
+			alt=""
+			class={`preview z-10 h-full w-full flex-shrink object-cover object-top fade-in-animation`}
+			style={{ transition: `opacity 1s ease-in-out` }}
+		/>
+	</div>
+</jomae-photo>
+
+<script>
+	class JomaePhoto extends HTMLElement {
+		constructor() {
+			super();
+
+			const image = this.querySelector('img');
+
+			if (image) {
+				image.complete
+					? setHighResImageStyles(image)
+					: image.addEventListener('load', () => {
+							setHighResImageStyles(image);
+						});
+			}
+		}
+	}
+
+	function setHighResImageStyles(image: HTMLElement) {
+		image.classList.add('fade-in-animation');
+		image.classList.remove('opacity-0');
+
+		image.parentElement?.classList.add('fade-out-blur');
+		image.parentElement?.classList.remove('blur-[30px]');
+	}
+
+	customElements.define('jomae-photo', JomaePhoto);
+</script>
