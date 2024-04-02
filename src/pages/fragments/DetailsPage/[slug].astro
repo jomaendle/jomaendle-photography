@@ -65,12 +65,12 @@ const lowResImgs = await getLowResImages();
 						<div class="flex min-h-[600px] items-center overflow-hidden">
 							<LazyLoadedImage id={`${project.slug}-${index}`} image={photo} />
 						</div>
-
-						<ImageViewModal index={index} slug={project.slug} images={projectData.images} />
 					</>
 				))
 			}
 		</section>
+
+		<ImageViewModal slug={project.slug} images={projectData.images} />
 	</div>
 </Layout>
 
@@ -81,8 +81,8 @@ const lowResImgs = await getLowResImages();
 			const allImages = document.querySelectorAll('img.preview');
 
 			allImages.forEach((image) => {
-				image.addEventListener('click', (event) => {
-					const modalId = (event.target as HTMLElement).id + '-modal';
+				image.addEventListener('click', () => {
+					const modalId = 'modal';
 					const modal = document.getElementById(modalId);
 
 					if (!modal.hasAttribute('data-listener')) {

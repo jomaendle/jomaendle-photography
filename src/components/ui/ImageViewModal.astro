@@ -3,15 +3,14 @@ import { ImageCarousel } from '../ImageCarousel';
 
 interface Props {
 	images: any[];
-	index: number;
 	slug: string;
 }
 
-const { slug, index, images }: Props = Astro.props;
+const { images }: Props = Astro.props;
 ---
 
 <div
-	id=`${slug}-${index}-modal`
+	id="modal"
 	class="modal fixed inset-0 z-[100] hidden h-full items-center justify-center bg-black/50 p-12 backdrop-blur-sm"
 >
 	<ImageCarousel client:load images={images} />
