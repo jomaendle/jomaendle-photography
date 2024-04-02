@@ -9,6 +9,8 @@ import type { GetImageResult } from 'astro';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
 import { toggleModal } from '@/util/modal.util.ts';
+import { $currentImageIndex } from '@/state/images.ts';
+import { useEffect, useState } from 'react';
 
 export function ImageCarousel({
 	images,
@@ -17,6 +19,16 @@ export function ImageCarousel({
 	images: GetImageResult[];
 	showCloseOnMobile?: boolean;
 }) {
+	const [startIndex, setStartIndex] = useState($currentImageIndex.get());
+
+	useEffect(() => {
+		$currentImageIndex.subscribe((index) => {
+			if (index !== startIndex) {
+				setStartIndex(index);
+			}
+		});
+	}, []);
+
 	function onModalCloseClick() {
 		toggleModal('modal', false);
 	}
@@ -24,7 +36,8 @@ export function ImageCarousel({
 	return (
 		<Carousel
 			opts={{
-				align: 'start'
+				align: 'start',
+				startIndex: startIndex
 			}}
 			onClick={(e) => e.stopPropagation()}
 			className="relative mx-auto flex h-full w-full items-center justify-center gap-4 overflow-hidden sm:max-w-lg lg:max-w-2xl"

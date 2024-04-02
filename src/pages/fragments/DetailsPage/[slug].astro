@@ -76,13 +76,14 @@ const lowResImgs = await getLowResImages();
 
 <script>
 	import { toggleModal } from '../../../util/modal.util';
+	import { setCurrentImageIndex } from '../../../state/images';
 
 	if (document) {
 		document.addEventListener('astro:page-load', () => {
 			const button = document.getElementById('go-back-button');
 			const allImages = document.querySelectorAll('img.preview');
 
-			allImages.forEach((image) => {
+			allImages.forEach((image, index) => {
 				image.addEventListener('click', () => {
 					const modalId = 'modal';
 					const modal = document.getElementById(modalId);
@@ -95,6 +96,7 @@ const lowResImgs = await getLowResImages();
 					}
 
 					toggleModal(modalId, true);
+					setCurrentImageIndex(index);
 				});
 			});
 
