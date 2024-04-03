@@ -29,25 +29,12 @@ function getOptimalWidth(width: number) {
 		animation: fadeIn 0.3s ease-in-out;
 	}
 
-	.fade-out-blur {
-		animation: fadeOutBlur 0.6s ease-in-out;
-	}
-
 	@keyframes fadeIn {
 		from {
 			opacity: 0;
 		}
 		to {
 			opacity: 1;
-		}
-	}
-
-	@keyframes fadeOutBlur {
-		from {
-			filter: blur(30px);
-		}
-		to {
-			filter: blur(0px);
 		}
 	}
 </style>
@@ -92,8 +79,6 @@ function getOptimalWidth(width: number) {
 	function setHighResImageStyles(image: HTMLElement) {
 		image.classList.add('fade-in-animation');
 		image.classList.remove('opacity-0');
-
-		image.parentElement?.classList.add('fade-out-blur');
 		image.parentElement?.classList.remove('blur-[30px]');
 	}
 

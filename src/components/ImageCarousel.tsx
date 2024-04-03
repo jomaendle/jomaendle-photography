@@ -9,7 +9,7 @@ import type { GetImageResult } from 'astro';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
 import { toggleModal } from '@/util/modal.util.ts';
-import { $currentImageIndex } from '@/state/images.ts';
+import { $currentImageIndex, setCurrentImageIndex } from '@/state/images.ts';
 import { useEffect, useState } from 'react';
 
 export function ImageCarousel({
@@ -31,6 +31,8 @@ export function ImageCarousel({
 
 	function onModalCloseClick() {
 		toggleModal('modal', false);
+
+		setCurrentImageIndex(0);
 	}
 
 	return (

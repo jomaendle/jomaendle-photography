@@ -58,11 +58,11 @@ const lowResImgs = await getLowResImages();
 			</h1>
 		</header>
 
-		<section class="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+		<section class="grid w-full grid-cols-1 grid-rows-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
 			{
 				[projectData.titleImage, ...projectData.images].map((photo, index) => (
 					<>
-						<div class="flex  aspect-[2/3] items-center overflow-hidden">
+						<div class="flex aspect-[2/3] items-center overflow-hidden">
 							<LazyLoadedImage id={`${project.slug}-${index}`} image={photo} />
 						</div>
 					</>
