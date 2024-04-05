@@ -56,25 +56,25 @@ export function ImageCarousel({
 					</Button>
 				</div>
 			)}
-			<CarouselPrevious className={'z-10 hidden shrink-0 sm:flex'} />
-			<CarouselContent className="h-full shrink-0">
+			<CarouselPrevious className={'z-10 hidden h-10 w-10 shrink-0 sm:flex'} />
+			<CarouselContent className="h-full shrink-0 items-center">
 				{(images ?? []).map((img, index) => (
 					<CarouselItem key={index} className="h-full">
-						<div className="aspect-[2:3] flex h-full max-h-[700px] items-center justify-center">
+						<div className="aspect-[2:3] flex h-full items-center justify-center">
 							<img
 								src={img.src}
 								alt=""
 								width={img.options?.width}
 								height={img.options?.height}
 								loading={index === 0 ? 'eager' : 'lazy'}
-								className="h-full w-full object-contain object-left sm:object-center md:object-left"
+								className="max-h-[700px] object-contain"
 							/>
 							<slot />
 						</div>
 					</CarouselItem>
 				))}
 			</CarouselContent>
-			<CarouselNext className={'z-10 hidden shrink-0 sm:flex'} />
+			<CarouselNext className={'z-10 hidden h-10 w-10 shrink-0 sm:flex'} />
 		</Carousel>
 	);
 }

@@ -1,0 +1,34 @@
+---
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import Layout from '../../../layouts/Layout.astro';
+import LayoutCard from '../../LayoutCard.astro';
+import { Button } from '@/components/ui/button';
+import me from './me.jpg';
+import { Image } from 'astro:assets';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title="Portrait Photography by Jo Maendle">
+	<LayoutCard title={t('nav.about')}>
+		<Image src={me} alt="Jo Maendle" height="720" class="h-[380px] object-contain" />
+
+		<p>
+			<strong>Hi, I'm Jo Maendle</strong>
+
+			<br />
+			<br />
+
+			I'm a nature and portrait photographer based in Bremen, Germany. I love capturing the beauty
+			of people and their stories. I'm passionate about creating authentic, emotional and timeless
+			images that you will cherish forever.
+		</p>
+
+		<p>
+			<a href="/contact" class="btn">
+				<Button variant="ghost">{t('cta.short')}</Button>
+			</a>
+		</p>
+	</LayoutCard>
+</Layout>

@@ -6,7 +6,7 @@ export const nav = {
 		'nav.FAQ': 'FAQs',
 		'nav.nature': 'Nature',
 		'nav.services': 'Services',
-		'nav.contact': 'Contact Us',
+		'nav.contact': 'Contact me',
 		'nav.about': 'About',
 		'nav.imprint': 'Imprint'
 	},
@@ -17,8 +17,8 @@ export const nav = {
 		'nav.FAQ': 'FAQs',
 		'nav.nature': 'Natur',
 		'nav.services': 'Leistungen',
-		'nav.contact': 'Kontaktiere Uns',
-		'nav.about': 'Über uns',
+		'nav.contact': 'Kontaktiere mich',
+		'nav.about': 'Über mich',
 		'nav.imprint': 'Impressum'
 	}
 };

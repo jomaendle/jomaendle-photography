@@ -16,23 +16,36 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang={lang} class="inline">
+<html lang={lang} class="h-full">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content="Astro description" />
 		<title>{title}</title>
+		<link rel="preload" href="/fonts/Outfit-Light.woff" as="font" type="font/woff" crossorigin />
+		<link
+			rel="preload"
+			href="/fonts/Outfit-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link rel="preload" href="/fonts/Outfit-Regular.woff" as="font" type="font/woff" crossorigin />
+
+		<link rel="preload" href="/fonts/Outfit-Medium.woff" as="font" type="font/woff" crossorigin />
+		<link rel="preload" href="/fonts/Outfit-Medium.woff2" as="font" type="font/woff2" crossorigin />
+
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="Astro description" />
+
 		<ViewTransitions />
 	</head>
-	<body class="flex flex-col">
+	<body class="flex h-full flex-col">
 		<style is:global>
 			@font-face {
 				font-family: 'Outfit';
-				src:
-					url('/fonts/Outfit-Light.woff2') format('woff2'),
-					url('/fonts/Outfit-Light.woff') format('woff');
+				src: url('/fonts/Outfit-Light.woff') format('woff');
 				font-weight: 300;
 				font-style: normal;
 				font-display: swap;
@@ -40,9 +53,7 @@ const lang = getLangFromUrl(Astro.url);
 
 			@font-face {
 				font-family: 'Outfit';
-				src:
-					url('/fonts/Outfit-Regular.woff2') format('woff2'),
-					url('/fonts/Outfit-Regular.woff') format('woff');
+				src: url('/fonts/Outfit-Regular.woff') format('woff');
 				font-weight: 400;
 				font-style: normal;
 				font-display: swap;
@@ -53,17 +64,7 @@ const lang = getLangFromUrl(Astro.url);
 				src:
 					url('/fonts/Outfit-Medium.woff2') format('woff2'),
 					url('/fonts/Outfit-Medium.woff') format('woff');
-				font-weight: 500;
-				font-style: normal;
-				font-display: swap;
-			}
-
-			@font-face {
-				font-family: 'Outfit';
-				src:
-					url('/fonts/Outfit-SemiBold.woff2') format('woff2'),
-					url('/fonts/Outfit-SemiBold.woff') format('woff');
-				font-weight: 700;
+				font-weight: 600;
 				font-style: normal;
 				font-display: swap;
 			}
@@ -79,13 +80,8 @@ const lang = getLangFromUrl(Astro.url);
 			body {
 				margin: 0;
 				padding: 0;
-				height: 100%;
 				scrollbar-gutter: stable;
 				scroll-behavior: smooth;
-			}
-
-			body {
-				height: auto;
 			}
 
 			.text-hover {
@@ -110,7 +106,7 @@ const lang = getLangFromUrl(Astro.url);
 		</style>
 
 		<Header />
-		<main class="min-h-[75vh] flex-1">
+		<main class="flex-1">
 			<slot />
 		</main>
 		<Footer />

@@ -6,6 +6,8 @@ import { getImage } from 'astro:assets';
 export async function getStoredImages(key: string, slug?: string) {
 	const hasImages = $loadedImages.get().has(key);
 
+	console.log('Has Images:', hasImages);
+
 	if (!hasImages) {
 		const imagesFromCollection = await getCollection(key as any);
 
@@ -17,7 +19,7 @@ export async function getStoredImages(key: string, slug?: string) {
 			imagesFromCollection.map(async (image) => {
 				return await getImage({
 					src: (image as any).data.image,
-					width: 600,
+					width: 1000,
 					quality: 'high'
 				});
 			})
