@@ -3,6 +3,18 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 
 const reviews = [
 	{
+		name: 'Daria',
+		quote:
+			'Johannes, ich möchte mich ganz herzlich für deine Arbeit bedanken. Als ich die Fotos erhielt, wurde mir klar, dass mir bereits alles gefällt. Die Fotos sind sehr zart, hell und lebendig. Es war genau das, was ich wollte. Ich möchte mich noch einmal bei dir für deine Arbeit bedanken. Du bist ein wunderbarer Fotograf und es war sehr einfach mit dir beim Fotoshooting! Ich wünsche dir kreativen Erfolg und stetiges berufliches Wachstum! DANKE!!!))))',
+		rating: 5
+	},
+	{
+		name: 'Marie',
+		quote:
+			"I had asked about a shoot with my dog and Johannes got involved straight away, even though he doesn't have much experience with animal shoots. Despite the rain, we made the most of the day. Thank you so much for your openness! It was a lot of fun, we felt at ease at all times and many wonderful memories were created. We'd love to do it again! ☺️",
+		rating: 5
+	},
+	{
 		name: 'Oksana',
 		quote:
 			'Many thanks for the positive photography and good humor! The photos turned out to be high quality and vibrant. Johannes is a wonderful photographer and the photo shoot with you was very easy. I am very pleased! Success in creative work 😊',

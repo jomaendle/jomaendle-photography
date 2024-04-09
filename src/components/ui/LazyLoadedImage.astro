@@ -16,8 +16,8 @@ const lowResImg = await getImage({
 });
 
 function getOptimalWidth(width: number) {
-	if (width > 3000) return width * 0.14;
-	if (width > 2000) return width * 0.25;
+	if (width > 3000) return width * 0.2;
+	if (width > 2000) return width * 0.35;
 	if (width > 1000) return width * 0.6;
 	if (width > 500) return width * 0.7;
 	return width;

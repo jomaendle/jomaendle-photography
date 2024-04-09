@@ -1,5 +1,5 @@
 ---
-title: 'Spring day with Robin'
+title: 'Robin'
 description: 'Robin was looking for a photographer to capture him during the spring season. We took a variety of photos in different locations and the results were amazing.'
 images:
   - '../robin/1.jpg'

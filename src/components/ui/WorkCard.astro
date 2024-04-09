@@ -6,11 +6,26 @@ import LazyLoadedImage from './LazyLoadedImage.astro';
 const { project } = Astro.props;
 ---
 
+<style>
+	.fade-in-animation {
+		animation: fade-in 0.3s ease;
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+
 <div class="group relative flex h-full w-full gap-4 overflow-hidden">
 	<LazyLoadedImage id={`${project.slug}`} image={project.data.titleImage} />
 
 	<div
-		class="fade-in-animation absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/70 to-60% group-hover:flex sm:hidden sm:gap-4"
+		class="fade-in-animation absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/80 to-60% group-hover:flex sm:hidden sm:gap-4"
 	>
 		<div class="flex h-full items-end justify-end p-2 text-white sm:py-4">
 			<h2 class="layout-title leading-2 flex-1">
