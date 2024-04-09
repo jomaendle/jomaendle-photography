@@ -1,13 +1,14 @@
 ---
+import { getStoredImages } from '../../state/images.service';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { getCollection } from 'astro:content';
+
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { Button } from '@/components/ui/button';
 import { portraitImagesKey } from '../../content/config';
 
-const images = await getCollection(portraitImagesKey);
+const optimizedMobileImages = await getStoredImages(portraitImagesKey);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,13 +20,13 @@ const t = useTranslations(lang);
 			class="relative flex h-full w-full grid-cols-2 flex-col-reverse gap-8 overflow-hidden md:grid md:gap-12 lg:gap-20 xl:gap-24"
 		>
 			<div class="shrink-0">
-				<ImageCarousel client:load images={images} />
+				<ImageCarousel client:load images={optimizedMobileImages} />
 			</div>
 
 			<div
 				class="flex flex-col items-center text-center md:items-start md:justify-center md:text-start"
 			>
-				<h1 class="my-8 max-w-[520px] text-3xl font-bold sm:mb-4 sm:mt-0 md:text-5xl lg:text-6xl">
+				<h1 class="my-8 max-w-[520px] text-3xl font-bold sm:mb-4 sm:mt-0 md:text-5xl">
 					{t('start.hero.title')}
 				</h1>
 				<p class="text-pretty text-gray-600">{t('start.hero.subtitle')}</p>

@@ -1,30 +1,34 @@
 ---
-import type { CollectionItem } from '../../content/config';
 import { ArrowRight } from 'lucide-react';
 import { Button } from './button';
-import { Image } from 'astro:assets';
-import { type ClientProject } from '../../content/config';
+import LazyLoadedImage from './LazyLoadedImage.astro';
 
-const { project = {} as CollectionItem<ClientProject> } = Astro.props;
+const { project } = Astro.props;
 ---
 
-<div
-	class="card-layout group relative flex aspect-[4/5] max-h-[350px] w-full gap-4 overflow-hidden sm:max-h-[500px]"
->
-	<Image
-		src={project.data.titleImage}
-		alt={project.data.titleImage?.alt ?? ''}
-		loading="lazy"
-		widths={[240, 540, 720, project.data.titleImage.width]}
-		sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${project.data.titleImage.width}px`}
-		transition:name=`media-image-${project.slug}`
-		class="h-full w-full flex-shrink object-cover object-top"
-	/>
+<style>
+	.fade-in-animation {
+		animation: fade-in 0.3s ease;
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+
+<div class="group relative flex h-full w-full gap-4 overflow-hidden">
+	<LazyLoadedImage id={`${project.slug}`} image={project.data.titleImage} />
+
 	<div
-		class="button-fade-in absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/70 to-60% group-hover:flex sm:hidden sm:gap-4"
+		class="fade-in-animation absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/80 to-60% group-hover:flex sm:hidden sm:gap-4"
 	>
 		<div class="flex h-full items-end justify-end p-2 text-white sm:py-4">
-			<h2 class="layout-title leading-2 flex-1" transition:name=`project-heading-${project.slug}`>
+			<h2 class="layout-title leading-2 flex-1">
 				{project.data.title}
 			</h2>
 
@@ -34,18 +38,3 @@ const { project = {} as CollectionItem<ClientProject> } = Astro.props;
 		</div>
 	</div>
 </div>
-
-<style>
-	.button-fade-in {
-		animation: fadeIn 0.2s ease-in-out;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-</style>

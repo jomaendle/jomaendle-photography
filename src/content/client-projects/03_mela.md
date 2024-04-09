@@ -1,5 +1,5 @@
 ---
-title: 'Indoor shooting with Mela'
+title: 'Mela'
 description: 'Mela is a yoga instructor and she wanted to capture her passion for yoga in a photo shoot. '
 images:
   - '../mela/1.jpg'

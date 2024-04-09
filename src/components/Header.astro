@@ -16,7 +16,7 @@ const isCurrent = (link) => {
 
 ---
 
-<header class="sticky top-0 z-20 flex gap-12 bg-white md:bg-white/85 md:backdrop-blur p-4 sm:p-8 sm:pb-4">
+<header class="flex gap-12 p-4 sm:p-8 sm:pb-4">
 	<a
 		href="/"
 		class="flex flex-1 items-center gap-2 text-center leading-5 text-gray-800 sm:flex-col sm:items-start sm:gap-0"
@@ -32,12 +32,12 @@ const isCurrent = (link) => {
 		</span>
 	</a>
 
-	<nav class="hidden gap-4 md:flex lg:gap-8">
+	<nav class="hidden gap-4 md:flex lg:gap-6">
 		{
 			LINKS.map((link) => (
 				<a
 					href={getNavItemLink(lang, link)}
-					class=`flex items-center whitespace-nowrap underline-offset-4 py-1 ${isCurrent(link) ? 'text-primary underline' : 'text-hover'}`
+					class=`flex items-center text-sm whitespace-nowrap underline-offset-4 py-1 ${isCurrent(link) ? 'text-primary underline' : 'text-hover'}`
 				>
 					{t(link.labelKey)}
 				</a>

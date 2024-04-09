@@ -11,7 +11,7 @@
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.5",
+    "@astrojs/check": "^0.5.10",
     "@astrojs/react": "^3.1.1",
     "@astrojs/tailwind": "^5.1.0",
     "@nanostores/persistent": "^0.9.1",
@@ -19,11 +19,10 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
-    "astro": "^4.4.1",
+    "astro": "^4.5.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "embla-carousel-react": "^8.0.0",
-    "framer-motion": "^11.0.8",
     "lucide-react": "^0.365.0",
     "nanostores": "^0.9.5",
     "next-themes": "^0.2.1",

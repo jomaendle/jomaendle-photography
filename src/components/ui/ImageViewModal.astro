@@ -1,26 +1,17 @@
 ---
-import { Image } from 'astro:assets';
+import { ImageCarousel } from '../ImageCarousel';
 
 interface Props {
-	image: any;
-	index: number;
+	images: any[];
 	slug: string;
 }
 
-const { image, slug, index }: Props = Astro.props;
+const { images }: Props = Astro.props;
 ---
 
 <div
-	id=`${slug}-${index}-modal`
-	class="modal fixed inset-0 z-[100] hidden h-full items-center justify-center bg-black/50 p-12 backdrop-blur-sm"
+	id="modal"
+	class="modal fixed inset-0 z-[100] hidden h-full items-center justify-center bg-black/70 p-2 backdrop-blur-md sm:p-12"
 >
-	<Image
-		src={image as unknown as string}
-		alt=""
-		transition:name=`media-image-${slug}-${index}`
-		width="900"
-		height="1200"
-		class="max-h-full object-contain"
-		quality={100}
-	/>
+	<ImageCarousel client:load images={images ?? []} showCloseOnMobile={true} />
 </div>
