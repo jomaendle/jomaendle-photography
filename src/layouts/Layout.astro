@@ -21,6 +21,7 @@ const lang = getLangFromUrl(Astro.url);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>{title}</title>
+		<link rel="preload" href="/fonts/Outfit-Light.woff" as="font" type="font/woff" crossorigin />
 		<link
 			rel="preload"
 			href="/fonts/Outfit-Regular.woff2"
@@ -28,7 +29,9 @@ const lang = getLangFromUrl(Astro.url);
 			type="font/woff2"
 			crossorigin
 		/>
+		<link rel="preload" href="/fonts/Outfit-Regular.woff" as="font" type="font/woff" crossorigin />
 
+		<link rel="preload" href="/fonts/Outfit-Medium.woff" as="font" type="font/woff" crossorigin />
 		<link rel="preload" href="/fonts/Outfit-Medium.woff2" as="font" type="font/woff2" crossorigin />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -42,7 +45,7 @@ const lang = getLangFromUrl(Astro.url);
 		<style is:global>
 			@font-face {
 				font-family: 'Outfit';
-				src: url('/fonts/Outfit-Light.woff2') format('woff2');
+				src: url('/fonts/Outfit-Light.woff') format('woff');
 				font-weight: 300;
 				font-style: normal;
 				font-display: swap;
@@ -50,7 +53,7 @@ const lang = getLangFromUrl(Astro.url);
 
 			@font-face {
 				font-family: 'Outfit';
-				src: url('/fonts/Outfit-Regular.woff2') format('woff2');
+				src: url('/fonts/Outfit-Regular.woff') format('woff');
 				font-weight: 400;
 				font-style: normal;
 				font-display: swap;
@@ -58,7 +61,9 @@ const lang = getLangFromUrl(Astro.url);
 
 			@font-face {
 				font-family: 'Outfit';
-				src: url('/fonts/Outfit-Medium.woff2') format('woff2');
+				src:
+					url('/fonts/Outfit-Medium.woff2') format('woff2'),
+					url('/fonts/Outfit-Medium.woff') format('woff');
 				font-weight: 600;
 				font-style: normal;
 				font-display: swap;
