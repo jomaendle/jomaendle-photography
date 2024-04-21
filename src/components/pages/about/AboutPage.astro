@@ -12,23 +12,61 @@ const t = useTranslations(lang);
 
 <Layout title="Portrait Photography by Jo Maendle">
 	<LayoutCard title={t('nav.about')}>
-		<Image src={me} alt="Jo Maendle" height="720" class="h-[380px] object-contain" />
+		<div
+			class="mt-8 flex w-full flex-col-reverse items-center justify-center gap-12 sm:mt-12 sm:flex-row sm:gap-16 lg:gap-20"
+		>
+			<Image
+				src={me}
+				alt="Jo Maendle"
+				height="720"
+				class="aspect-square max-w-[200px] rounded-full object-cover object-right-top sm:object-cover md:max-h-[280px] md:max-w-[280px]"
+			/>
+			<div
+				class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center font-light leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left sm:leading-7"
+			>
+				<h4 class="text-2xl font-normal text-black">{t('about.title')}</h4>
+				<p>{t('about.subtitle')}</p>
+				<p>
+					{t('about.desc.1')}
+					<a
+						href="https://unsplash.com/@leonardo_64"
+						rel="noreferrer"
+						target="_blank"
+						class="text-blue-600 hover:text-blue-500 hover:underline"
+					>
+						Unsplash.
+					</a>
+				</p>
+				<p>
+					{t('about.desc.2')}
+				</p>
 
-		<p>
-			<strong>Hi, I'm Jo Maendle</strong>
+				<p>
+					{t('about.desc.3')}
+				</p>
+			</div>
+		</div>
 
-			<br />
-			<br />
+		<section
+			class="my-12 flex max-w-[90%] items-center justify-center text-pretty rounded-md bg-slate-50 px-8 py-2 text-center font-light leading-7 sm:w-full sm:min-w-[260px] sm:leading-6 md:my-16 lg:mt-20"
+		>
+			<div class="flex w-full max-w-lg flex-col items-center justify-center gap-4">
+				<h4 class="mt-4 w-full text-2xl font-normal text-black">{t('about.cta.title')}!</h4>
 
-			I'm a nature and portrait photographer based in Bremen, Germany. I love capturing the beauty
-			of people and their stories. I'm passionate about creating authentic, emotional and timeless
-			images that you will cherish forever.
-		</p>
+				<p>
+					{t('about.cta.offers')}
+				</p>
 
-		<p>
-			<a href="/contact" class="btn">
-				<Button variant="ghost">{t('cta.short')}</Button>
-			</a>
-		</p>
+				<p>
+					{t('about.cta.subtitle')}
+				</p>
+
+				<p class="my-4">
+					<a href={`/${lang}/contact`} class="btn">
+						<Button variant="outline"> {t('cta.short')} </Button>
+					</a>
+				</p>
+			</div>
+		</section>
 	</LayoutCard>
 </Layout>
