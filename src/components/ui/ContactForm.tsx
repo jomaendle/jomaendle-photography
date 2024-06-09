@@ -15,7 +15,13 @@ const encode = (data: unknown) => {
 		.join('&');
 };
 
-export default function ContactForm({ translatedCta }: { translatedCta: string }) {
+export default function ContactForm({
+	translatedCta,
+	showHeader
+}: {
+	translatedCta: string;
+	showHeader?: boolean;
+}) {
 	function getFormData() {
 		const message = document.getElementById('message') as HTMLTextAreaElement;
 		const email = document.getElementById('email') as HTMLInputElement;
@@ -67,24 +73,30 @@ export default function ContactForm({ translatedCta }: { translatedCta: string }
 
 	return (
 		<div className="space-y-4">
-			<div className="space-y-2">
-				<h1 className="text-center text-3xl font-bold">Get in touch</h1>
-				<div className={'flex flex-col items-center justify-center gap-4 py-8'}>
-					<a href="https://calendly.com/jo-maendle/erstgespraech" rel="noreferrer" target="_blank">
-						<Button variant="link" size={'linkLg'}>
-							{translatedCta}
-						</Button>
-					</a>
+			{showHeader && (
+				<div className="space-y-2">
+					<h1 className="text-center text-3xl font-bold">Get in touch</h1>
+					<div className={'flex flex-col items-center justify-center gap-4 py-8'}>
+						<a
+							href="https://calendly.com/jo-maendle/erstgespraech"
+							rel="noreferrer"
+							target="_blank"
+						>
+							<Button variant="link" size={'linkLg'}>
+								{translatedCta}
+							</Button>
+						</a>
 
-					<div className={'flex items-center gap-2'}>
-						<Separator />
-						<span className={'text-sm text-gray-500'}>or</span>
-						<Separator />
+						<div className={'flex items-center gap-2'}>
+							<Separator />
+							<span className={'text-sm text-gray-500'}>or</span>
+							<Separator />
+						</div>
+
+						<p className="text-gray-500">Fill out the form below to contact us.</p>
 					</div>
-
-					<p className="text-gray-500">Fill out the form below to contact us.</p>
 				</div>
-			</div>
+			)}
 			<Card>
 				<CardHeader>
 					<CardTitle>Contact us</CardTitle>

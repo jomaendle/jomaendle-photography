@@ -16,7 +16,7 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang={lang} class="h-full">
+<html lang={lang} class="hide-scrollbar h-full">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -98,13 +98,19 @@ const lang = getLangFromUrl(Astro.url);
 			.secondary-text {
 				@apply text-sm font-thin text-gray-600;
 			}
+
+			.hide-scrollbar {
+				scrollbar-color: rgba(52, 52, 70, 0.7) rgb(231, 231, 231);
+				scroll-behavior: smooth;
+				scrollbar-width: thin;
+			}
 		</style>
 
 		<Header />
 		<main class="flex-1">
 			<slot />
 		</main>
-		<Footer />
+		<Footer size="sm" />
 		<Toaster client:load />
 	</body>
 </html>

@@ -1,8 +1,8 @@
 ---
 import { getLangFromUrl, getNavItemLink, useTranslations } from '../i18n/utils';
 import { MOBILE_LINKS } from '../models/nav-item';
-import LanguagePicker from './LanguagePicker.astro';
 import { X, Menu } from 'lucide-react';
+import Footer from './Footer.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -71,7 +71,7 @@ const t = useTranslations(lang);
 		</svg>
 	</a>
 	<div id="langPicker" class="flex flex-1 items-end justify-center pb-4">
-		<LanguagePicker />
+		<Footer />
 	</div>
 </div>
 
