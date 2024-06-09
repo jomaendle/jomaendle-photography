@@ -1,14 +1,9 @@
 ---
 import { Image } from 'astro:assets'
+import { type GetImageResult } from 'astro'
 
 interface Props {
-	images: {
-		src: string;
-		attributes: {
-			width: number;
-			height: number;
-		}
-	}[];
+	images: GetImageResult[];
 	reverse?: boolean;
 }
 
