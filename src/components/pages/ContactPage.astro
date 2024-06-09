@@ -15,6 +15,6 @@ const translationFn = useTranslations(lang);
 			<textarea class="min-h-[100px]" name="message" placeholder="Enter your message"></textarea>
 		</form>
 
-		<ContactForm client:load translatedCta={translationFn('cta.call')} />
+		<ContactForm client:load translatedCta={translationFn('cta.call')} showHeader={true} />
 	</div>
 </Layout>

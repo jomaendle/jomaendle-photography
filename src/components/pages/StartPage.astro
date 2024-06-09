@@ -1,14 +1,18 @@
 ---
 import { getStoredImages } from '../../state/images.service';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { Button } from '@/components/ui/button';
-import { portraitImagesKey } from '../../content/config';
+import { heroImagesKey, portraitImagesKey } from '../../content/config';
+import ImageScroll from '@/components/ImageScroll';
+import ImageRow from './start/ImageRow.astro';
+import ContactForm from '../ui/ContactForm';
+import { CustomerReviewPreview } from './services/CustomerReview';
 
-const optimizedMobileImages = await getStoredImages(portraitImagesKey);
+const optimizedMobileImages = await getStoredImages(heroImagesKey);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,19 +21,13 @@ const t = useTranslations(lang);
 <Layout title="Jo Maendle Photography">
 	<LayoutCard>
 		<div
-			class="relative flex h-full w-full grid-cols-2 flex-col-reverse gap-8 overflow-hidden md:grid md:gap-12 lg:gap-20 xl:gap-24"
+			class="hide-scrollbar flex w-full flex-col items-center gap-8 md:gap-12 lg:gap-20 xl:gap-24"
 		>
-			<div class="shrink-0">
-				<ImageCarousel client:load images={optimizedMobileImages} />
-			</div>
-
-			<div
-				class="flex flex-col items-center text-center md:items-start md:justify-center md:text-start"
-			>
-				<h1 class="my-8 max-w-[520px] text-3xl font-bold sm:mb-4 sm:mt-0 md:text-5xl">
+			<div class="flex flex-col items-center text-center md:justify-center">
+				<h1 class="my-12 max-w-[520px] text-2xl sm:mb-4 md:text-4xl">
 					{t('start.hero.title')}
 				</h1>
-				<p class="text-pretty text-gray-600">{t('start.hero.subtitle')}</p>
+				<p class="text-pretty text-center text-gray-600">{t('start.hero.subtitle')}</p>
 				<p class="text-gray-600">{t('start.hero.cta')}</p>
 
 				<div class="mt-8 flex gap-3">
@@ -45,6 +43,16 @@ const t = useTranslations(lang);
 						</Button>
 					</a>
 				</div>
+			</div>
+			<div class="flex h-full max-w-4xl gap-4 sm:gap-6">
+				<ImageRow images={optimizedMobileImages.slice(0, 2)} />
+				<ImageRow images={optimizedMobileImages.slice(2, 4)} reverse={true} />
+			</div>
+
+			<CustomerReviewPreview />
+
+			<div class="w-full max-w-4xl">
+				<ContactForm client:load translatedCta={t('cta.call')} />
 			</div>
 		</div>
 	</LayoutCard>

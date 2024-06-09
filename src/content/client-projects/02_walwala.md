@@ -8,6 +8,5 @@ images:
   - '../portrait-images/man3.jpg'
   - '../portrait-images/man4.jpg'
   - '../portrait-images/man.jpg'
-  - '../portrait-images/woman.jpg'
 titleImage: '../portrait-images/couple.jpg'
 ---

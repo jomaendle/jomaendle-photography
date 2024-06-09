@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets'
+
+interface Props {
+	images: {
+		src: string;
+		attributes: {
+			width: number;
+			height: number;
+		}
+	}[];
+	reverse?: boolean;
+}
+
+const { images, reverse } = Astro.props
+
+function getAspectRatio(index: number) {
+	// if reverse is true, then the first image will be landscape
+	if (reverse) {
+		return index % 2 === 0 ? 'aspect-[5/4]' : 'aspect-[4/5]'
+	}
+
+	return index % 2 === 0 ? 'aspect-[4/5]' : 'aspect-[5/4]'
+}
+
+---
+<div class="flex flex-col min-w-6 gap-4 h-full sm:gap-6">
+	{
+		images.slice(0, 2).map((image, index) => (
+				<Image
+					src={image.src}
+					alt="Portrait"
+					class=`block h-auto w-full object-cover rounded-xl shadow-xl bg-gray-200 transition-transform object-top ${getAspectRatio(index)}`
+					width={image.attributes.width}
+					height={image.attributes.height}
+					style={{
+						width: image.attributes.width + 'px',
+					}}
+				/>
+		))
+	}
+</div>
