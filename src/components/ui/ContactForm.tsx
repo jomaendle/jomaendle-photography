@@ -4,6 +4,22 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
 import { toast } from 'sonner';
+import PageTitle from '@/components/ui/PageTitle.tsx';
+
+export interface ContactFormTranslations {
+	title: string;
+	cta: string;
+	formTitle: string;
+	formName: string;
+	formEmail: string;
+	formMessage: string;
+	formSubmit: string;
+	placeholder: {
+		name: string;
+		email: string;
+		message: string;
+	};
+}
 
 function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
@@ -16,11 +32,11 @@ const encode = (data: unknown) => {
 };
 
 export default function ContactForm({
-	translatedCta,
-	showHeader
+	showHeader,
+	translations
 }: {
-	translatedCta: string;
 	showHeader?: boolean;
+	translations: ContactFormTranslations;
 }) {
 	function getFormData() {
 		const message = document.getElementById('message') as HTMLTextAreaElement;
@@ -75,7 +91,8 @@ export default function ContactForm({
 		<div className="space-y-4">
 			{showHeader && (
 				<div className="space-y-2">
-					<h1 className="text-center text-3xl font-bold">Get in touch</h1>
+					<PageTitle title={translations.title} />
+
 					<div className={'flex flex-col items-center justify-center gap-4 py-8'}>
 						<a
 							href="https://calendly.com/jo-maendle/erstgespraech"
@@ -83,7 +100,7 @@ export default function ContactForm({
 							target="_blank"
 						>
 							<Button variant="link" size={'linkLg'}>
-								{translatedCta}
+								{translations.cta}
 							</Button>
 						</a>
 
@@ -99,7 +116,7 @@ export default function ContactForm({
 			)}
 			<Card>
 				<CardHeader>
-					<CardTitle>Contact us</CardTitle>
+					<CardTitle>{translations.formTitle}</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<form
@@ -111,18 +128,27 @@ export default function ContactForm({
 					>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
-							<Label htmlFor="name">Name</Label>
-							<Input id="name" placeholder="Enter your name" required />
+							<Label htmlFor="name">{translations.formName}</Label>
+							<Input id="name" placeholder={translations.placeholder.name} required />
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="email">Email</Label>
-							<Input id="email" placeholder="Enter your email" type="email" required />
+							<Label htmlFor="email">{translations.formEmail}</Label>
+							<Input
+								id="email"
+								placeholder={translations.placeholder.email}
+								type="email"
+								required
+							/>
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="message">Message</Label>
-							<Textarea className="min-h-[100px]" id="message" placeholder="Enter your message" />
+							<Label htmlFor="message">{translations.formMessage}</Label>
+							<Textarea
+								className="min-h-[100px]"
+								id="message"
+								placeholder={translations.placeholder.message}
+							/>
 						</div>
-						<Button type="submit">Send message</Button>
+						<Button type="submit">{translations.formSubmit}</Button>
 					</form>
 				</CardContent>
 			</Card>

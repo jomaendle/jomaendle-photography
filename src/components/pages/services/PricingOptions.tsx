@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
+import PageTitle from '@/components/ui/PageTitle';
 
 export default function PricingOptions({
 	title,
@@ -12,12 +13,7 @@ export default function PricingOptions({
 }) {
 	return (
 		<div className="grid w-full items-center gap-6 md:mx-auto md:max-w-5xl lg:gap-12">
-			<div className="text-center">
-				<h1 className="text-3xl font-bold tracking-tight">{title}</h1>
-				<p className="mt-2 max-w-2xl text-gray-500 sm:text-lg md:mx-auto lg:text-gray-400">
-					{subtitle}
-				</p>
-			</div>
+			<PageTitle title={title} subtitle={subtitle} />
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{shootings.map((shooting, index) => (
 					<div

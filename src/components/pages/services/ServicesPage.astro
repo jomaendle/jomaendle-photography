@@ -1,34 +1,17 @@
 ---
-import { CustomerReview } from '../services/CustomerReview';
+import { CustomerReview } from '../customer-reviews/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
 import ProcessDescription from '../services/ProcessDescription';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
-import { OFFERS, type PhotoShootingOffersTranslated } from './pricing-data';
-import { type ProcessDescriptionTranslated, SHOOTING_PROCESS } from './process-data';
 import Layout from '../../../layouts/Layout.astro';
+import {
+	translatedCustomerReview,
+	translatedShootingDescription,
+	translatedShootings
+} from './services-translation.util';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-const translatedShootings: PhotoShootingOffersTranslated[] = OFFERS.map((offer) => {
-	return {
-		...offer,
-		title: t(offer.title),
-		description: t(offer.description),
-		targetGroup: t(offer.targetGroup),
-		cta: t(offer.cta),
-		includes: offer.includes.map((include) => t(include))
-	};
-});
-
-const translatedShootingDescription: ProcessDescriptionTranslated[] = SHOOTING_PROCESS.map(
-	(step) => {
-		return {
-			title: t(step.title),
-			description: t(step.description)
-		};
-	}
-);
 ---
 
 <Layout title="Jo Maendle Photography">
@@ -36,7 +19,7 @@ const translatedShootingDescription: ProcessDescriptionTranslated[] = SHOOTING_P
 		<section>
 			<PricingOptions
 				client:load
-				shootings={translatedShootings}
+				shootings={translatedShootings(t)}
 				title={t('pricing.title')}
 				subtitle={t('pricing.subtitle')}
 			/>
@@ -47,12 +30,12 @@ const translatedShootingDescription: ProcessDescriptionTranslated[] = SHOOTING_P
 				client:load
 				title={t('process.title')}
 				subtitle={t('process.subtitle')}
-				shootingSteps={translatedShootingDescription}
+				shootingSteps={translatedShootingDescription(t)}
 			/>
 		</section>
 
 		<section>
-			<CustomerReview client:load />
+			<CustomerReview translatedCustomerReview={translatedCustomerReview(t)} client:load />
 		</section>
 	</section>
 </Layout>

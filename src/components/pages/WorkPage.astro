@@ -4,6 +4,7 @@ import { type CollectionEntry, getCollection } from 'astro:content'
 import WorkCard from '../ui/WorkCard.astro'
 import { clientProjectsKey } from '../../content/config'
 import { getLangFromUrl } from '../../i18n/utils'
+import PageTitle from '@/components/ui/PageTitle';
 
 const lang = getLangFromUrl(Astro.url)
 
@@ -13,10 +14,12 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 
 <Layout title="Work - Jo Maendle Photography">
 	<section class="card mx-auto max-w-6xl flex h-full flex-col gap-8">
-		<div class="grid gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-center pt-16">
+		<PageTitle title="Work" />
+
+		<div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-center pt-2 sm:pt-8">
 			{
 				clientProjects.map((project) => (
-					<a href=`/${lang}/details/${project.slug}` class="sm:aspect-[4/5] aspect-square rounded-xl overflow-hidden sm:max-h-none">
+					<a href=`/${lang}/details/${project.slug}` class="sm:aspect-[4/5] aspect-square rounded sm:rounded-xl shadow-xl overflow-hidden sm:max-h-none">
 						<WorkCard project={project} />
 					</a>
 				))

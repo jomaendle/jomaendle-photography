@@ -1,10 +1,14 @@
 ---
+import { getContactTranslations } from './contact/contact-translations';
+import type { ContactFormTranslations } from '../ui/ContactForm';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import Layout from '../../layouts/Layout.astro';
 import ContactForm from '../../components/ui/ContactForm';
 
 const lang = getLangFromUrl(Astro.url);
-const translationFn = useTranslations(lang);
+const t = useTranslations(lang);
+
+const translations: ContactFormTranslations = getContactTranslations(t);
 ---
 
 <Layout title="Portrait Photography by Jo Maendle">
@@ -15,6 +19,6 @@ const translationFn = useTranslations(lang);
 			<textarea class="min-h-[100px]" name="message" placeholder="Enter your message"></textarea>
 		</form>
 
-		<ContactForm client:load translatedCta={translationFn('cta.call')} showHeader={true} />
+		<ContactForm translations={translations} client:load showHeader={true} />
 	</div>
 </Layout>
