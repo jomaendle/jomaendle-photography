@@ -1,5 +1,7 @@
 export const customerReviews = {
 	en: {
+		'customerReviews.title': 'Customer Reviews',
+		'customerReviews.averageRating': 'Average rating based on {count} reviews on',
 		'customerReviews.daria.review':
 			'I had a great experience with this photographer. They were very professional and the photos turned out amazing. I would definitely recommend them to anyone looking for a photographer.',
 		'customerReviews.marie.review':
@@ -14,6 +16,9 @@ export const customerReviews = {
 			'One of the greatest photographer in Bremen. Very nice and friendly and yet very professional.'
 	},
 	de: {
+		'customerReviews.title': 'Kundenbewertungen',
+		'customerReviews.averageRating':
+			'Durchschnittliche Bewertung basierend auf {count} Bewertungen auf ',
 		'customerReviews.daria.review':
 			'Ich hatte eine tolle Erfahrung mit diesem Fotografen. Sie waren sehr professionell und die Fotos waren erstaunlich. Ich würde sie auf jeden Fall jedem empfehlen, der nach einem Fotografen sucht.',
 		'customerReviews.marie.review':

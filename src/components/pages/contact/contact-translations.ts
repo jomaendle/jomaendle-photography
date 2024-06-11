@@ -1,5 +1,6 @@
 import type { ContactFormTranslations } from '@/components/ui/ContactForm.tsx';
 import type { TranslationFunction } from '@/models/i18n.ts';
+import type { CustomerReviewPreviewTranslations } from '@/components/pages/customer-reviews/CustomerReview.tsx';
 
 export const getContactTranslations: (t: TranslationFunction) => ContactFormTranslations = (t) => {
 	return {
@@ -17,3 +18,10 @@ export const getContactTranslations: (t: TranslationFunction) => ContactFormTran
 		}
 	};
 };
+
+export const getCustomerReviewTranslations: (
+	t: TranslationFunction
+) => CustomerReviewPreviewTranslations = (t) => ({
+	title: t('customerReviews.title'),
+	description: t('customerReviews.averageRating')
+});

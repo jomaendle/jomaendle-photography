@@ -1,4 +1,5 @@
 ---
+import { getCustomerReviewTranslations } from '../contact/contact-translations';
 import { CustomerReview } from '../customer-reviews/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
 import ProcessDescription from '../services/ProcessDescription';
@@ -12,6 +13,8 @@ import {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const reviewTranslations = getCustomerReviewTranslations(t);
 ---
 
 <Layout title="Jo Maendle Photography">
@@ -35,7 +38,11 @@ const t = useTranslations(lang);
 		</section>
 
 		<section>
-			<CustomerReview translatedCustomerReview={translatedCustomerReview(t)} client:load />
+			<CustomerReview
+				customerReviewTranslations={reviewTranslations}
+				translatedCustomerReview={translatedCustomerReview(t)}
+				client:load
+			/>
 		</section>
 	</section>
 </Layout>

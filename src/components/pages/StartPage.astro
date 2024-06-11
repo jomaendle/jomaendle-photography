@@ -1,4 +1,5 @@
 ---
+import { getCustomerReviewTranslations } from './contact/contact-translations';
 import { getContactTranslations } from './contact/contact-translations';
 import { getStoredImages } from '../../state/images.service';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
@@ -8,23 +9,27 @@ import { Button } from '@/components/ui/button';
 import { heroImagesKey } from '../../content/config';
 import ImageRow from './start/ImageRow.astro';
 import ContactForm, { type ContactFormTranslations } from '../ui/ContactForm';
-import { CustomerReviewPreview } from './customer-reviews/CustomerReview';
+import {
+	CustomerReviewPreview,
+	CustomerReviewPreviewTranslations
+} from './customer-reviews/CustomerReview';
 
 const optimizedMobileImages = await getStoredImages(heroImagesKey);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const translations: ContactFormTranslations = getContactTranslations(t);
+const contactTranslations: ContactFormTranslations = getContactTranslations(t);
+const reviewTranslations = getCustomerReviewTranslations(t);
 ---
 
 <Layout title="Jo Maendle Photography">
 	<LayoutCard>
 		<div
-			class="hide-scrollbar flex w-full flex-col items-center gap-8 md:gap-12 lg:gap-20 xl:gap-24"
+			class="hide-scrollbar flex w-full flex-col items-center gap-16 md:gap-12 lg:gap-20 xl:gap-24"
 		>
 			<div class="flex flex-col items-center text-center md:justify-center">
-				<h1 class="my-12 max-w-[520px] text-3xl sm:mb-4 md:text-4xl">
+				<h1 class="mb-4 mt-8 max-w-[520px] text-3xl md:text-4xl">
 					{t('start.hero.title')}
 				</h1>
 				<p class="text-pretty text-center text-gray-600">{t('start.hero.subtitle')}</p>
@@ -44,15 +49,16 @@ const translations: ContactFormTranslations = getContactTranslations(t);
 					</a>
 				</div>
 			</div>
+
 			<div class="flex h-full max-w-4xl gap-3 sm:gap-6">
 				<ImageRow images={optimizedMobileImages.slice(0, 2)} reverse={true} />
 				<ImageRow images={optimizedMobileImages.slice(2, 4)} />
 			</div>
 
-			<CustomerReviewPreview />
+			<CustomerReviewPreview translations={reviewTranslations} />
 
 			<div class="w-full max-w-4xl">
-				<ContactForm client:load translations={translations} />
+				<ContactForm client:load translations={contactTranslations} />
 			</div>
 		</div>
 	</LayoutCard>

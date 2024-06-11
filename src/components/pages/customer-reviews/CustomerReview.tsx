@@ -9,16 +9,30 @@ import {
 	type CustomerReviewData
 } from '@/components/pages/customer-reviews/customer-review.data.ts';
 
-export function CustomerReviewPreview() {
+export interface CustomerReviewPreviewTranslations {
+	title: string;
+	description: string;
+}
+
+export function CustomerReviewPreview({
+	translations
+}: {
+	translations: CustomerReviewPreviewTranslations;
+}) {
+	const updatedDescription = translations.description.replace(
+		'{count}',
+		CUSTOMER_REVIEW_DATA.length + ''
+	);
+
 	return (
 		<div className="flex flex-col items-center gap-2 text-center">
-			<h2 className="text-3xl font-bold">Customer Reviews</h2>
+			<h2 className="text-3xl font-bold">{translations.title}</h2>
 			<div className="flex items-center gap-2">
 				{getStars(getAverageRating())}
 				<span className="text-2xl font-bold">{getAverageRating().toFixed(1)}</span>
 			</div>
 			<p className="text-sm text-gray-500 dark:text-gray-400">
-				Average Rating based on {CUSTOMER_REVIEW_DATA.length} personal reviews and from
+				{updatedDescription}
 				<a
 					href="https://maps.app.goo.gl/zfsgASCDqqe2e6pJ6"
 					target="_blank"
@@ -26,7 +40,7 @@ export function CustomerReviewPreview() {
 					className="px-1"
 				>
 					<Button variant="link" size="link">
-						Google Maps
+						Google Maps.
 					</Button>
 				</a>
 			</p>
@@ -35,13 +49,15 @@ export function CustomerReviewPreview() {
 }
 
 export function CustomerReview({
-	translatedCustomerReview
+	translatedCustomerReview,
+	customerReviewTranslations
 }: {
+	customerReviewTranslations: CustomerReviewPreviewTranslations;
 	translatedCustomerReview: CustomerReviewData[];
 }) {
 	return (
 		<div className="mx-auto grid w-full max-w-5xl gap-6 lg:gap-12">
-			<CustomerReviewPreview />
+			<CustomerReviewPreview translations={customerReviewTranslations} />
 
 			<div className="grid items-start gap-6 md:grid-cols-2">
 				{translatedCustomerReview.map((review, index) => (
