@@ -15,7 +15,14 @@ export const getContactTranslations: (t: TranslationFunction) => ContactFormTran
 			email: t('contact.form.placeholder.email'),
 			name: t('contact.form.placeholder.name'),
 			message: t('contact.form.placeholder.message')
-		}
+		},
+		messages: {
+			error: t('contact.messages.error'),
+			formIncomplete: t('contact.messages.formIncomplete'),
+			success: t('contact.messages.success')
+		},
+		description: t('contact.form.description'),
+		or: t('contact.or')
 	};
 };
 

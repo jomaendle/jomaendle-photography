@@ -9,6 +9,8 @@ import PageTitle from '@/components/ui/PageTitle.tsx';
 export interface ContactFormTranslations {
 	title: string;
 	cta: string;
+	description: string;
+	or: string;
 	formTitle: string;
 	formName: string;
 	formEmail: string;
@@ -18,6 +20,11 @@ export interface ContactFormTranslations {
 		name: string;
 		email: string;
 		message: string;
+	};
+	messages: {
+		success: string;
+		error: string;
+		formIncomplete: string;
 	};
 }
 
@@ -64,7 +71,10 @@ export default function ContactForm({
 		event.preventDefault();
 
 		if (!isFormValid()) {
-			toast.error('Please fill out all required fields');
+			toast.error(translations.messages.formIncomplete, {
+				duration: 6000,
+				important: true
+			});
 			return;
 		}
 
@@ -76,14 +86,19 @@ export default function ContactForm({
 			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams })
 		})
 			.then(() => {
-				toast.success('Message sent successfully', {
+				toast.success(translations.messages.success, {
 					duration: 6000,
-					closeButton: true
+					closeButton: true,
+					important: true
 				});
 				resetForm();
 			})
 			.catch(() => {
-				toast.error('An error occurred while sending the message');
+				toast.error(translations.messages.error, {
+					duration: 6000,
+					closeButton: true,
+					important: true
+				});
 			});
 	};
 
@@ -99,18 +114,18 @@ export default function ContactForm({
 							rel="noreferrer"
 							target="_blank"
 						>
-							<Button variant="link" size={'linkLg'}>
+							<Button variant="outline" className={'text-blue-700'}>
 								{translations.cta}
 							</Button>
 						</a>
 
 						<div className={'flex items-center gap-2'}>
 							<Separator />
-							<span className={'text-sm text-gray-500'}>or</span>
+							<span className={'text-sm text-gray-500'}>{translations.or}</span>
 							<Separator />
 						</div>
 
-						<p className="text-gray-500">Fill out the form below to contact us.</p>
+						<p className="text-center text-gray-500">{translations.description}</p>
 					</div>
 				</div>
 			)}

@@ -5,9 +5,10 @@ import Layout from '../../../layouts/Layout.astro';
 import { type CollectionEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
 import { ArrowLeft } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
+import { Button } from '@/components/ui/button';
 import ImageViewModal from '../../../components/ui/ImageViewModal.astro';
 import LazyLoadedImage from '../../../components/ui/LazyLoadedImage.astro';
+import PageTitle, { SecondaryPageTitle } from '../../../components/ui/PageTitle';
 
 interface Props {
 	project: CollectionEntry<'client-projects'>;
@@ -45,17 +46,21 @@ const lowResImgs = await getLowResImages();
 	<div
 		class="mx-auto flex h-full max-w-6xl flex-col items-center justify-center gap-8 px-4 pb-12 sm:px-8"
 	>
-		<header class="flex w-full items-center self-start pb-2 pt-7">
-			<Button id="go-back-button" variant="ghost" className="z-10 sm:absolute">
+		<header
+			class="sticky top-[60px] z-50 flex w-full items-center justify-start gap-4 bg-white py-2 sm:gap-8 sm:pt-6"
+		>
+			<Button
+				id="go-back-button"
+				variant="secondary"
+				className="bottom-4 right-8 z-50 sm:inset-[unset] sm:z-10 "
+			>
 				<div class="flex items-center gap-2">
 					<ArrowLeft />
-					<span>{t('common.back')}</span>
+					<span class="text-xs">{t('common.back')}</span>
 				</div>
 			</Button>
 
-			<h1 class="flex-1 text-center text-xl">
-				{projectData.title}
-			</h1>
+			<SecondaryPageTitle title={projectData.title} />
 		</header>
 
 		<section
