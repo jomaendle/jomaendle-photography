@@ -8,7 +8,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ImageViewModal from '../../../components/ui/ImageViewModal.astro';
 import LazyLoadedImage from '../../../components/ui/LazyLoadedImage.astro';
-import PageTitle, { SecondaryPageTitle } from '../../../components/ui/PageTitle';
+import { SecondaryPageTitle } from '../../../components/ui/PageTitle';
 
 interface Props {
 	project: CollectionEntry<'client-projects'>;
@@ -32,8 +32,8 @@ async function getLowResImages() {
 			src: image as any,
 			quality: 'mid',
 			width: image.width / 2,
-			height: image.height / 2
-		})
+			height: image.height / 2,
+		}),
 	);
 
 	return await Promise.all(result);
@@ -47,12 +47,12 @@ const lowResImgs = await getLowResImages();
 		class="mx-auto flex h-full max-w-6xl flex-col items-center justify-center gap-8 px-4 pb-12 sm:px-8"
 	>
 		<header
-			class="sticky top-[60px] z-50 flex w-full items-center justify-start gap-4 bg-white py-2 sm:gap-8 sm:pt-6"
+			class="sticky top-[60px] z-50 flex w-full items-center justify-start gap-4 bg-white py-2 sm:top-[80px] sm:gap-8 sm:pt-6"
 		>
 			<Button
 				id="go-back-button"
 				variant="secondary"
-				className="bottom-4 right-8 z-50 sm:inset-[unset] sm:z-10 "
+				className="bottom-4 right-8 z-50 sm:inset-[unset] sm:z-10"
 			>
 				<div class="flex items-center gap-2">
 					<ArrowLeft />
@@ -68,7 +68,8 @@ const lowResImgs = await getLowResImages();
 		>
 			{
 				[projectData.titleImage, ...projectData.images].map((photo, index) => (
-					<div class="flex aspect-[4/5] items-center overflow-hidden rounded-xl">
+					<div transition:name=`details-${project.slug}-${index}`
+							 class="flex aspect-[4/5] items-center overflow-hidden rounded-xl">
 						<LazyLoadedImage id={`${project.slug}-${index}`} image={photo} />
 					</div>
 				))

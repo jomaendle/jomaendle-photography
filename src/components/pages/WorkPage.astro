@@ -1,15 +1,15 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import { type CollectionEntry, getCollection } from 'astro:content'
-import WorkCard from '../ui/WorkCard.astro'
-import { clientProjectsKey } from '../../content/config'
-import { getLangFromUrl, useTranslations } from '../../i18n/utils'
+import Layout from '../../layouts/Layout.astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import WorkCard from '../ui/WorkCard.astro';
+import { clientProjectsKey } from '../../content/config';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import PageTitle from '@/components/ui/PageTitle';
 
-const lang = getLangFromUrl(Astro.url)
+const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection(clientProjectsKey)
+const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection(clientProjectsKey);
 ---
 
 
@@ -20,7 +20,8 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 		<div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-center pt-2 sm:pt-8">
 			{
 				clientProjects.map((project) => (
-					<a href=`/${lang}/details/${project.slug}` class="aspect-[4/5] rounded sm:rounded-xl shadow-xl overflow-hidden sm:max-h-none">
+					<a href=`/${lang}/details/${project.slug}` transition:name=`details-${project.slug}-0`
+						 class="aspect-[4/5] rounded sm:rounded-xl shadow-xl overflow-hidden sm:max-h-none">
 						<WorkCard project={project} />
 					</a>
 				))

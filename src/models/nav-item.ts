@@ -13,10 +13,6 @@ export const LINKS: NavItem[] = [
 	{
 		url: '/services',
 		labelKey: 'nav.services'
-	},
-	{
-		labelKey: 'nav.contact',
-		url: '/contact'
 	}
 ];
 
@@ -25,5 +21,9 @@ export const MOBILE_LINKS: NavItem[] = [
 		url: '/',
 		labelKey: 'nav.home'
 	},
-	...LINKS
+	...LINKS,
+	{
+		url: '/contact',
+		labelKey: 'nav.contact'
+	}
 ];
