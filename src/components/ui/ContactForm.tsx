@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
 import { toast } from 'sonner';
 import PageTitle from '@/components/ui/PageTitle.tsx';
+import { DatePicker } from '@/components/ui/datePicker.tsx';
 
 export interface ContactFormTranslations {
 	title: string;
@@ -13,6 +14,7 @@ export interface ContactFormTranslations {
 	or: string;
 	formTitle: string;
 	formName: string;
+	formDate: string;
 	formEmail: string;
 	formMessage: string;
 	formSubmit: string;
@@ -155,6 +157,28 @@ export default function ContactForm({
 								required
 							/>
 						</div>
+
+						<div className="flex flex-col gap-2">
+							<Label htmlFor="date-picker">{translations.formDate}</Label>
+							<DatePicker id="date-picker" fullWidth={true} />
+						</div>
+
+						<Label>Dein gewünschtes Angebot</Label>
+						<div className="grid grid-cols-2 gap-3">
+							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
+								Bildbearbeitung - 1 Foto
+							</div>
+							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
+								Bildbearbeitung - 1 Foto
+							</div>
+							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
+								Bildbearbeitung - 1 Foto
+							</div>
+							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
+								Bildbearbeitung - 1 Foto
+							</div>
+						</div>
+
 						<div className="space-y-2">
 							<Label htmlFor="message">{translations.formMessage}</Label>
 							<Textarea

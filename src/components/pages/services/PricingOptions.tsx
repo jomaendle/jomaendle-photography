@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
 import PageTitle from '@/components/ui/PageTitle';
+import { Toggle } from '@/components/ui/toggle.tsx';
 
 export default function PricingOptions({
 	title,
@@ -14,6 +15,12 @@ export default function PricingOptions({
 	return (
 		<div className="grid w-full items-center gap-6 md:mx-auto md:max-w-5xl lg:gap-12">
 			<PageTitle title={title} subtitle={subtitle} />
+
+			<div className={'flex gap-2'}>
+				<Toggle variant={'outline'}>Shootings</Toggle>
+				<Toggle variant={'outline'}>Bildbearbeitung</Toggle>
+			</div>
+
 			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{shootings.map((shooting, index) => (
 					<div
@@ -27,7 +34,7 @@ export default function PricingOptions({
 						<div className="grid flex-1 gap-4 bg-white p-6">
 							<h2 className="text-3xl font-semibold">
 								{shooting.price}
-								{shooting.isBusiness && <p className="inline text-base ">/month</p>}
+								{shooting.isBusiness && <p className="inline text-base">/month</p>}
 							</h2>
 
 							<ul>

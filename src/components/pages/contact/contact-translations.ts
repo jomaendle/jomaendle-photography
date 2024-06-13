@@ -10,6 +10,7 @@ export const getContactTranslations: (t: TranslationFunction) => ContactFormTran
 		formName: t('contact.formName'),
 		formMessage: t('contact.formMessage'),
 		formSubmit: t('contact.formSubmit'),
+		formDate: t('contact.formDate'),
 		formTitle: t('contact.formTitle'),
 		placeholder: {
 			email: t('contact.form.placeholder.email'),

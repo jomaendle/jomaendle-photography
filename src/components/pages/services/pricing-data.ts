@@ -1,5 +1,5 @@
 import { type TranslationKey } from '@/i18n/utils.ts';
-import { offer1, offer2 } from '@/i18n/translations/pricing.i18n.ts';
+import { offer1, offer2, offer_image_editing } from '@/i18n/translations/pricing.i18n.ts';
 
 export interface PhotoShootingOffersBase {
 	title: TranslationKey;
@@ -24,6 +24,15 @@ export type PhotoShootingOffersTranslated = Omit<
 };
 
 export const OFFERS: PhotoShootingOffersBase[] = [
+	{
+		duration: '15min',
+		price: offer_image_editing.price,
+		title: 'pricing.offering4.title',
+		description: 'pricing.offering4.description',
+		includes: ['pricing.offering4.included.1', 'pricing.offering4.included.2'],
+		cta: 'pricing.offering4.cta',
+		targetGroup: 'pricing.offering4.targetGroup'
+	},
 	{
 		duration: offer1.durationInHours,
 		price: offer1.price,
