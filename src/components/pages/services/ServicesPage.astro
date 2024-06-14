@@ -6,9 +6,9 @@ import ProcessDescription from '../services/ProcessDescription';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 import Layout from '../../../layouts/Layout.astro';
 import {
-	translatedCustomerReview,
-	translatedShootingDescription,
-	translatedShootings
+	getTranslatedCustomerReviews,
+	getTranslatedShootingDescriptions,
+	getTranslatedOffers,
 } from './services-translation.util';
 
 const lang = getLangFromUrl(Astro.url);
@@ -22,7 +22,7 @@ const reviewTranslations = getCustomerReviewTranslations(t);
 		<section>
 			<PricingOptions
 				client:load
-				shootings={translatedShootings(t)}
+				shootings={getTranslatedOffers(t)}
 				title={t('pricing.title')}
 				subtitle={t('pricing.subtitle')}
 			/>
@@ -33,14 +33,14 @@ const reviewTranslations = getCustomerReviewTranslations(t);
 				client:load
 				title={t('process.title')}
 				subtitle={t('process.subtitle')}
-				shootingSteps={translatedShootingDescription(t)}
+				shootingSteps={getTranslatedShootingDescriptions(t)}
 			/>
 		</section>
 
 		<section>
 			<CustomerReview
 				customerReviewTranslations={reviewTranslations}
-				translatedCustomerReview={translatedCustomerReview(t)}
+				translatedCustomerReview={getTranslatedCustomerReviews(t)}
 				client:load
 			/>
 		</section>

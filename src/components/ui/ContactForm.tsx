@@ -7,117 +7,78 @@ import { toast } from 'sonner';
 import PageTitle from '@/components/ui/PageTitle.tsx';
 import { DatePicker } from '@/components/ui/datePicker.tsx';
 import * as React from 'react';
-
-export interface ContactFormTranslations {
-	title: string;
-	cta: string;
-	description: string;
-	or: string;
-	formTitle: string;
-	formName: string;
-	formDate: string;
-	formEmail: string;
-	formMessage: string;
-	formSubmit: string;
-	placeholder: {
-		name: string;
-		email: string;
-		message: string;
-	};
-	messages: {
-		success: string;
-		error: string;
-		formIncomplete: string;
-	};
-}
+import { Combobox } from '@/components/ui/combobox.tsx';
+import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
+import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';
+import {
+	encodeFormData,
+	getContactFormData,
+	isContactFormValid,
+	resetContactForm,
+} from '@/components/pages/contact/contact-form.util.ts';
 
 function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
 }
 
-const encode = (data: unknown) => {
-	return Object.keys(data)
-		.map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-		.join('&');
-};
-
 export default function ContactForm({
 	showHeader,
 	translations,
+	offers,
 }: {
 	showHeader?: boolean;
 	translations: ContactFormTranslations;
+	offers?: PhotoShootingOffersTranslated[];
 }) {
-	function getFormData() {
-		const message = document.getElementById('message') as HTMLTextAreaElement;
-		const email = document.getElementById('email') as HTMLInputElement;
-		const name = document.getElementById('name') as HTMLInputElement;
-		const date = document.getElementById('date') as HTMLInputElement;
-
-		return {
-			name: name.value,
-			email: email.value,
-			message: message.value,
-			date: date.value,
-		};
-	}
-
-	function isFormValid() {
-		const form = document.getElementById('contact-form') as HTMLFormElement;
-		return form.checkValidity();
-	}
-
-	function resetForm() {
-		const form = document.getElementById('contact-form') as HTMLFormElement;
-		form.reset();
-	}
-
 	function onDateChange(date: Date) {
-		console.log('date', date);
-
 		if (!date) {
 			return;
 		}
 
 		const dateInput = document.getElementById('date') as HTMLInputElement;
 		dateInput.value = date.toISOString();
-		console.log('dateInput', dateInput.value);
+	}
+
+	function onOfferChange(offer: string) {
+		const offerInput = document.getElementById('offer') as HTMLInputElement;
+		offerInput.value = offer;
 	}
 
 	const handleSubmit = (event) => {
-		console.log('submit', event);
-
 		event.preventDefault();
 
-		if (!isFormValid()) {
+		if (!isContactFormValid()) {
 			toast.error(translations.messages.formIncomplete, {
-				duration: 6000,
+				duration: 10000,
 				important: true,
 			});
 			return;
 		}
 
-		const formDataAsUrlParams = getFormData();
+		const formDataAsUrlParams = getContactFormData();
 
 		fetch('/', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams }),
+			body: encodeFormData({ 'form-name': 'contact', ...formDataAsUrlParams }),
 		})
 			.then(() => {
 				toast.success(translations.messages.success, {
-					duration: 6000,
+					duration: 10000,
 					closeButton: true,
 					important: true,
 				});
-				resetForm();
+				resetContactForm();
 			})
 			.catch(() => {
 				toast.error(translations.messages.error, {
-					duration: 6000,
+					duration: 10000,
 					closeButton: true,
 					important: true,
 				});
+			})
+			.finally(() => {
+				window.dispatchEvent(new Event('resetForm'));
 			});
 	};
 
@@ -151,6 +112,7 @@ export default function ContactForm({
 			<Card>
 				<CardHeader>
 					<CardTitle>{translations.formTitle}</CardTitle>
+					<p className="mt-4 text-sm text-gray-500">{translations.formDescription}</p>
 				</CardHeader>
 				<CardContent>
 					<form
@@ -160,13 +122,14 @@ export default function ContactForm({
 						name="contact"
 						onSubmit={handleSubmit}
 					>
+						<p className="text-xs text-gray-500">{translations.requiredFields}</p>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
-							<Label htmlFor="name">{translations.formName}</Label>
+							<Label htmlFor="name">{translations.formName} (*)</Label>
 							<Input id="name" placeholder={translations.placeholder.name} required />
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="email">{translations.formEmail}</Label>
+							<Label htmlFor="email">{translations.formEmail} (*)</Label>
 							<Input
 								id="email"
 								placeholder={translations.placeholder.email}
@@ -177,25 +140,20 @@ export default function ContactForm({
 
 						<div className="flex flex-col gap-2">
 							<Label htmlFor="date-picker">{translations.formDate}</Label>
-							<DatePicker id="date-picker" fullWidth={true} onChange={onDateChange} />
+							<DatePicker
+								id="date-picker"
+								fullWidth={true}
+								onChange={onDateChange}
+								placeholder={translations.date}
+							/>
 
 							<input type="hidden" name="date" id="date" />
 						</div>
 
-						<Label>Dein gewünschtes Angebot</Label>
-						<div className="grid grid-cols-2 gap-3">
-							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
-								Bildbearbeitung - 1 Foto
-							</div>
-							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
-								Bildbearbeitung - 1 Foto
-							</div>
-							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
-								Bildbearbeitung - 1 Foto
-							</div>
-							<div className="rounded-xl bg-gray-200 p-4 text-sm shadow">
-								Bildbearbeitung - 1 Foto
-							</div>
+						<div className="flex flex-col gap-2">
+							<Label>{translations.offers.title}</Label>
+							<Combobox offers={offers} translations={translations} onSelect={onOfferChange} />
+							<input type="hidden" name="offer" id="offer" />
 						</div>
 
 						<div className="space-y-2">

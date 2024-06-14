@@ -1,6 +1,37 @@
-import type { ContactFormTranslations } from '@/components/ui/ContactForm.tsx';
 import type { TranslationFunction } from '@/models/i18n.ts';
 import type { CustomerReviewPreviewTranslations } from '@/components/pages/customer-reviews/CustomerReview.tsx';
+
+export interface ContactFormTranslations {
+	title: string;
+	cta: string;
+	description: string;
+	or: string;
+	formTitle: string;
+	formDescription: string;
+	requiredFields: string;
+	formName: string;
+	formDate: string;
+	formEmail: string;
+	formMessage: string;
+	formSubmit: string;
+	date: string;
+	placeholder: {
+		name: string;
+		email: string;
+		message: string;
+	};
+	messages: {
+		success: string;
+		error: string;
+		formIncomplete: string;
+	};
+	offers: {
+		title: string;
+		searchPlaceholder: string;
+		noResults: string;
+		selectPlaceholder: string;
+	};
+}
 
 export const getContactTranslations: (t: TranslationFunction) => ContactFormTranslations = (t) => {
 	return {
@@ -12,24 +43,33 @@ export const getContactTranslations: (t: TranslationFunction) => ContactFormTran
 		formSubmit: t('contact.formSubmit'),
 		formDate: t('contact.formDate'),
 		formTitle: t('contact.formTitle'),
+		formDescription: t('contact.formDescription'),
+		requiredFields: t('contact.requiredFields'),
+		date: t('contact.date'),
 		placeholder: {
 			email: t('contact.form.placeholder.email'),
 			name: t('contact.form.placeholder.name'),
-			message: t('contact.form.placeholder.message')
+			message: t('contact.form.placeholder.message'),
 		},
 		messages: {
 			error: t('contact.messages.error'),
 			formIncomplete: t('contact.messages.formIncomplete'),
-			success: t('contact.messages.success')
+			success: t('contact.messages.success'),
 		},
 		description: t('contact.form.description'),
-		or: t('contact.or')
+		or: t('contact.or'),
+		offers: {
+			title: t('contact.offers.title'),
+			searchPlaceholder: t('contact.offers.searchPlaceholder'),
+			noResults: t('contact.offers.noResults'),
+			selectPlaceholder: t('contact.offers.selectPlaceholder'),
+		},
 	};
 };
 
 export const getCustomerReviewTranslations: (
-	t: TranslationFunction
+	t: TranslationFunction,
 ) => CustomerReviewPreviewTranslations = (t) => ({
 	title: t('customerReviews.title'),
-	description: t('customerReviews.averageRating')
+	description: t('customerReviews.averageRating'),
 });

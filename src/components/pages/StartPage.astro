@@ -1,5 +1,8 @@
 ---
-import { getCustomerReviewTranslations } from './contact/contact-translations';
+import {
+	ContactFormTranslations,
+	getCustomerReviewTranslations,
+} from './contact/contact-translations';
 import { getContactTranslations } from './contact/contact-translations';
 import { getStoredImages } from '../../state/images.service';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
@@ -8,11 +11,9 @@ import LayoutCard from '../../components/LayoutCard.astro';
 import { Button } from '@/components/ui/button';
 import { heroImagesKey } from '../../content/config';
 import ImageRow from './start/ImageRow.astro';
-import ContactForm, { type ContactFormTranslations } from '../ui/ContactForm';
-import {
-	CustomerReviewPreview,
-	type CustomerReviewPreviewTranslations
-} from './customer-reviews/CustomerReview';
+import ContactForm from '../ui/ContactForm';
+
+import { getTranslatedOffers } from './services/services-translation.util';
 
 const optimizedMobileImages = await getStoredImages(heroImagesKey);
 
@@ -21,6 +22,7 @@ const t = useTranslations(lang);
 
 const contactTranslations: ContactFormTranslations = getContactTranslations(t);
 const reviewTranslations = getCustomerReviewTranslations(t);
+const offerTranslations = getTranslatedOffers(t);
 ---
 
 <Layout title="Jo Maendle Photography">
@@ -58,7 +60,7 @@ const reviewTranslations = getCustomerReviewTranslations(t);
 			<CustomerReviewPreview translations={reviewTranslations} />
 
 			<div class="w-full max-w-4xl">
-				<ContactForm client:load translations={contactTranslations} />
+				<ContactForm client:load translations={contactTranslations} offers={offerTranslations} />
 			</div>
 		</div>
 	</LayoutCard>
