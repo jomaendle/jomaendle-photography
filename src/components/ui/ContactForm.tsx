@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.t
 import { toast } from 'sonner';
 import PageTitle from '@/components/ui/PageTitle.tsx';
 import { DatePicker } from '@/components/ui/datePicker.tsx';
+import * as React from 'react';
 
 export interface ContactFormTranslations {
 	title: string;
@@ -42,7 +43,7 @@ const encode = (data: unknown) => {
 
 export default function ContactForm({
 	showHeader,
-	translations
+	translations,
 }: {
 	showHeader?: boolean;
 	translations: ContactFormTranslations;
@@ -51,11 +52,13 @@ export default function ContactForm({
 		const message = document.getElementById('message') as HTMLTextAreaElement;
 		const email = document.getElementById('email') as HTMLInputElement;
 		const name = document.getElementById('name') as HTMLInputElement;
+		const date = document.getElementById('date') as HTMLInputElement;
 
 		return {
 			name: name.value,
 			email: email.value,
-			message: message.value
+			message: message.value,
+			date: date.value,
 		};
 	}
 
@@ -69,13 +72,27 @@ export default function ContactForm({
 		form.reset();
 	}
 
+	function onDateChange(date: Date) {
+		console.log('date', date);
+
+		if (!date) {
+			return;
+		}
+
+		const dateInput = document.getElementById('date') as HTMLInputElement;
+		dateInput.value = date.toISOString();
+		console.log('dateInput', dateInput.value);
+	}
+
 	const handleSubmit = (event) => {
+		console.log('submit', event);
+
 		event.preventDefault();
 
 		if (!isFormValid()) {
 			toast.error(translations.messages.formIncomplete, {
 				duration: 6000,
-				important: true
+				important: true,
 			});
 			return;
 		}
@@ -85,13 +102,13 @@ export default function ContactForm({
 		fetch('/', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams })
+			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams }),
 		})
 			.then(() => {
 				toast.success(translations.messages.success, {
 					duration: 6000,
 					closeButton: true,
-					important: true
+					important: true,
 				});
 				resetForm();
 			})
@@ -99,7 +116,7 @@ export default function ContactForm({
 				toast.error(translations.messages.error, {
 					duration: 6000,
 					closeButton: true,
-					important: true
+					important: true,
 				});
 			});
 	};
@@ -160,7 +177,9 @@ export default function ContactForm({
 
 						<div className="flex flex-col gap-2">
 							<Label htmlFor="date-picker">{translations.formDate}</Label>
-							<DatePicker id="date-picker" fullWidth={true} />
+							<DatePicker id="date-picker" fullWidth={true} onChange={onDateChange} />
+
+							<input type="hidden" name="date" id="date" />
 						</div>
 
 						<Label>Dein gewünschtes Angebot</Label>
