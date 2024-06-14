@@ -4,6 +4,6 @@ description: 'This project was a fun one. We had the opportunity to work with a 
 images:
   - '../akanksha/1.jpg'
   - '../akanksha/2.jpg'
-  - '../akanksha/3.jpg'
-titleImage: '../akanksha/0.jpg'
+  - '../akanksha/0.jpg'
+titleImage: '../akanksha/3.jpg'
 ---
