@@ -3,7 +3,7 @@ import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 import Layout from '../../../layouts/Layout.astro';
 import LayoutCard from '../../LayoutCard.astro';
 import { Button } from '@/components/ui/button';
-import me from './me.jpg';
+import me from './me.png';
 import { Image } from 'astro:assets';
 import PageTitle from '@/components/ui/PageTitle';
 
@@ -11,21 +11,28 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout title="Portrait Photography by Jo Maendle">
+<Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
 	<LayoutCard>
+		<PageTitle title={t('about.title')} subtitle={t('about.subtitle')} />
 		<div
 			class="mt-8 flex w-full flex-col-reverse items-center justify-center gap-12 sm:mt-12 sm:flex-row sm:gap-16 lg:gap-20"
 		>
-			<Image
-				src={me}
-				alt="Jo Maendle"
-				height="720"
-				class="aspect-square max-w-[200px] rounded-full object-cover object-right-top shadow-xl sm:object-cover md:max-h-[280px] md:max-w-[280px]"
-			/>
+			<div class="relative shrink-0 overflow-hidden rounded-xl">
+				<div
+					class="absolute bottom-0 right-0 h-[270px] w-[300px] rounded-tl-xl rounded-tr-xl bg-gradient-to-t from-blue-300 to-70%"
+				>
+				</div>
+				<Image
+					src={me}
+					alt="Jo Maendle"
+					height="720"
+					class="relative z-10 aspect-square max-w-[200px] object-cover object-right-top md:max-h-[340px] md:max-w-[280px]"
+				/>
+			</div>
+
 			<div
 				class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left sm:leading-7"
 			>
-				<PageTitle title={t('about.title')} subtitle={t('about.subtitle')} />
 				<p>
 					{t('about.desc.1')}
 					<a
@@ -46,27 +53,5 @@ const t = useTranslations(lang);
 				</p>
 			</div>
 		</div>
-
-		<section
-			class="my-12 flex max-w-[90%] items-center justify-center text-pretty rounded-md bg-slate-100 px-8 py-2 text-center leading-7 shadow-md sm:w-full sm:min-w-[260px] sm:leading-6 md:my-16 lg:mt-20"
-		>
-			<div class="flex w-full max-w-lg flex-col items-center justify-center gap-4">
-				<h4 class="mt-4 w-full text-2xl font-bold text-black">{t('about.cta.title')}!</h4>
-
-				<p>
-					{t('about.cta.offers')}
-				</p>
-
-				<p>
-					{t('about.cta.subtitle')}
-				</p>
-
-				<p class="my-4">
-					<a href={`/${lang}/contact`} class="btn">
-						<Button variant="default"> {t('nav.contact')} </Button>
-					</a>
-				</p>
-			</div>
-		</section>
 	</LayoutCard>
 </Layout>
