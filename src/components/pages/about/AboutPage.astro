@@ -13,6 +13,11 @@ import { Button } from '@/components/ui/button';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+const isProd = import.meta.env.PROD;
+const url = isProd ? 'https://deploy-preview-32--photography-jo.netlify.app' : Astro.url.origin;
+
+const unsplashData = await fetchUnsplashData(url);
+
 async function fetchUnsplashData(baseUrl: string): Promise<UnsplashData> {
 	try {
 		return await EleventyFetch(baseUrl + '/api/unsplash', {
@@ -30,8 +35,6 @@ async function fetchUnsplashData(baseUrl: string): Promise<UnsplashData> {
 		};
 	}
 }
-
-const unsplashData = await fetchUnsplashData(Astro.url.origin);
 ---
 
 <Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
@@ -74,20 +77,22 @@ const unsplashData = await fetchUnsplashData(Astro.url.origin);
 				</div>
 			</div>
 
-			<section class="flex flex-col gap-6 pt-6">
-				<h3 class="mt-12 text-2xl font-bold">{t('about.unsplash.title')}</h3>
-				<div class="grid grid-cols-2 flex-col gap-4 md:grid-cols-4">
-					{
-						Object.keys(unsplashData).map((key) => (
-							<ViewCounter
-								key={key as keyof UnsplashData}
-								title={t(getTranslationKeyForUnsplashData(key))}
-								value={unsplashData[key]}
-							/>
-						))
-					}
-				</div>
-			</section>
+			{
+				unsplashData.totalPhotos > 0 && (
+					<section class="flex flex-col gap-6 pt-6">
+						<h3 class="mt-12 text-2xl font-bold">{t('about.unsplash.title')}</h3>
+						<div class="grid grid-cols-2 flex-col gap-4 md:grid-cols-4">
+							{Object.keys(unsplashData).map((key) => (
+								<ViewCounter
+									key={key as keyof UnsplashData}
+									title={t(getTranslationKeyForUnsplashData(key))}
+									value={unsplashData[key]}
+								/>
+							))}
+						</div>
+					</section>
+				)
+			}
 		</main>
 	</LayoutCard>
 </Layout>
