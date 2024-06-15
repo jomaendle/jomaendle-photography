@@ -1,4 +1,4 @@
-const { getAllStats } = require('../../scripts/unsplash.js');
+import { getAllStats } from '../../scripts/unsplash.js';
 
 export const handler = async () => {
 	try {
