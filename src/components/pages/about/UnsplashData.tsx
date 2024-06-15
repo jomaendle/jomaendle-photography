@@ -19,7 +19,7 @@ export function UnsplashData() {
 		const statsFromStorage = JSON.parse(window.localStorage.getItem('unsplashStats') ?? '{}');
 
 		console.log('statsFromStorage:', statsFromStorage);
-		if (statsFromStorage) {
+		if (Object.keys(statsFromStorage).length > 0) {
 			setUnsplashData(statsFromStorage);
 			console.log('Unsplash data loaded from storage:', statsFromStorage);
 			return;
