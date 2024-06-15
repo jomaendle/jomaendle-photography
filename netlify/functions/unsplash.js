@@ -1,6 +1,6 @@
 const { getAllStats } = require('../../scripts/unsplash.js');
 
-export const handler = async (event, context) => {
+export const handler = async () => {
 	try {
 		const data = await getAllStats();
 

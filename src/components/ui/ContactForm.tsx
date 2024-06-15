@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.t
 import { toast } from 'sonner';
 import PageTitle from '@/components/ui/PageTitle.tsx';
 import { DatePicker } from '@/components/ui/datePicker.tsx';
-import * as React from 'react';
 import { Combobox } from '@/components/ui/combobox.tsx';
 import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
 import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';

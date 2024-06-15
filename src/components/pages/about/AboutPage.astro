@@ -3,7 +3,6 @@ import { getTranslationKeyForUnsplashData, type UnsplashData } from './unsplash-
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 import Layout from '../../../layouts/Layout.astro';
 import LayoutCard from '../../LayoutCard.astro';
-import { Button } from '@/components/ui/button';
 import me from './me.png';
 import { Image } from 'astro:assets';
 import PageTitle from '@/components/ui/PageTitle';
@@ -81,7 +80,7 @@ const unsplashData = await fetchUnsplashData(Astro.url.origin);
 					{
 						Object.keys(unsplashData).map((key) => (
 							<ViewCounter
-								key={key}
+								key={key as keyof UnsplashData}
 								title={t(getTranslationKeyForUnsplashData(key))}
 								value={unsplashData[key]}
 							/>
