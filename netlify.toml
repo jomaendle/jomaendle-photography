@@ -8,3 +8,7 @@ from = "/api/*" # simplify all calls to serverless functions
 to = "/.netlify/functions/:splat" # all function calls will go to this path
 status = 200 # ok code
 force = true # ensure to always redirect
+
+
+[functions]
+included_files = ["scripts/**"]
