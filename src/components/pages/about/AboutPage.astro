@@ -1,37 +1,15 @@
 ---
-import { getTranslationKeyForUnsplashData, type UnsplashData } from './unsplash-data';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 import Layout from '../../../layouts/Layout.astro';
 import LayoutCard from '../../LayoutCard.astro';
 import me from './me.png';
 import { Image } from 'astro:assets';
 import PageTitle from '@/components/ui/PageTitle';
-import EleventyFetch from '@11ty/eleventy-fetch';
-import ViewCounter from '././ViewCounter.astro';
 import { Button } from '@/components/ui/button';
+import { UnsplashData } from './UnsplashData';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-async function fetchUnsplashData(baseUrl: string): Promise<UnsplashData> {
-	try {
-		return await EleventyFetch(baseUrl + '/api/unsplash', {
-			duration: '1d',
-			type: 'json',
-		});
-	} catch (error) {
-		console.error('Failed loading Unsplash data:', error);
-
-		return {
-			views: 0,
-			downloads: 0,
-			totalPhotos: 0,
-			followers: 0,
-		};
-	}
-}
-
-const unsplashData = await fetchUnsplashData(Astro.url.origin);
 ---
 
 <Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
@@ -74,20 +52,7 @@ const unsplashData = await fetchUnsplashData(Astro.url.origin);
 				</div>
 			</div>
 
-			<section class="flex flex-col gap-6 pt-6">
-				<h3 class="mt-12 text-2xl font-bold">{t('about.unsplash.title')}</h3>
-				<div class="grid grid-cols-2 flex-col gap-4 md:grid-cols-4">
-					{
-						Object.keys(unsplashData).map((key) => (
-							<ViewCounter
-								key={key as keyof UnsplashData}
-								title={t(getTranslationKeyForUnsplashData(key))}
-								value={unsplashData[key]}
-							/>
-						))
-					}
-				</div>
-			</section>
+			<UnsplashData client:only />
 		</main>
 	</LayoutCard>
 </Layout>
