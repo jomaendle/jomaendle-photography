@@ -9,6 +9,32 @@ import PageTitle from '@/components/ui/PageTitle';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+await fetch('/api/unsplash', {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+})
+	.then(async (response) => {
+		const data = await response.json();
+		console.log('Unsplash: ', data);
+
+		/*const views = document.getElementById('unsplash-views');
+	const downloads = document.getElementById('unsplash-downloads');
+	const photos = document.getElementById('unsplash-photos');
+	const followers = document.getElementById('unsplash-followers');
+
+	if (data && views && downloads && photos && followers) {
+		views.textContent = data.views.toLocaleString();
+		downloads.textContent = data.downloads.toLocaleString();
+		photos.textContent = data.totalPhotos.toLocaleString();
+		followers.textContent = data.followers.toLocaleString();
+	}*/
+	})
+	.catch((error) => {
+		console.error('Error:', error);
+	});
 ---
 
 <Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
