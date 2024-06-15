@@ -13,7 +13,7 @@ const imageCollection = defineCollection({
 	schema: ({ image }) =>
 		z.object({
 			image: image(),
-			project: reference('client-projects'),
+			project: reference('client-projects').optional(),
 		}),
 });
 
