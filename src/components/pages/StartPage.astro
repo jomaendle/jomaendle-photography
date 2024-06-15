@@ -4,19 +4,19 @@ import {
 	getCustomerReviewTranslations,
 } from './contact/contact-translations';
 import { getContactTranslations } from './contact/contact-translations';
-import { getStoredImages } from '../../state/images.service';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getHeroImages } from '../../state/images.service';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
 import { Button } from '@/components/ui/button';
-import { heroImagesKey } from '../../content/config';
 import ImageRow from './start/ImageRow.astro';
 import ContactForm from '../ui/ContactForm';
 import { CustomerReviewPreview } from '@/components/pages/customer-reviews/CustomerReview';
 
 import { getTranslatedOffers } from './services/services-translation.util';
+import { getCollection } from 'astro:content';
 
-const optimizedMobileImages = await getStoredImages(heroImagesKey);
+const optimizedMobileImages = await getHeroImages();
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

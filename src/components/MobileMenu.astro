@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, getNavItemLink, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, getNavItemLink, useTranslations } from '@/i18n/utils';
 import { MOBILE_LINKS } from '../models/nav-item';
 import { X, Menu } from 'lucide-react';
 import Footer from './Footer.astro';
@@ -60,7 +60,7 @@ const t = useTranslations(lang);
 		const closeSvg = document.getElementById('closeSvg');
 		const menuSvg = document.getElementById('menuSvg');
 		const allLinks = mobileMenu.querySelectorAll(
-			'a, hr, div#langPicker'
+			'a, hr, div#langPicker',
 		) as NodeListOf<HTMLElement>;
 
 		mobileMenuButton.addEventListener('click', () => {
@@ -72,7 +72,7 @@ const t = useTranslations(lang);
 			allLinks.forEach((link, index) => {
 				link.animate(
 					{ opacity: [1] },
-					{ duration: 500, delay: (index + 1) * 200, fill: 'forwards' }
+					{ duration: 500, delay: (index + 1) * 200, fill: 'forwards' },
 				);
 				if (link.tagName === 'A' && !link.hasAttribute('data-skip-router-check')) {
 					link.addEventListener('click', onLinkClick);

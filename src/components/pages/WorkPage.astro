@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import WorkCard from '../ui/WorkCard.astro';
 import { clientProjectsKey } from '../../content/config';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from  '@/i18n/utils';
 import PageTitle from '@/components/ui/PageTitle';
 
 const lang = getLangFromUrl(Astro.url);
