@@ -11,4 +11,7 @@ force = true # ensure to always redirect
 
 
 [functions]
-included_files = ["scripts/**"]
+included_files = ["scripts/**.js"]
+
+# Specifies `esbuild` for functions bundling
+node_bundler = "esbuild"
