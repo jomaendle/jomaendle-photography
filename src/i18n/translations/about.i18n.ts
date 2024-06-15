@@ -11,7 +11,12 @@ export const about = {
 		'about.cta.title': "Let's work together",
 		'about.cta.subtitle': 'Ready to book a session or have questions? Contact us today.',
 		'about.cta.offers':
-			'I offer outdoor portrait sessions for individuals and couples in Bremen and surrounding areas.'
+			'I offer outdoor portrait sessions for individuals and couples in Bremen and surrounding areas.',
+		'about.unsplash.views': 'Views',
+		'about.unsplash.downloads': 'Downloads',
+		'about.unsplash.totalPhotos': 'Photos',
+		'about.unsplash.followers': 'Followers',
+		'about.unsplash.title': 'Unsplash Stats',
 	},
 	de: {
 		'about.title': 'Jo Maendle',
@@ -27,6 +32,11 @@ export const about = {
 		'about.cta.subtitle':
 			'Bereit für eine Buchung oder hast du Fragen? Kontaktiere mich noch heute.',
 		'about.cta.offers':
-			'Ich biete Outdoor-Porträtsessions für Einzelpersonen und Paare in Bremen und Umgebung an.'
-	}
+			'Ich biete Outdoor-Porträtsessions für Einzelpersonen und Paare in Bremen und Umgebung an.',
+		'about.unsplash.views': 'Impressionen',
+		'about.unsplash.downloads': 'Downloads',
+		'about.unsplash.totalPhotos': 'Fotos',
+		'about.unsplash.followers': 'Follower',
+		'about.unsplash.title': 'Unsplash Statistiken',
+	},
 };

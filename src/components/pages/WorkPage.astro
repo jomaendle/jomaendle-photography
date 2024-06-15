@@ -21,7 +21,7 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 			{
 				clientProjects.map((project) => (
 					<a href=`/${lang}/details/${project.slug}` transition:name=`details-${project.slug}-0`
-						 class="aspect-[4/5] rounded sm:rounded-xl shadow-xl overflow-hidden sm:max-h-none">
+						 class="aspect-[4/5] rounded-xl shadow-xl overflow-hidden sm:max-h-none">
 						<WorkCard project={project} />
 					</a>
 				))

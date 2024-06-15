@@ -1,4 +1,5 @@
 ---
+import { getTranslationKeyForUnsplashData, type UnsplashData } from './unsplash-data';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 import Layout from '../../../layouts/Layout.astro';
 import LayoutCard from '../../LayoutCard.astro';
@@ -6,78 +7,88 @@ import { Button } from '@/components/ui/button';
 import me from './me.png';
 import { Image } from 'astro:assets';
 import PageTitle from '@/components/ui/PageTitle';
+import EleventyFetch from '@11ty/eleventy-fetch';
+import ViewCounter from '././ViewCounter.astro';
+import { Button } from '@/components/ui/button';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-await fetch('/api/unsplash', {
-	method: 'GET',
-	headers: {
-		'Content-Type': 'application/json',
-	},
-})
-	.then(async (response) => {
-		const data = await response.json();
-		console.log('Unsplash: ', data);
+async function fetchUnsplashData(baseUrl: string): Promise<UnsplashData> {
+	try {
+		return await EleventyFetch(baseUrl + '/api/unsplash', {
+			duration: '1d',
+			type: 'json',
+		});
+	} catch (error) {
+		console.error('Failed loading Unsplash data:', error);
 
-		/*const views = document.getElementById('unsplash-views');
-	const downloads = document.getElementById('unsplash-downloads');
-	const photos = document.getElementById('unsplash-photos');
-	const followers = document.getElementById('unsplash-followers');
+		return {
+			views: 0,
+			downloads: 0,
+			totalPhotos: 0,
+			followers: 0,
+		};
+	}
+}
 
-	if (data && views && downloads && photos && followers) {
-		views.textContent = data.views.toLocaleString();
-		downloads.textContent = data.downloads.toLocaleString();
-		photos.textContent = data.totalPhotos.toLocaleString();
-		followers.textContent = data.followers.toLocaleString();
-	}*/
-	})
-	.catch((error) => {
-		console.error('Error:', error);
-	});
+const unsplashData = await fetchUnsplashData(Astro.url.origin);
 ---
 
 <Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
 	<LayoutCard>
-		<PageTitle title={t('about.title')} subtitle={t('about.subtitle')} />
-		<div
-			class="mt-8 flex w-full flex-col-reverse items-center justify-center gap-12 sm:mt-12 sm:flex-row sm:gap-16 lg:gap-20"
-		>
-			<div class="relative shrink-0 overflow-hidden rounded-xl">
-				<div
-					class="absolute bottom-0 right-0 h-[270px] w-[300px] rounded-tl-xl rounded-tr-xl bg-gradient-to-t from-blue-300 to-70%"
-				>
-				</div>
-				<Image
-					src={me}
-					alt="Jo Maendle"
-					height="720"
-					class="relative z-10 aspect-square max-w-[200px] object-cover object-right-top md:max-h-[340px] md:max-w-[280px]"
-				/>
-			</div>
-
+		<main class="flex max-w-3xl flex-col">
+			<PageTitle title={t('about.title')} subtitle={t('about.subtitle')} />
 			<div
-				class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left sm:leading-7"
+				class="mt-8 flex w-full flex-col-reverse items-center justify-start gap-12 sm:mt-12 sm:flex-row sm:items-start sm:gap-16 lg:gap-20"
 			>
-				<p>
-					{t('about.desc.1')}
-					<a
-						href="https://unsplash.com/@leonardo_64"
-						rel="noreferrer"
-						target="_blank"
-						class="text-blue-600 hover:text-blue-500 hover:underline"
-					>
-						Unsplash.
-					</a>
-				</p>
-				<p>
-					{t('about.desc.2')}
-				</p>
+				<div class="relative shrink-0 overflow-hidden rounded-xl">
+					<Image
+						src={me}
+						alt="Jo Maendle"
+						height="720"
+						class="relative z-10 aspect-square max-w-[200px] bg-gray-100 object-cover object-right-top md:max-h-[340px] md:max-w-[280px]"
+					/>
+				</div>
 
-				<p>
-					{t('about.desc.3')}
-				</p>
+				<div
+					class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left sm:leading-7"
+				>
+					<p>
+						{t('about.desc.1')}
+						<a
+							href="https://unsplash.com/@leonardo_64"
+							rel="noreferrer"
+							target="_blank"
+							class="px-2"
+						>
+							<Button variant="link" size="link">Unsplash.</Button>
+						</a>
+					</p>
+					<p>
+						{t('about.desc.2')}
+					</p>
+
+					<p>
+						{t('about.desc.3')}
+					</p>
+				</div>
 			</div>
-		</div>
+
+			<section class="flex flex-col gap-6 pt-6">
+				<h3 class="mt-12 text-2xl font-bold">{t('about.unsplash.title')}</h3>
+				<div class="grid grid-cols-2 flex-col gap-4 md:grid-cols-4">
+					{
+						Object.keys(unsplashData).map((key) => (
+							<ViewCounter
+								key={key}
+								title={t(getTranslationKeyForUnsplashData(key))}
+								value={unsplashData[key]}
+							/>
+						))
+					}
+				</div>
+			</section>
+		</main>
 	</LayoutCard>
 </Layout>
