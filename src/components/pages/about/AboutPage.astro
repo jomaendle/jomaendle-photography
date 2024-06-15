@@ -7,9 +7,20 @@ import { Image } from 'astro:assets';
 import PageTitle from '@/components/ui/PageTitle';
 import { Button } from '@/components/ui/button';
 import { UnsplashData } from './UnsplashData';
+import { ExternalLinkIcon } from 'lucide-react';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const unsplashViewTranslations = {
+	title: t('about.unsplash.title'),
+	views: t('about.unsplash.views'),
+	downloads: t('about.unsplash.downloads'),
+	totalPhotos: t('about.unsplash.totalPhotos'),
+	followers: t('about.unsplash.followers'),
+	description: t('about.unsplash.description'),
+	cta: t('about.unsplash.cta'),
+};
 ---
 
 <Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
@@ -29,7 +40,7 @@ const t = useTranslations(lang);
 				</div>
 
 				<div
-					class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left sm:leading-7"
+					class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left"
 				>
 					<p>
 						{t('about.desc.1')}
@@ -39,7 +50,10 @@ const t = useTranslations(lang);
 							target="_blank"
 							class="px-2"
 						>
-							<Button variant="link" size="link">Unsplash.</Button>
+							<Button variant="link" size="linkLg" className="flex items-center gap-2">
+								<ExternalLinkIcon size="12" className="shrink-0" />
+								Unsplash.
+							</Button>
 						</a>
 					</p>
 					<p>
@@ -52,7 +66,7 @@ const t = useTranslations(lang);
 				</div>
 			</div>
 
-			<UnsplashData client:only="react" />
+			<UnsplashData client:only="react" translations={unsplashViewTranslations} />
 		</main>
 	</LayoutCard>
 </Layout>

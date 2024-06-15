@@ -17,11 +17,11 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 	<section class="card mx-auto max-w-6xl flex h-full flex-col gap-8">
 		<PageTitle title={t('work.title')} subtitle={t('work.subtitle')} />
 
-		<div class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-center pt-2 sm:pt-8">
+		<div class="grid gap-4 h-full sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full pt-2 sm:pt-8">
 			{
 				clientProjects.map((project) => (
 					<a href=`/${lang}/details/${project.slug}` transition:name=`details-${project.slug}-0`
-						 class="aspect-[4/5] rounded-xl shadow-xl overflow-hidden sm:max-h-none">
+						 class="aspect-[4/5] rounded-xl shadow-xl overflow-hidden h-full w-full sm:max-h-none bg-gray-200">
 						<WorkCard project={project} />
 					</a>
 				))

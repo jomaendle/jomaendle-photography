@@ -16,7 +16,10 @@ export const about = {
 		'about.unsplash.downloads': 'Downloads',
 		'about.unsplash.totalPhotos': 'Photos',
 		'about.unsplash.followers': 'Followers',
-		'about.unsplash.title': 'Unsplash Stats',
+		'about.unsplash.title': 'Stats',
+		'about.unsplash.description':
+			'Thanks to Unsplash, my work reaches millions of people worldwide. Here are some live stats:',
+		'about.unsplash.cta': 'View on Unsplash',
 	},
 	de: {
 		'about.title': 'Jo Maendle',
@@ -37,6 +40,9 @@ export const about = {
 		'about.unsplash.downloads': 'Downloads',
 		'about.unsplash.totalPhotos': 'Fotos',
 		'about.unsplash.followers': 'Follower',
-		'about.unsplash.title': 'Unsplash Statistiken',
+		'about.unsplash.title': 'Statistiken',
+		'about.unsplash.description':
+			'Dank Unsplash erreicht meine Arbeit viele Millionen von Menschen weltweit. Hier sind einige Live Statistiken dazu:',
+		'about.unsplash.cta': 'Auf Unsplash ansehen',
 	},
 };

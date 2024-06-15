@@ -1,12 +1,25 @@
 import { getTranslationKeyForUnsplashData } from '@/components/pages/about/unsplash-data.ts';
 import { useEffect, useState } from 'react';
 import { type UnsplashData } from '@/components/pages/about/unsplash-data.ts';
-import { DownloadIcon, EyeIcon, ImageIcon, UsersIcon } from 'lucide-react';
-import { $unsplashStats } from '@/state/unsplash.ts';
+import { DownloadIcon, EyeIcon, ImageIcon, UsersIcon, ExternalLinkIcon } from 'lucide-react';
+import { $unsplashStats, readUnsplashStatsFromLocalStorage } from '@/state/unsplash.ts';
+import { Button } from '@/components/ui/button.tsx';
 
-const formatter = new Intl.NumberFormat('en', { notation: 'compact' });
+const formatter = new Intl.NumberFormat('de', { notation: 'compact' });
 
-export function UnsplashData() {
+interface Props {
+	translations: UnsplashViewTranslations;
+}
+
+type UnsplashViewTranslations = {
+	[k in keyof UnsplashData]: string;
+} & {
+	title: string;
+	description: string;
+	cta: string;
+};
+
+export function UnsplashData({ translations }: Props) {
 	const [unsplashData, setUnsplashData] = useState<UnsplashData>({
 		views: 0,
 		downloads: 0,
@@ -15,13 +28,10 @@ export function UnsplashData() {
 	});
 
 	useEffect(() => {
-		console.log('fetching Unsplash data');
-		const statsFromStorage = JSON.parse(window.localStorage.getItem('unsplashStats') ?? '{}');
+		const statsFromStorage = readUnsplashStatsFromLocalStorage();
 
-		console.log('statsFromStorage:', statsFromStorage);
-		if (Object.keys(statsFromStorage).length > 0) {
-			setUnsplashData(statsFromStorage);
-			console.log('Unsplash data loaded from storage:', statsFromStorage);
+		if (statsFromStorage?.stats && Object.keys(statsFromStorage.stats).length > 0) {
+			setUnsplashData(statsFromStorage.stats);
 			return;
 		}
 
@@ -50,23 +60,43 @@ export function UnsplashData() {
 		<>
 			{unsplashData?.views > 0 && (
 				<section className="flex flex-col gap-6 pt-6">
-					<h3 className="mt-12 text-2xl font-bold">title</h3>
-					<div className="grid grid-cols-2 flex-col gap-4 md:grid-cols-4">
+					<header className="flex flex-col gap-2">
+						<h3 className="mt-12 text-2xl font-bold">{translations.title}</h3>
+						<p className="text-gray-500">{translations.description}</p>
+					</header>
+					<div className="flex grid-cols-2 flex-col gap-4 sm:grid md:gap-6 lg:grid-cols-4">
 						{Object.keys(unsplashData).map((key) => (
 							<div key={key} className="flex flex-col gap-2 rounded-xl bg-gray-100 p-6">
 								<header className="flex items-center gap-2 text-sm">
-									{key === 'downloads' && <DownloadIcon size="16" className="shrink-0" />}
-									{key === 'views' && <EyeIcon size="16" className="shrink-0" />}
-									{key === 'followers' && <UsersIcon size="16" className="shrink-0" />}
-									{key === 'totalPhotos' && <ImageIcon size="16" className="shrink-0" />}
+									{key === 'downloads' && (
+										<DownloadIcon size="16" className="shrink-0 text-gray-500" />
+									)}
+									{key === 'views' && <EyeIcon size="16" className="shrink-0 text-gray-500" />}
+									{key === 'followers' && (
+										<UsersIcon size="16" className="shrink-0 text-gray-500" />
+									)}
+									{key === 'totalPhotos' && (
+										<ImageIcon size="16" className="shrink-0 text-gray-500" />
+									)}
 
-									<span className="overflow-hidden text-ellipsis whitespace-nowrap">{key}</span>
+									<span className="overflow-hidden text-ellipsis whitespace-nowrap">
+										{translations[key]}
+									</span>
 								</header>
 								<span className="text-xl font-bold sm:text-2xl">
 									{formatter.format(Number(unsplashData[key] ?? 0))}
 								</span>
 							</div>
 						))}
+					</div>
+
+					<div>
+						<a href="https://unsplash.com/@leonardo_64" rel="noreferrer" target="_blank">
+							<Button variant="link" size="linkLg" className="flex items-center gap-2">
+								{translations.cta}
+								<ExternalLinkIcon size="12" className="shrink-0" />
+							</Button>
+						</a>
 					</div>
 				</section>
 			)}
