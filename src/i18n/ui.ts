@@ -5,13 +5,13 @@ import {
 	faq,
 	nav,
 	pricing,
-	processDescriptions
+	processDescriptions,
 } from '@/i18n/translations';
 import { work } from '@/i18n/translations/work.i18n.ts';
 
 export const languages = {
 	en: 'English',
-	de: 'Deutsch'
+	de: 'Deutsch',
 };
 
 export const defaultLang = 'de';
@@ -39,7 +39,7 @@ export const ui = {
 		'start.hero.exploreWork': 'Explore My Work',
 		'start.hero.exploreService': 'View Services',
 		'common.duration': 'Duration',
-		'common.price': 'Price'
+		'common.price': 'Price',
 	},
 	de: {
 		...pricing.de,
@@ -50,7 +50,7 @@ export const ui = {
 		...contact.de,
 		...customerReviews.de,
 		...work.de,
-		'cta.call': 'Jetzt kostenloses Gespräch buchen',
+		'cta.call': 'Jetzt kostenloses Gespräch vereinbaren',
 		'cta.short': 'Kontaktieren',
 		'common.back': 'Zurück',
 		'imprint.phone': 'Telefon',
@@ -63,6 +63,6 @@ export const ui = {
 		'start.hero.exploreWork': 'Arbeit entdecken',
 		'start.hero.exploreService': 'Leistungen ansehen',
 		'common.duration': 'Dauer',
-		'common.price': 'Preis'
-	}
+		'common.price': 'Preis',
+	},
 } as const;

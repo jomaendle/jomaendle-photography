@@ -7,7 +7,7 @@ import { Image } from 'astro:assets';
 import PageTitle from '@/components/ui/PageTitle';
 import { Button } from '@/components/ui/button';
 import { UnsplashData } from './UnsplashData';
-import { ExternalLinkIcon } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -25,7 +25,7 @@ const unsplashViewTranslations = {
 
 <Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
 	<LayoutCard>
-		<main class="flex max-w-3xl flex-col">
+		<main class="flex max-w-4xl flex-col">
 			<PageTitle title={t('about.title')} subtitle={t('about.subtitle')} />
 			<div
 				class="mt-8 flex w-full flex-col-reverse items-center justify-start gap-12 sm:mt-12 sm:flex-row sm:items-start sm:gap-16 lg:gap-20"
@@ -35,27 +35,30 @@ const unsplashViewTranslations = {
 						src={me}
 						alt="Jo Maendle"
 						height="720"
-						class="relative z-10 aspect-square max-w-[200px] bg-gray-100 object-cover object-right-top md:max-h-[340px] md:max-w-[280px]"
+						class="relative z-10 aspect-square max-w-[200px] bg-gray-100 object-cover object-right-top md:max-h-[260px] md:max-w-[240px]"
 					/>
 				</div>
 
 				<div
-					class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left"
+					class="flex flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:text-left"
 				>
-					<p>
-						{t('about.desc.1')}
+					<div>
+						<p class="inline">
+							{t('about.desc.1')}
+						</p>
+
 						<a
 							href="https://unsplash.com/@leonardo_64"
 							rel="noreferrer"
 							target="_blank"
-							class="px-2"
+							class="inline-block h-10 px-2"
 						>
 							<Button variant="link" size="linkLg" className="flex items-center gap-2">
-								<ExternalLinkIcon size="12" className="shrink-0" />
-								Unsplash.
+								Unsplash
+								<ExternalLink size="12" className="shrink-0" />
 							</Button>
 						</a>
-					</p>
+					</div>
 					<p>
 						{t('about.desc.2')}
 					</p>
