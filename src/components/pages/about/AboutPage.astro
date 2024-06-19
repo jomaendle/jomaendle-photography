@@ -1,72 +1,76 @@
 ---
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Layout from '../../../layouts/Layout.astro';
 import LayoutCard from '../../LayoutCard.astro';
-import { Button } from '@/components/ui/button';
-import me from './me.jpg';
+import me from './me.png';
 import { Image } from 'astro:assets';
+import PageTitle from '@/components/ui/PageTitle';
+import { Button } from '@/components/ui/button';
+import { UnsplashData } from './UnsplashData';
+import { ExternalLink } from 'lucide-react';
+import { getPageTitle } from '../../../util/page-title';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const unsplashViewTranslations = {
+	title: t('about.unsplash.title'),
+	views: t('about.unsplash.views'),
+	downloads: t('about.unsplash.downloads'),
+	totalPhotos: t('about.unsplash.totalPhotos'),
+	followers: t('about.unsplash.followers'),
+	description: t('about.unsplash.description'),
+	cta: t('about.unsplash.cta'),
+};
 ---
 
-<Layout title="Portrait Photography by Jo Maendle">
-	<LayoutCard title={t('nav.about')}>
-		<div
-			class="mt-8 flex w-full flex-col-reverse items-center justify-center gap-12 sm:mt-12 sm:flex-row sm:gap-16 lg:gap-20"
-		>
-			<Image
-				src={me}
-				alt="Jo Maendle"
-				height="720"
-				class="aspect-square max-w-[200px] rounded-full object-cover object-right-top sm:object-cover md:max-h-[280px] md:max-w-[280px]"
-			/>
+<Layout title={getPageTitle(t, 'about.page.title')} hasFullHeight={true}>
+	<LayoutCard>
+		<main class="flex max-w-4xl flex-col">
+			<PageTitle title={t('about.title')} subtitle={t('about.subtitle')} />
 			<div
-				class="flex max-w-[min(95%,400px)] flex-col gap-4 text-pretty text-center font-light leading-7 sm:min-w-[260px] sm:max-w-[400px] sm:text-left sm:leading-7"
+				class="mt-8 flex w-full flex-col-reverse items-center justify-start gap-12 sm:mt-12 sm:flex-row sm:items-start sm:gap-16 lg:gap-20"
 			>
-				<h4 class="text-2xl font-normal text-black">{t('about.title')}</h4>
-				<p>{t('about.subtitle')}</p>
-				<p>
-					{t('about.desc.1')}
-					<a
-						href="https://unsplash.com/@leonardo_64"
-						rel="noreferrer"
-						target="_blank"
-						class="text-blue-600 hover:text-blue-500 hover:underline"
-					>
-						Unsplash.
-					</a>
-				</p>
-				<p>
-					{t('about.desc.2')}
-				</p>
+				<div class="relative shrink-0 overflow-hidden rounded-xl">
+					<Image
+						src={me}
+						alt="Jo Maendle"
+						height="720"
+						class="relative z-10 aspect-square max-w-[200px] bg-gray-100 object-cover object-right-top md:max-h-[260px] md:max-w-[240px]"
+					/>
+				</div>
 
-				<p>
-					{t('about.desc.3')}
-				</p>
+				<div
+					class="flex flex-col gap-4 text-pretty text-center leading-7 sm:min-w-[260px] sm:text-left"
+				>
+					<div>
+						<p class="inline">
+							{t('about.desc.1')}
+						</p>
+
+						<a
+							href="https://unsplash.com/@leonardo_64"
+							rel="noreferrer"
+							target="_blank"
+							class="inline-block h-10 px-2"
+						>
+							<Button variant="link" size="linkLg" className="flex items-center gap-2">
+								Unsplash
+								<ExternalLink size="12" className="shrink-0" />
+							</Button>
+						</a>
+					</div>
+					<p>
+						{t('about.desc.2')}
+					</p>
+
+					<p>
+						{t('about.desc.3')}
+					</p>
+				</div>
 			</div>
-		</div>
 
-		<section
-			class="my-12 flex max-w-[90%] items-center justify-center text-pretty rounded-md bg-slate-50 px-8 py-2 text-center font-light leading-7 sm:w-full sm:min-w-[260px] sm:leading-6 md:my-16 lg:mt-20"
-		>
-			<div class="flex w-full max-w-lg flex-col items-center justify-center gap-4">
-				<h4 class="mt-4 w-full text-2xl font-normal text-black">{t('about.cta.title')}!</h4>
-
-				<p>
-					{t('about.cta.offers')}
-				</p>
-
-				<p>
-					{t('about.cta.subtitle')}
-				</p>
-
-				<p class="my-4">
-					<a href={`/${lang}/contact`} class="btn">
-						<Button variant="outline"> {t('cta.short')} </Button>
-					</a>
-				</p>
-			</div>
-		</section>
+			<UnsplashData client:only="react" translations={unsplashViewTranslations} />
+		</main>
 	</LayoutCard>
 </Layout>

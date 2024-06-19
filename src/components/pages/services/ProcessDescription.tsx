@@ -3,7 +3,7 @@ import type { ProcessDescriptionTranslated } from '@/components/pages/services/p
 export default function ProcessDescription({
 	shootingSteps,
 	title,
-	subtitle
+	subtitle,
 }: {
 	title: string;
 	subtitle: string;
@@ -18,15 +18,15 @@ export default function ProcessDescription({
 				</p>
 			</div>
 
-			<div className="flex max-w-xs flex-col gap-12 md:max-w-none md:flex-row ">
+			<div className="flex flex-col gap-10">
 				{shootingSteps.map((step, index) => (
-					<div className="flex flex-col items-center" key={index}>
-						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
+					<div className="flex items-start gap-4" key={index}>
+						<div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-medium text-primary-foreground">
 							{index + 1}
 						</div>
-						<div className="mt-4 text-center">
-							<h3 className="text-xl font-bold">{step.title}</h3>
-							<p className="mt-2 max-w-md text-pretty text-gray-500">{step.description}</p>
+						<div className="flex-1">
+							<h3 className="text-lg font-medium">{step.title}</h3>
+							<p className="mt-2 text-muted-foreground">{step.description}</p>
 						</div>
 					</div>
 				))}

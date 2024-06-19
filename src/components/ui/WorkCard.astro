@@ -1,5 +1,6 @@
 ---
 import LazyLoadedImage from './LazyLoadedImage.astro';
+import ImageHover from '../ImageHover.astro';
 
 const { project } = Astro.props;
 ---
@@ -22,17 +23,5 @@ const { project } = Astro.props;
 <div class="group relative flex h-full w-full gap-4 overflow-hidden">
 	<LazyLoadedImage id={`${project.slug}`} image={project.data.titleImage} />
 
-	<div
-		class="fade-in-animation absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/80 to-60% group-hover:flex sm:hidden sm:gap-4"
-	>
-		<div class="flex h-full items-end justify-end p-2 text-white sm:py-4">
-			<h2 class="layout-title leading-2 flex-1">
-				{project.data.title}
-			</h2>
-
-			<Button variant="ghost">
-				<ArrowRight />
-			</Button>
-		</div>
-	</div>
+	<ImageHover label={project.data.title} />
 </div>

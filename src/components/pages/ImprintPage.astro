@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../LayoutCard.astro';
 
@@ -7,7 +7,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout title="Portrait Photography by Jo Maendle">
+<Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
 	<LayoutCard title={t('nav.imprint')}>
 		<div>
 			<p>
@@ -17,13 +17,13 @@ const t = useTranslations(lang);
 				28199 Bremen
 			</p>
 
-			<h2 class="text-xl font-medium">{t('nav.contact')}</h2>
+			<h2 class="text-2xl font-bold">{t('nav.contact')}</h2>
 			<p>
 				{t('imprint.phone')}: +49 (0) 15780778443<br />
 				E-Mail: johannes.maendle@outlook.de
 			</p>
 
-			<h2 class="text-xl font-medium">{t('imprint.umsatzsteuer.title')}</h2>
+			<h2 class="text-2xl font-bold">{t('imprint.umsatzsteuer.title')}</h2>
 			<p>
 				{t('imprint.umsatzsteuer.desc')}<br />
 				DE360224988
@@ -34,6 +34,6 @@ const t = useTranslations(lang);
 
 <style>
 	p {
-		@apply pb-8 pt-2 font-light text-gray-700;
+		@apply pb-8 pt-2 text-gray-700;
 	}
 </style>

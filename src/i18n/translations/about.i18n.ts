@@ -1,6 +1,7 @@
 export const about = {
 	en: {
 		'about.title': 'Jo Maendle',
+		'about.page.title': 'About me',
 		'about.subtitle': 'A Bremen-based photographer specializing in nature and portraits.',
 		'about.desc.1':
 			'With over 9 years of experience in capturing the beauty of nature and landscapes, my work has garnered hundreds of millions of views worldwide on ',
@@ -11,10 +12,19 @@ export const about = {
 		'about.cta.title': "Let's work together",
 		'about.cta.subtitle': 'Ready to book a session or have questions? Contact us today.',
 		'about.cta.offers':
-			'I offer outdoor portrait sessions for individuals and couples in Bremen and surrounding areas.'
+			'I offer outdoor portrait sessions for individuals and couples in Bremen and surrounding areas.',
+		'about.unsplash.views': 'Views',
+		'about.unsplash.downloads': 'Downloads',
+		'about.unsplash.totalPhotos': 'Photos',
+		'about.unsplash.followers': 'Followers',
+		'about.unsplash.title': 'Stats',
+		'about.unsplash.description':
+			'Thanks to Unsplash, my work reaches millions of people worldwide. Here are some live stats:',
+		'about.unsplash.cta': 'View on Unsplash',
 	},
 	de: {
 		'about.title': 'Jo Maendle',
+		'about.page.title': 'Über mich',
 		'about.subtitle':
 			'Ein in Bremen ansässiger Fotograf, spezialisiert auf Natur- und Porträtaufnahmen.',
 		'about.desc.1':
@@ -27,6 +37,14 @@ export const about = {
 		'about.cta.subtitle':
 			'Bereit für eine Buchung oder hast du Fragen? Kontaktiere mich noch heute.',
 		'about.cta.offers':
-			'Ich biete Outdoor-Porträtsessions für Einzelpersonen und Paare in Bremen und Umgebung an.'
-	}
+			'Ich biete Outdoor-Porträtsessions für Einzelpersonen und Paare in Bremen und Umgebung an.',
+		'about.unsplash.views': 'Impressionen',
+		'about.unsplash.downloads': 'Downloads',
+		'about.unsplash.totalPhotos': 'Fotos',
+		'about.unsplash.followers': 'Follower',
+		'about.unsplash.title': 'Statistiken',
+		'about.unsplash.description':
+			'Dank Unsplash erreicht meine Arbeit viele Millionen von Menschen weltweit. Hier sind einige Live Statistiken dazu:',
+		'about.unsplash.cta': 'Auf Unsplash ansehen',
+	},
 };

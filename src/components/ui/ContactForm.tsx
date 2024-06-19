@@ -4,102 +4,116 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
 import { toast } from 'sonner';
+import PageTitle from '@/components/ui/PageTitle.tsx';
+import { DatePicker, type DatePickerTranslations } from '@/components/ui/datePicker.tsx';
+import { Combobox } from '@/components/ui/combobox.tsx';
+import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
+import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';
+import {
+	encodeFormData,
+	getContactFormData,
+	isContactFormValid,
+	resetContactForm,
+} from '@/components/pages/contact/contact-form.util.ts';
 
 function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
 }
 
-const encode = (data: unknown) => {
-	return Object.keys(data)
-		.map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-		.join('&');
-};
-
 export default function ContactForm({
-	translatedCta,
-	showHeader
+	showHeader,
+	translations,
+	offers,
+	datePickerTranslations,
 }: {
-	translatedCta: string;
 	showHeader?: boolean;
+	translations: ContactFormTranslations;
+	offers?: PhotoShootingOffersTranslated[];
+	datePickerTranslations: DatePickerTranslations;
 }) {
-	function getFormData() {
-		const message = document.getElementById('message') as HTMLTextAreaElement;
-		const email = document.getElementById('email') as HTMLInputElement;
-		const name = document.getElementById('name') as HTMLInputElement;
+	function onDateChange(date: Date) {
+		if (!date) {
+			return;
+		}
 
-		return {
-			name: name.value,
-			email: email.value,
-			message: message.value
-		};
+		const dateInput = document.getElementById('date') as HTMLInputElement;
+		dateInput.value = date.toISOString();
 	}
 
-	function isFormValid() {
-		const form = document.getElementById('contact-form') as HTMLFormElement;
-		return form.checkValidity();
-	}
-
-	function resetForm() {
-		const form = document.getElementById('contact-form') as HTMLFormElement;
-		form.reset();
+	function onOfferChange(offer: string) {
+		const offerInput = document.getElementById('offer') as HTMLInputElement;
+		offerInput.value = offer;
 	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		if (!isFormValid()) {
-			toast.error('Please fill out all required fields');
+		if (!isContactFormValid()) {
+			toast.error(translations.messages.formIncomplete, {
+				duration: 10000,
+				important: true,
+			});
 			return;
 		}
 
-		const formDataAsUrlParams = getFormData();
+		const formDataAsUrlParams = getContactFormData();
 
 		fetch('/', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: encode({ 'form-name': 'contact', ...formDataAsUrlParams })
+			body: encodeFormData({ 'form-name': 'contact', ...formDataAsUrlParams }),
 		})
 			.then(() => {
-				toast.success('Message sent successfully', {
-					duration: 6000,
-					closeButton: true
+				toast.success(translations.messages.success, {
+					duration: 10000,
+					closeButton: true,
+					important: true,
 				});
-				resetForm();
+				resetContactForm();
 			})
 			.catch(() => {
-				toast.error('An error occurred while sending the message');
+				toast.error(translations.messages.error, {
+					duration: 10000,
+					closeButton: true,
+					important: true,
+				});
+			})
+			.finally(() => {
+				window.dispatchEvent(new Event('resetForm'));
 			});
 	};
 
 	return (
-		<div className="space-y-4">
+		<div className="max-w-xl space-y-4 self-center">
 			{showHeader && (
 				<div className="space-y-2">
-					<h1 className="text-center text-3xl font-bold">Get in touch</h1>
+					<PageTitle title={translations.title} />
+
 					<div className={'flex flex-col items-center justify-center gap-4 py-8'}>
 						<a
 							href="https://calendly.com/jo-maendle/erstgespraech"
 							rel="noreferrer"
 							target="_blank"
 						>
-							<Button variant="link" size={'linkLg'}>
-								{translatedCta}
+							<Button variant="outline" className={'text-blue-700'}>
+								{translations.cta}
 							</Button>
 						</a>
 
 						<div className={'flex items-center gap-2'}>
 							<Separator />
-							<span className={'text-sm text-gray-500'}>or</span>
+							<span className={'text-sm text-gray-500'}>{translations.or}</span>
 							<Separator />
 						</div>
 
-						<p className="text-gray-500">Fill out the form below to contact us.</p>
+						<p className="text-center text-gray-500">{translations.description}</p>
 					</div>
 				</div>
 			)}
 			<Card>
 				<CardHeader>
-					<CardTitle>Contact us</CardTitle>
+					<CardTitle>{translations.formTitle}</CardTitle>
+					<p className="mt-4 text-sm text-gray-500">{translations.formDescription}</p>
 				</CardHeader>
 				<CardContent>
 					<form
@@ -109,20 +123,49 @@ export default function ContactForm({
 						name="contact"
 						onSubmit={handleSubmit}
 					>
+						<p className="text-xs text-gray-500">{translations.requiredFields}</p>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="grid gap-4">
-							<Label htmlFor="name">Name</Label>
-							<Input id="name" placeholder="Enter your name" required />
+							<Label htmlFor="name">{translations.formName} (*)</Label>
+							<Input id="name" placeholder={translations.placeholder.name} required />
 						</div>
 						<div className="space-y-2">
-							<Label htmlFor="email">Email</Label>
-							<Input id="email" placeholder="Enter your email" type="email" required />
+							<Label htmlFor="email">{translations.formEmail} (*)</Label>
+							<Input
+								id="email"
+								placeholder={translations.placeholder.email}
+								type="email"
+								required
+							/>
 						</div>
+
+						<div className="flex flex-col gap-2">
+							<Label htmlFor="date-picker">{translations.formDate}</Label>
+							<DatePicker
+								id="date-picker"
+								fullWidth={true}
+								onChange={onDateChange}
+								translations={datePickerTranslations}
+							/>
+
+							<input type="hidden" name="date" id="date" />
+						</div>
+
+						<div className="flex flex-col gap-2">
+							<Label>{translations.offers.title}</Label>
+							<Combobox offers={offers} translations={translations} onSelect={onOfferChange} />
+							<input type="hidden" name="offer" id="offer" />
+						</div>
+
 						<div className="space-y-2">
-							<Label htmlFor="message">Message</Label>
-							<Textarea className="min-h-[100px]" id="message" placeholder="Enter your message" />
+							<Label htmlFor="message">{translations.formMessage}</Label>
+							<Textarea
+								className="min-h-[100px]"
+								id="message"
+								placeholder={translations.placeholder.message}
+							/>
 						</div>
-						<Button type="submit">Send message</Button>
+						<Button type="submit">{translations.formSubmit}</Button>
 					</form>
 				</CardContent>
 			</Card>

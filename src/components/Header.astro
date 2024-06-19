@@ -1,6 +1,5 @@
 ---
-import { getNavItemLink } from '../i18n/utils';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, getNavItemLink } from '@/i18n/utils';
 import MobileMenu from './MobileMenu.astro';
 import { LINKS } from '../models/nav-item';
 import { Button } from './ui/button';
@@ -13,7 +12,6 @@ const isCurrent = (link) => {
 	const linkPath = getNavItemLink(lang, link);
 	return currentPath === linkPath;
 };
-
 ---
 
 <header class="flex gap-12 p-4 sm:p-8 sm:pb-4 sticky top-0 bg-white z-20">
@@ -44,9 +42,9 @@ const isCurrent = (link) => {
 			))
 		}
 
-		<a target="_blank" class="ml-4" href="https://calendly.com/jo-maendle/erstgespraech">
+		<a class="ml-4" href=`/${lang}/contact`>
 			<Button>
-				{t('cta.short')}
+				{t('nav.contact')}
 			</Button>
 		</a>
 	</nav>
