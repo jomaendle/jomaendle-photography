@@ -1,0 +1,15 @@
+{
+	"siteId": "210d2b44-51ff-4574-be8a-7380147da0aa",
+	"geolocation": {
+		"data": {
+			"country": {
+				"code": "DE",
+				"name": "Germany"
+			},
+			"timezone": "Europe/Berlin",
+			"latitude": 51.2993,
+			"longitude": 9.491
+		},
+		"timestamp": 1718801855475
+	}
+}

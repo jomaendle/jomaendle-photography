@@ -1,37 +1,72 @@
 import { Button } from '@/components/ui/button';
 import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
+import PageTitle from '@/components/ui/PageTitle';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group.tsx';
+import { useEffect, useState } from 'react';
+import { CameraIcon, ImageIcon } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card.tsx';
+
+export interface PricingOptionsTranslations {
+	shooting: string;
+	editing: string;
+}
 
 export default function PricingOptions({
 	title,
 	subtitle,
-	shootings
+	shootings,
+	translations,
 }: {
 	title: string;
 	subtitle: string;
+	translations: PricingOptionsTranslations;
 	shootings: PhotoShootingOffersTranslated[];
 }) {
+	const [selectedShooting, setSelectedShooting] = useState<'shooting' | 'editing'>('shooting');
+	const [shootingOffers, setShootingOffers] = useState<PhotoShootingOffersTranslated[]>(
+		shootings.filter((shooting) => shooting.type === selectedShooting),
+	);
+
+	useEffect(() => {
+		setShootingOffers(shootings.filter((shooting) => shooting.type === selectedShooting));
+	}, [selectedShooting]);
+
 	return (
 		<div className="grid w-full items-center gap-6 md:mx-auto md:max-w-5xl lg:gap-12">
-			<div className="text-center">
-				<h1 className="text-3xl font-bold tracking-tight">{title}</h1>
-				<p className="mt-2 max-w-2xl text-gray-500 sm:text-lg md:mx-auto lg:text-gray-400">
-					{subtitle}
-				</p>
-			</div>
-			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				{shootings.map((shooting, index) => (
-					<div
-						className={`card-layout flex cursor-pointer flex-col gap-4 overflow-hidden bg-gray-50 sm:gap-8`}
-						key={index}
+			<PageTitle title={title} subtitle={subtitle} />
+
+			<div className={'flex justify-center gap-4'}>
+				<ToggleGroup type="single" value={selectedShooting}>
+					<ToggleGroupItem
+						value="shooting"
+						className={'flex items-center gap-2'}
+						onClick={() => setSelectedShooting('shooting')}
 					>
-						<div className="bg-gray-50 p-6">
+						<CameraIcon size={18} className={'text-gray-500'} />
+						{translations.shooting}
+					</ToggleGroupItem>
+					<ToggleGroupItem
+						value="editing"
+						className={'flex items-center gap-2'}
+						onClick={() => setSelectedShooting('editing')}
+					>
+						<ImageIcon size={18} className={'text-gray-500'} />
+						{translations.editing}
+					</ToggleGroupItem>
+				</ToggleGroup>
+			</div>
+
+			<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				{shootingOffers.map((shooting, index) => (
+					<Card className={`flex cursor-pointer flex-col gap-4 overflow-hidden`} key={index}>
+						<CardHeader className="bg-gray-50 p-6">
 							<h3 className="text-xl font-bold">{shooting.title}</h3>
 							<p className="mt-1 text-sm text-gray-500">For {shooting.targetGroup}</p>
-						</div>
-						<div className="grid flex-1 gap-4 bg-white p-6">
+						</CardHeader>
+						<CardContent className="grid flex-1 gap-4 bg-white px-6 py-4">
 							<h2 className="text-3xl font-semibold">
 								{shooting.price}
-								{shooting.isBusiness && <p className="inline text-base ">/month</p>}
+								{shooting.isBusiness && <p className="inline text-base">/month</p>}
 							</h2>
 
 							<ul>
@@ -41,12 +76,13 @@ export default function PricingOptions({
 									</li>
 								))}
 							</ul>
-
-							<Button size="sm" variant="outline">
+						</CardContent>
+						<CardFooter>
+							<Button variant="outline" size="lg" className={'w-full'}>
 								{shooting.cta}
 							</Button>
-						</div>
-					</div>
+						</CardFooter>
+					</Card>
 				))}
 			</div>
 		</div>
