@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { ViewTransitions } from 'astro:transitions';
@@ -9,10 +9,13 @@ import '../styles.css';
 
 interface Props {
 	title: string;
+	description?: string;
+	hasFullHeight?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, description, hasFullHeight } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <!doctype html>
@@ -34,20 +37,12 @@ const lang = getLangFromUrl(Astro.url);
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={description ?? 'Jo Maendle Photography'} />
 
 		<ViewTransitions />
 	</head>
-	<body class="flex h-full flex-col">
+	<body class=`flex flex-col ${hasFullHeight ? 'h-full' : ''}`>
 		<style is:global>
-			@font-face {
-				font-family: 'Outfit';
-				src: url('/fonts/Outfit-Light.woff2') format('woff2');
-				font-weight: 300;
-				font-style: normal;
-				font-display: swap;
-			}
-
 			@font-face {
 				font-family: 'Outfit';
 				src: url('/fonts/Outfit-Regular.woff2') format('woff2');
@@ -64,9 +59,6 @@ const lang = getLangFromUrl(Astro.url);
 				font-display: swap;
 			}
 
-			:root {
-			}
-
 			html {
 				font-family: 'Outfit', sans-serif;
 			}
@@ -77,6 +69,13 @@ const lang = getLangFromUrl(Astro.url);
 				padding: 0;
 				scrollbar-gutter: stable;
 				scroll-behavior: smooth;
+			}
+
+			hr {
+				background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, rgba(52, 52, 70, 0) 30%);
+				border: none;
+				height: 2px;
+				width: 100%;
 			}
 
 			.text-hover {

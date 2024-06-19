@@ -1,42 +1,29 @@
 ---
-import { CustomerReview } from '../services/CustomerReview';
+import { getCustomerReviewTranslations } from '../contact/contact-translations';
+import { CustomerReview } from '../customer-reviews/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
 import ProcessDescription from '../services/ProcessDescription';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
-import { OFFERS, type PhotoShootingOffersTranslated } from './pricing-data';
-import { type ProcessDescriptionTranslated, SHOOTING_PROCESS } from './process-data';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Layout from '../../../layouts/Layout.astro';
+import {
+	getTranslatedCustomerReviews,
+	getTranslatedShootingDescriptions,
+	getTranslatedOffers,
+} from './services-translation.util';
+import { getPageTitle } from '../../../util/page-title';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const translatedShootings: PhotoShootingOffersTranslated[] = OFFERS.map((offer) => {
-	return {
-		...offer,
-		title: t(offer.title),
-		description: t(offer.description),
-		targetGroup: t(offer.targetGroup),
-		cta: t(offer.cta),
-		includes: offer.includes.map((include) => t(include))
-	};
-});
-
-const translatedShootingDescription: ProcessDescriptionTranslated[] = SHOOTING_PROCESS.map(
-	(step) => {
-		return {
-			title: t(step.title),
-			description: t(step.description)
-		};
-	}
-);
+const reviewTranslations = getCustomerReviewTranslations(t);
 ---
 
-<Layout title="Jo Maendle Photography">
+<Layout title={getPageTitle(t, 'nav.services')}>
 	<section class="card mx-auto mb-12 flex max-w-[90rem] flex-col gap-20 md:gap-40">
 		<section>
 			<PricingOptions
 				client:load
-				shootings={translatedShootings}
+				shootings={getTranslatedOffers(t)}
 				title={t('pricing.title')}
 				subtitle={t('pricing.subtitle')}
 			/>
@@ -45,14 +32,18 @@ const translatedShootingDescription: ProcessDescriptionTranslated[] = SHOOTING_P
 		<section>
 			<ProcessDescription
 				client:load
-				title={t('process.title')}
-				subtitle={t('process.subtitle')}
-				shootingSteps={translatedShootingDescription}
+				title={t('start.process.title')}
+				subtitle={t('start.process.subtitle')}
+				shootingSteps={getTranslatedShootingDescriptions(t)}
 			/>
 		</section>
 
 		<section>
-			<CustomerReview client:load />
+			<CustomerReview
+				customerReviewTranslations={reviewTranslations}
+				translatedCustomerReview={getTranslatedCustomerReviews(t)}
+				client:load
+			/>
 		</section>
 	</section>
 </Layout>

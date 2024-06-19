@@ -2,3 +2,16 @@
 from = "/"
 to = "/de/"
 status = 200
+
+[[redirects]]
+from = "/api/*" # simplify all calls to serverless functions
+to = "/.netlify/functions/:splat" # all function calls will go to this path
+status = 200 # ok code
+force = true # ensure to always redirect
+
+
+[functions]
+included_files = ["scripts/**.js"]
+
+# Specifies `esbuild` for functions bundling
+node_bundler = "esbuild"

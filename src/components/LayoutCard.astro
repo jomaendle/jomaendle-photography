@@ -3,10 +3,14 @@ const { title, subtitle } = Astro.props;
 ---
 
 <div class="card flex h-full flex-col items-center gap-2">
-	<header class="flex flex-col gap-2">
-		<h1 class="text-3xl font-bold">{title}</h1>
-		{subtitle && <p class="font-light text-gray-500">{subtitle}</p>}
-	</header>
+	{
+		title && (
+			<header class="flex flex-col gap-2">
+				<h1 class="text-3xl font-bold">{title}</h1>
+				{subtitle && <p class="font-light text-gray-500">{subtitle}</p>}
+			</header>
+		)
+	}
 
 	<slot />
 </div>

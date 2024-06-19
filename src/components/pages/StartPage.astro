@@ -1,29 +1,45 @@
 ---
-import { getStoredImages } from '../../state/images.service';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { Image } from 'astro:assets';
+import {
+	type ContactFormTranslations,
+	getCustomerReviewTranslations,
+	getDatePickerTranslations,
+} from './contact/contact-translations';
+import { getContactTranslations } from './contact/contact-translations';
+import { getHeroImages } from '../../state/images.service';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import Layout from '../../layouts/Layout.astro';
 import LayoutCard from '../../components/LayoutCard.astro';
-import { ImageCarousel } from '@/components/ImageCarousel';
 import { Button } from '@/components/ui/button';
-import { heroImagesKey, portraitImagesKey } from '../../content/config';
 import ImageRow from './start/ImageRow.astro';
 import ContactForm from '../ui/ContactForm';
-import { CustomerReviewPreview } from './services/CustomerReview';
+import { CustomerReviewPreview } from '@/components/pages/customer-reviews/CustomerReview';
 
-const optimizedMobileImages = await getStoredImages(heroImagesKey);
+import {
+	getTranslatedOffers,
+	getTranslatedShootingDescriptions,
+} from './services/services-translation.util';
+import { getCollection } from 'astro:content';
+import { getPageTitle } from '../../util/page-title';
+import ProcessDescription from './services/ProcessDescription';
+
+const optimizedMobileImages = await getHeroImages();
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const contactTranslations: ContactFormTranslations = getContactTranslations(t);
+const datePickerTranslations = getDatePickerTranslations(t);
+const reviewTranslations = getCustomerReviewTranslations(t);
+const offerTranslations = getTranslatedOffers(t);
 ---
 
-<Layout title="Jo Maendle Photography">
+<Layout title={getPageTitle(t, 'site.title')}>
 	<LayoutCard>
 		<div
-			class="hide-scrollbar flex w-full flex-col items-center gap-8 md:gap-12 lg:gap-20 xl:gap-24"
+			class="hide-scrollbar flex w-full flex-col items-center gap-16 md:gap-12 lg:gap-20 xl:gap-24"
 		>
 			<div class="flex flex-col items-center text-center md:justify-center">
-				<h1 class="my-12 max-w-[520px] text-2xl sm:mb-4 md:text-4xl">
+				<h1 class="mb-4 mt-8 max-w-[400px] text-3xl sm:max-w-[520px] md:text-4xl">
 					{t('start.hero.title')}
 				</h1>
 				<p class="text-pretty text-center text-gray-600">{t('start.hero.subtitle')}</p>
@@ -43,15 +59,48 @@ const t = useTranslations(lang);
 					</a>
 				</div>
 			</div>
-			<div class="flex h-full max-w-4xl gap-4 sm:gap-6">
-				<ImageRow images={optimizedMobileImages.slice(0, 2)} />
-				<ImageRow images={optimizedMobileImages.slice(2, 4)} reverse={true} />
+
+			<section class="flex flex-col gap-12">
+				<div class="flex h-full max-w-4xl gap-3 sm:gap-6">
+					<ImageRow images={optimizedMobileImages.slice(0, 2)} reverse={true} />
+					<ImageRow images={optimizedMobileImages.slice(2, 4)} />
+				</div>
+
+				<a class="self-center" href=`/${lang}/work`>
+					<Button size="lg" variant="default">
+						{t('start.exploreMoreWork')}
+					</Button>
+				</a>
+			</section>
+
+			<hr />
+
+			<CustomerReviewPreview translations={reviewTranslations} />
+
+			<hr />
+
+			<div class="flex flex-col items-center gap-3">
+				<ProcessDescription
+					client:load
+					title={t('start.process.title')}
+					subtitle={t('start.process.subtitle')}
+					shootingSteps={getTranslatedShootingDescriptions(t)}
+				/>
+
+				<a class="mt-4" href=`/${lang}/services`>
+					<Button size="lg" variant="outline"> {t('start.viewAllServices')}</Button>
+				</a>
 			</div>
 
-			<CustomerReviewPreview />
+			<hr />
 
-			<div class="w-full max-w-4xl">
-				<ContactForm client:load translatedCta={t('cta.call')} />
+			<div class="flex w-full max-w-4xl items-center justify-center">
+				<ContactForm
+					client:load
+					translations={contactTranslations}
+					datePickerTranslations={datePickerTranslations}
+					offers={offerTranslations}
+				/>
 			</div>
 		</div>
 	</LayoutCard>
