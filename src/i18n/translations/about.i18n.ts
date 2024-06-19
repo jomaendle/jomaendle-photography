@@ -1,6 +1,7 @@
 export const about = {
 	en: {
 		'about.title': 'Jo Maendle',
+		'about.page.title': 'About me',
 		'about.subtitle': 'A Bremen-based photographer specializing in nature and portraits.',
 		'about.desc.1':
 			'With over 9 years of experience in capturing the beauty of nature and landscapes, my work has garnered hundreds of millions of views worldwide on ',
@@ -23,6 +24,7 @@ export const about = {
 	},
 	de: {
 		'about.title': 'Jo Maendle',
+		'about.page.title': 'Über mich',
 		'about.subtitle':
 			'Ein in Bremen ansässiger Fotograf, spezialisiert auf Natur- und Porträtaufnahmen.',
 		'about.desc.1':

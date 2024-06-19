@@ -15,6 +15,7 @@ import { CustomerReviewPreview } from '@/components/pages/customer-reviews/Custo
 
 import { getTranslatedOffers } from './services/services-translation.util';
 import { getCollection } from 'astro:content';
+import { getPageTitle } from '../../util/page-title';
 
 const optimizedMobileImages = await getHeroImages();
 
@@ -26,7 +27,7 @@ const reviewTranslations = getCustomerReviewTranslations(t);
 const offerTranslations = getTranslatedOffers(t);
 ---
 
-<Layout title="Jo Maendle Photography">
+<Layout title={getPageTitle(t, 'site.title')}>
 	<LayoutCard>
 		<div
 			class="hide-scrollbar flex w-full flex-col items-center gap-16 md:gap-12 lg:gap-20 xl:gap-24"

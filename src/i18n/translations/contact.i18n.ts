@@ -2,6 +2,7 @@ export const contact = {
 	en: {
 		'contact.subtitle': 'Ready to book a session or have questions? Contact me today',
 		'contact.title': 'Request a shooting',
+		'contact.page.title': 'Contact me',
 		'contact.form.description': 'Fill out the form below to contact me.',
 		'contact.or': 'or',
 		'contact.formName': 'Name',
@@ -28,6 +29,7 @@ export const contact = {
 	de: {
 		'contact.subtitle': 'Bereit für eine Buchung oder hast du Fragen? Kontaktiere mich noch heute.',
 		'contact.title': 'Shooting anfragen',
+		'contact.page.title': 'Kontaktiere mich',
 		'contact.form.description': 'Fülle das Formular unten aus, um mich zu kontaktieren.',
 		'contact.or': 'oder',
 		'contact.formName': 'Name',

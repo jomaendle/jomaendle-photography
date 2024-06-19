@@ -10,6 +10,7 @@ import {
 	getTranslatedShootingDescriptions,
 	getTranslatedOffers,
 } from './services-translation.util';
+import { getPageTitle } from '../../../util/page-title';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,7 +18,7 @@ const t = useTranslations(lang);
 const reviewTranslations = getCustomerReviewTranslations(t);
 ---
 
-<Layout title="Jo Maendle Photography">
+<Layout title={getPageTitle(t, 'nav.services')}>
 	<section class="card mx-auto mb-12 flex max-w-[90rem] flex-col gap-20 md:gap-40">
 		<section>
 			<PricingOptions

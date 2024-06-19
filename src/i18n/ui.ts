@@ -8,6 +8,7 @@ import {
 	processDescriptions,
 } from '@/i18n/translations';
 import { work } from '@/i18n/translations/work.i18n.ts';
+import { site } from '@/i18n/translations/global.i18n.ts';
 
 export const languages = {
 	en: 'English',
@@ -26,6 +27,7 @@ export const ui = {
 		...contact.en,
 		...customerReviews.en,
 		...work.en,
+		...site.en,
 		'cta.call': 'Book Your Free Call Now',
 		'cta.short': 'Contact Me',
 		'common.back': 'Go Back',
@@ -50,6 +52,7 @@ export const ui = {
 		...contact.de,
 		...customerReviews.de,
 		...work.de,
+		...site.de,
 		'cta.call': 'Jetzt kostenloses Gespräch vereinbaren',
 		'cta.short': 'Kontaktieren',
 		'common.back': 'Zurück',

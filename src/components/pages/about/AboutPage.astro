@@ -8,6 +8,7 @@ import PageTitle from '@/components/ui/PageTitle';
 import { Button } from '@/components/ui/button';
 import { UnsplashData } from './UnsplashData';
 import { ExternalLink } from 'lucide-react';
+import { getPageTitle } from '../../../util/page-title';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -23,7 +24,7 @@ const unsplashViewTranslations = {
 };
 ---
 
-<Layout title="Portrait Photography by Jo Maendle" hasFullHeight={true}>
+<Layout title={getPageTitle(t, 'about.page.title')} hasFullHeight={true}>
 	<LayoutCard>
 		<main class="flex max-w-4xl flex-col">
 			<PageTitle title={t('about.title')} subtitle={t('about.subtitle')} />
