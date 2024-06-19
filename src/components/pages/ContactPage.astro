@@ -1,4 +1,5 @@
 ---
+import { getDatePickerTranslations } from './contact/contact-translations';
 import {
 	type ContactFormTranslations,
 	getContactTranslations,
@@ -13,6 +14,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const contactContent: ContactFormTranslations = getContactTranslations(t);
+const datePickerTranslations = getDatePickerTranslations(t);
 const offerContent = getTranslatedOffers(t);
 ---
 
@@ -29,6 +31,7 @@ const offerContent = getTranslatedOffers(t);
 		<ContactForm
 			translations={contactContent}
 			offers={offerContent}
+			datePickerTranslations={datePickerTranslations}
 			client:load
 			showHeader={true}
 		/>

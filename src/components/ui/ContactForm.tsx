@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
 import { toast } from 'sonner';
 import PageTitle from '@/components/ui/PageTitle.tsx';
-import { DatePicker } from '@/components/ui/datePicker.tsx';
+import { DatePicker, type DatePickerTranslations } from '@/components/ui/datePicker.tsx';
 import { Combobox } from '@/components/ui/combobox.tsx';
 import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
 import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';
@@ -24,10 +24,12 @@ export default function ContactForm({
 	showHeader,
 	translations,
 	offers,
+	datePickerTranslations,
 }: {
 	showHeader?: boolean;
 	translations: ContactFormTranslations;
 	offers?: PhotoShootingOffersTranslated[];
+	datePickerTranslations: DatePickerTranslations;
 }) {
 	function onDateChange(date: Date) {
 		if (!date) {
@@ -82,7 +84,7 @@ export default function ContactForm({
 	};
 
 	return (
-		<div className="space-y-4">
+		<div className="max-w-xl space-y-4 self-center">
 			{showHeader && (
 				<div className="space-y-2">
 					<PageTitle title={translations.title} />
@@ -143,7 +145,7 @@ export default function ContactForm({
 								id="date-picker"
 								fullWidth={true}
 								onChange={onDateChange}
-								placeholder={translations.date}
+								translations={datePickerTranslations}
 							/>
 
 							<input type="hidden" name="date" id="date" />

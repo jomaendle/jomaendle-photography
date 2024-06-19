@@ -2,26 +2,27 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 import {
 	getAverageRating,
-	getStars
+	getStars,
 } from '@/components/pages/customer-reviews/customer-review.utils.tsx';
 import {
 	CUSTOMER_REVIEW_DATA,
-	type CustomerReviewData
+	type CustomerReviewData,
 } from '@/components/pages/customer-reviews/customer-review.data.ts';
 
 export interface CustomerReviewPreviewTranslations {
 	title: string;
 	description: string;
+	readMoreReviews: string;
 }
 
 export function CustomerReviewPreview({
-	translations
+	translations,
 }: {
 	translations: CustomerReviewPreviewTranslations;
 }) {
 	const updatedDescription = translations.description.replace(
 		'{count}',
-		CUSTOMER_REVIEW_DATA.length + ''
+		CUSTOMER_REVIEW_DATA.length + '',
 	);
 
 	return (
@@ -44,13 +45,19 @@ export function CustomerReviewPreview({
 					</Button>
 				</a>
 			</p>
+
+			<div className="mt-4">
+				<Button variant="outline" size="lg">
+					{translations.readMoreReviews}
+				</Button>
+			</div>
 		</div>
 	);
 }
 
 export function CustomerReview({
 	translatedCustomerReview,
-	customerReviewTranslations
+	customerReviewTranslations,
 }: {
 	customerReviewTranslations: CustomerReviewPreviewTranslations;
 	translatedCustomerReview: CustomerReviewData[];

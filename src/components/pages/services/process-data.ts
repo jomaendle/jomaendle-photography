@@ -12,15 +12,23 @@ export interface ProcessDescriptionTranslated {
 
 export const SHOOTING_PROCESS: ProcessDescriptionBase[] = [
 	{
-		title: 'process.getInTouch.title',
-		description: 'process.getInTouch.description'
+		title: 'start.process.step1.title',
+		description: 'start.process.step1.description',
 	},
 	{
-		title: 'process.shoot.title',
-		description: 'process.shoot.description'
+		title: 'start.process.step2.title',
+		description: 'start.process.step2.description',
 	},
 	{
-		title: 'process.delivery.title',
-		description: 'process.delivery.description'
-	}
+		title: 'start.process.step3.title',
+		description: 'start.process.step3.description',
+	},
+	{
+		title: 'start.process.step4.title',
+		description: 'start.process.step4.description',
+	},
+	{
+		title: 'start.process.step5.title',
+		description: 'start.process.step5.description',
+	},
 ];

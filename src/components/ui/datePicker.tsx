@@ -10,17 +10,24 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useEffect } from 'react';
+import { PopoverClose } from '@radix-ui/react-popover';
+
+export interface DatePickerTranslations {
+	placeholder: string;
+	apply: string;
+	cancel: string;
+}
 
 export function DatePicker({
 	id,
 	fullWidth,
 	onChange,
-	placeholder,
+	translations: { placeholder, apply, cancel },
 }: {
 	id: string;
 	fullWidth: boolean;
 	onChange: (date: Date) => void;
-	placeholder: string;
+	translations: DatePickerTranslations;
 }) {
 	const [date, setDate] = React.useState<Date>();
 
@@ -62,6 +69,17 @@ export function DatePicker({
 						dayOfWeek: [1, 2, 3, 4],
 					}}
 				/>
+				<PopoverClose asChild>
+					<div className={'grid grid-cols-2 gap-3 p-3'}>
+						<Button onClick={() => setDate(null)} variant="secondary">
+							{cancel}
+						</Button>
+
+						<Button onClick={() => setDate(date)} disabled={!date} variant="default">
+							{apply}
+						</Button>
+					</div>
+				</PopoverClose>
 			</PopoverContent>
 		</Popover>
 	);

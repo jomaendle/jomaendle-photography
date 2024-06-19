@@ -1,5 +1,6 @@
 import type { TranslationFunction } from '@/models/i18n.ts';
 import type { CustomerReviewPreviewTranslations } from '@/components/pages/customer-reviews/CustomerReview.tsx';
+import type { DatePickerTranslations } from '@/components/ui/datePicker.tsx';
 
 export interface ContactFormTranslations {
 	title: string;
@@ -72,4 +73,13 @@ export const getCustomerReviewTranslations: (
 ) => CustomerReviewPreviewTranslations = (t) => ({
 	title: t('customerReviews.title'),
 	description: t('customerReviews.averageRating'),
+	readMoreReviews: t('start.readMoreReviews'),
 });
+
+export function getDatePickerTranslations(t: TranslationFunction): DatePickerTranslations {
+	return {
+		apply: t('common.apply'),
+		cancel: t('common.cancel'),
+		placeholder: t('contact.date'),
+	};
+}

@@ -45,14 +45,6 @@ const t = useTranslations(lang);
 		<style is:global>
 			@font-face {
 				font-family: 'Outfit';
-				src: url('/fonts/Outfit-Light.woff2') format('woff2');
-				font-weight: 300;
-				font-style: normal;
-				font-display: swap;
-			}
-
-			@font-face {
-				font-family: 'Outfit';
 				src: url('/fonts/Outfit-Regular.woff2') format('woff2');
 				font-weight: 400;
 				font-style: normal;
@@ -67,9 +59,6 @@ const t = useTranslations(lang);
 				font-display: swap;
 			}
 
-			:root {
-			}
-
 			html {
 				font-family: 'Outfit', sans-serif;
 			}
@@ -80,6 +69,13 @@ const t = useTranslations(lang);
 				padding: 0;
 				scrollbar-gutter: stable;
 				scroll-behavior: smooth;
+			}
+
+			hr {
+				background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, rgba(52, 52, 70, 0) 30%);
+				border: none;
+				height: 2px;
+				width: 100%;
 			}
 
 			.text-hover {
