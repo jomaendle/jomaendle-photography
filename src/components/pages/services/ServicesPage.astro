@@ -1,4 +1,5 @@
 ---
+import type { PhotoShootingOffersTranslated } from './pricing-data';
 import { getCustomerReviewTranslations } from '../contact/contact-translations';
 import { CustomerReview } from '../customer-reviews/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
@@ -21,6 +22,10 @@ const servicesToggleTranslations: PricingOptionsTranslations = {
 	editing: t('pricing.options.editing'),
 	shooting: t('pricing.options.shootings'),
 };
+
+function onOfferClick(offer: PhotoShootingOffersTranslated) {
+	console.log('onofferclick', offer);
+}
 ---
 
 <Layout title={getPageTitle(t, 'nav.services')}>
@@ -32,6 +37,7 @@ const servicesToggleTranslations: PricingOptionsTranslations = {
 				title={t('pricing.title')}
 				subtitle={t('pricing.subtitle')}
 				translations={servicesToggleTranslations}
+				lang={lang}
 			/>
 		</section>
 
