@@ -18,6 +18,8 @@ export function getNavItemLink(lang: keyof typeof ui, item: NavItem) {
 	return `/${lang}${item.url}`;
 }
 
+export type Language = keyof typeof ui;
+
 export type TranslationKey = keyof (typeof ui)[typeof defaultLang];
 
 export type TranslationFunction = ReturnType<typeof useTranslations>;

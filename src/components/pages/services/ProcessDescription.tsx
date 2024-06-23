@@ -18,9 +18,12 @@ export default function ProcessDescription({
 				</p>
 			</div>
 
-			<div className="flex flex-col gap-10">
+			<div className="flex flex-col items-center gap-10 sm:items-start">
 				{shootingSteps.map((step, index) => (
-					<div className="flex items-start gap-4" key={index}>
+					<div
+						className="flex max-w-[85%] flex-col items-center gap-4 text-center sm:max-w-none sm:flex-row sm:items-start sm:text-start"
+						key={index}
+					>
 						<div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-medium text-primary-foreground">
 							{index + 1}
 						</div>

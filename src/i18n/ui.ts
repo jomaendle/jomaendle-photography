@@ -1,7 +1,8 @@
 import { about, contact, customerReviews, faq, nav, pricing } from '@/i18n/translations';
-import { work } from '@/i18n/translations/work.i18n.ts';
 import { site } from '@/i18n/translations/global.i18n.ts';
 import { startPageTranslations } from '@/i18n/translations/start.i18n.ts';
+import { work } from '@/i18n/translations/work.i18n.ts';
+import { servicesTranslations } from './translations/services.i18n';
 
 export const languages = {
 	en: 'English',
@@ -21,6 +22,7 @@ export const ui = {
 		...work.en,
 		...site.en,
 		...startPageTranslations.en,
+		...servicesTranslations.en,
 		'cta.call': 'Book Your Free Call Now',
 		'cta.short': 'Contact Me',
 		'common.back': 'Go Back',
@@ -41,6 +43,7 @@ export const ui = {
 		...work.de,
 		...site.de,
 		...startPageTranslations.de,
+		...servicesTranslations.de,
 		'cta.call': 'Jetzt kostenloses Gespräch vereinbaren',
 		'cta.short': 'Kontaktieren',
 		'common.back': 'Zurück',

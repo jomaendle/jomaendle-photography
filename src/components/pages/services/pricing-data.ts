@@ -1,10 +1,10 @@
-import { type TranslationKey } from '@/i18n/utils.ts';
 import {
 	offer1,
 	offer2,
 	offer_image_editing,
 	offer_image_editing_2,
 } from '@/i18n/translations/pricing.i18n.ts';
+import { type TranslationKey } from '@/i18n/utils.ts';
 
 export interface PhotoShootingOffersBase {
 	title: TranslationKey;
@@ -90,7 +90,7 @@ export const OFFERS: PhotoShootingOffersBase[] = [
 		duration: '30min',
 		type: 'editing',
 		price: offer_image_editing_2.price,
-		title: 'pricing.offering4.title',
+		title: 'pricing.offering5.title',
 		description: 'pricing.offering4.description',
 		includes: ['pricing.offering5.included.1'],
 		cta: 'pricing.offering4.cta',
