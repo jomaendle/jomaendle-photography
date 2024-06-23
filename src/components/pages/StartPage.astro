@@ -1,26 +1,25 @@
 ---
+import { CustomerReviewPreview } from '@/components/pages/customer-reviews/CustomerReview';
+import { Button } from '@/components/ui/button';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import LayoutCard from '../../components/LayoutCard.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getHeroImages } from '../../state/images.service';
+import ContactForm from '../ui/ContactForm';
 import {
-	type ContactFormTranslations,
+	getContactTranslations,
 	getCustomerReviewTranslations,
 	getDatePickerTranslations,
+	type ContactFormTranslations,
 } from './contact/contact-translations';
-import { getContactTranslations } from './contact/contact-translations';
-import { getHeroImages } from '../../state/images.service';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-import Layout from '../../layouts/Layout.astro';
-import LayoutCard from '../../components/LayoutCard.astro';
-import { Button } from '@/components/ui/button';
 import ImageRow from './start/ImageRow.astro';
-import ContactForm from '../ui/ContactForm';
-import { CustomerReviewPreview } from '@/components/pages/customer-reviews/CustomerReview';
 
+import { getPageTitle } from '../../util/page-title';
+import ProcessDescription from './services/ProcessDescription';
 import {
 	getTranslatedOffers,
 	getTranslatedShootingDescriptions,
 } from './services/services-translation.util';
-import { getCollection } from 'astro:content';
-import { getPageTitle } from '../../util/page-title';
-import ProcessDescription from './services/ProcessDescription';
 
 const optimizedMobileImages = await getHeroImages();
 
@@ -75,7 +74,10 @@ const offerTranslations = getTranslatedOffers(t);
 
 			<hr />
 
-			<CustomerReviewPreview translations={reviewTranslations} />
+			<CustomerReviewPreview
+				translations={reviewTranslations}
+				showMoreLink={`/${lang}/services#reviews`}
+			/>
 
 			<hr />
 
@@ -87,7 +89,7 @@ const offerTranslations = getTranslatedOffers(t);
 					shootingSteps={getTranslatedShootingDescriptions(t)}
 				/>
 
-				<a class="mt-4" href=`/${lang}/services`>
+				<a class="mt-8" href=`/${lang}/services`>
 					<Button size="lg" variant="outline"> {t('start.viewAllServices')}</Button>
 				</a>
 			</div>

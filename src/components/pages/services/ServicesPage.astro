@@ -1,18 +1,20 @@
 ---
-import type { PhotoShootingOffersTranslated } from './pricing-data';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+import Layout from '../../../layouts/Layout.astro';
+import { getPageTitle } from '../../../util/page-title';
 import { getCustomerReviewTranslations } from '../contact/contact-translations';
 import { CustomerReview } from '../customer-reviews/CustomerReview';
 import PricingOptions from '../services/PricingOptions';
 import ProcessDescription from '../services/ProcessDescription';
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-import Layout from '../../../layouts/Layout.astro';
+import MoreWork from './MoreWork.astro';
+import { type PricingOptionsTranslations } from './PricingOptions';
+import type { PhotoShootingOffersTranslated } from './pricing-data';
 import {
 	getTranslatedCustomerReviews,
-	getTranslatedShootingDescriptions,
 	getTranslatedOffers,
+	getTranslatedShootingDescriptions,
 } from './services-translation.util';
-import { getPageTitle } from '../../../util/page-title';
-import { type PricingOptionsTranslations } from './PricingOptions';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -51,11 +53,16 @@ function onOfferClick(offer: PhotoShootingOffersTranslated) {
 		</section>
 
 		<section>
+			<a id="reviews"></a>
 			<CustomerReview
 				customerReviewTranslations={reviewTranslations}
 				translatedCustomerReview={getTranslatedCustomerReviews(t)}
 				client:load
 			/>
+		</section>
+
+		<section>
+			<MoreWork />
 		</section>
 	</section>
 </Layout>

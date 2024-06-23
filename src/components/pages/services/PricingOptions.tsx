@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button';
 import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
 import PageTitle from '@/components/ui/PageTitle';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group.tsx';
-import { useEffect, useState } from 'react';
-import { CameraIcon, ImageIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card.tsx';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group.tsx';
 import type { Language } from '@/i18n/utils.ts';
+import { CameraIcon, ImageIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export interface PricingOptionsTranslations {
 	shooting: string;
@@ -71,13 +71,10 @@ export default function PricingOptions({
 					>
 						<CardHeader className="bg-gray-50 p-6">
 							<h3 className="text-xl font-bold">{shooting.title}</h3>
-							<p className="mt-1 text-sm text-gray-500">For {shooting.targetGroup}</p>
+							<p className="mt-1 text-sm text-gray-500">{shooting.targetGroup}</p>
 						</CardHeader>
 						<CardContent className="grid flex-1 gap-4 bg-white px-6 py-4">
-							<h2 className="text-3xl font-semibold">
-								{shooting.price}
-								{shooting.isBusiness && <p className="inline text-base">/month</p>}
-							</h2>
+							<h2 className="text-3xl font-semibold">{shooting.price}</h2>
 
 							<ul>
 								{shooting.includes.map((include, index) => (
@@ -88,7 +85,7 @@ export default function PricingOptions({
 							</ul>
 						</CardContent>
 						<CardFooter>
-							<a href={`/${lang}/contact&offer=${shooting.title}`}>
+							<a href={`/${lang}/contact&offer=${shooting.title}`} className="w-full">
 								<Button
 									variant="outline"
 									size="lg"

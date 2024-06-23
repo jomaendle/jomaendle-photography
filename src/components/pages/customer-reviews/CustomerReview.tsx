@@ -1,13 +1,13 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
-import {
-	getAverageRating,
-	getStars,
-} from '@/components/pages/customer-reviews/customer-review.utils.tsx';
 import {
 	CUSTOMER_REVIEW_DATA,
 	type CustomerReviewData,
 } from '@/components/pages/customer-reviews/customer-review.data.ts';
+import {
+	getAverageRating,
+	getStars,
+} from '@/components/pages/customer-reviews/customer-review.utils.tsx';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
 
 export interface CustomerReviewPreviewTranslations {
 	title: string;
@@ -17,8 +17,10 @@ export interface CustomerReviewPreviewTranslations {
 
 export function CustomerReviewPreview({
 	translations,
+	showMoreLink,
 }: {
 	translations: CustomerReviewPreviewTranslations;
+	showMoreLink?: string;
 }) {
 	const updatedDescription = translations.description.replace(
 		'{count}',
@@ -46,11 +48,15 @@ export function CustomerReviewPreview({
 				</a>
 			</p>
 
-			<div className="mt-4">
-				<Button variant="outline" size="lg">
-					{translations.readMoreReviews}
-				</Button>
-			</div>
+			{showMoreLink && (
+				<div className="mt-4">
+					<a href={showMoreLink}>
+						<Button variant="outline" size="lg">
+							{translations.readMoreReviews}
+						</Button>
+					</a>
+				</div>
+			)}
 		</div>
 	);
 }
