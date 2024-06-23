@@ -67,6 +67,7 @@ export const pricing = {
 		'pricing.offering3.included.2': `${offer_business.editedPictures} edited pictures per month`,
 		'pricing.offering3.included.3': 'Location of your choice',
 		'pricing.offering4.title': 'Image Editing',
+		'pricing.offering5.title': 'Image Editing - 5 Pictures',
 		'pricing.offering4.description':
 			'You have some pictures that need to be edited? No problem! I will make sure you get the best pictures possible.',
 		'pricing.offering4.cta': 'Request Image Editing',
@@ -110,6 +111,7 @@ export const pricing = {
 		'pricing.offering3.included.2': `${offer_business.editedPictures} bearbeitete Bilder pro Monat`,
 		'pricing.offering3.included.3': 'Ort deiner Wahl',
 		'pricing.offering4.title': 'Bildbearbeitung',
+		'pricing.offering5.title': 'Bildbearbeitung - 5 Bilder',
 		'pricing.offering4.description':
 			'Du hast Bilder, die bearbeitet werden müssen? Kein Problem! Ich werde sicherstellen, dass du die besten Bilder bekommst.',
 		'pricing.offering4.cta': 'Bildbearbeitung anfragen',

@@ -34,10 +34,6 @@ export default function PricingOptions({
 		setShootingOffers(shootings.filter((shooting) => shooting.type === selectedShooting));
 	}, [selectedShooting]);
 
-	function onShootingClick(shooting: PhotoShootingOffersTranslated) {
-		console.log(shooting);
-	}
-
 	return (
 		<div className="grid w-full items-center gap-6 md:mx-auto md:max-w-5xl lg:gap-12">
 			<PageTitle title={title} subtitle={subtitle} />
@@ -85,13 +81,8 @@ export default function PricingOptions({
 							</ul>
 						</CardContent>
 						<CardFooter>
-							<a href={`/${lang}/contact&offer=${shooting.title}`} className="w-full">
-								<Button
-									variant="outline"
-									size="lg"
-									className={'w-full'}
-									onClick={() => onShootingClick(shooting)}
-								>
+							<a href={`/${lang}/contact?offer=${shooting.title}`} className="w-full">
+								<Button variant="outline" size="lg" className={'w-full'}>
 									{shooting.cta}
 								</Button>
 							</a>

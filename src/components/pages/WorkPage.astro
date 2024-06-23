@@ -1,10 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { type CollectionEntry, getCollection } from 'astro:content';
-import WorkCard from '../ui/WorkCard.astro';
-import { clientProjectsKey } from '../../content/config';
-import { getLangFromUrl, useTranslations } from  '@/i18n/utils';
 import PageTitle from '@/components/ui/PageTitle';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { clientProjectsKey } from '../../content/config';
+import Layout from '../../layouts/Layout.astro';
+import WorkCard from '../ui/WorkCard.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,7 +17,7 @@ const clientProjects: CollectionEntry<'client-projects'>[] = await getCollection
 	<section class="card mx-auto max-w-6xl flex h-full flex-col gap-8">
 		<PageTitle title={t('work.title')} subtitle={t('work.subtitle')} />
 
-		<div class="grid gap-4 h-full sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full pt-2 sm:pt-8">
+		<div class="grid gap-3 h-full sm:gap-6 xs:grid-cols-2 lg:grid-cols-3 w-full pt-2 sm:pt-8">
 			{
 				clientProjects.map((project) => (
 					<a href=`/${lang}/details/${project.slug}` transition:name=`details-${project.slug}-0`

@@ -1,9 +1,10 @@
 'use client';
 
-import * as React from 'react';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
+import * as React from 'react';
 
-import { cn } from '@/lib/utils';
+import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';
+import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
 import { Button } from '@/components/ui/button';
 import {
 	Command,
@@ -14,18 +15,19 @@ import {
 	CommandList,
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
-import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';
+import { cn } from '@/lib/utils';
 import { useEffect } from 'react';
 
 export function Combobox({
 	offers,
 	translations,
 	onSelect,
+	initialValue,
 }: {
 	offers: PhotoShootingOffersTranslated[];
 	translations: ContactFormTranslations;
 	onSelect: (value: string) => void;
+	initialValue?: string;
 }) {
 	const [open, setOpen] = React.useState(false);
 	const [value, setValue] = React.useState('');
@@ -34,6 +36,12 @@ export function Combobox({
 		value: offer.title,
 		label: offer.title,
 	}));
+
+	useEffect(() => {
+		if (initialValue) {
+			setValue(initialValue);
+		}
+	}, [initialValue]);
 
 	useEffect(() => {
 		window.addEventListener('resetForm', () => {

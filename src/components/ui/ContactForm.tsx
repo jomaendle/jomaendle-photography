@@ -1,22 +1,23 @@
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
-import { toast } from 'sonner';
-import PageTitle from '@/components/ui/PageTitle.tsx';
-import { DatePicker, type DatePickerTranslations } from '@/components/ui/datePicker.tsx';
-import { Combobox } from '@/components/ui/combobox.tsx';
-import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
-import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';
 import {
 	encodeFormData,
 	getContactFormData,
 	isContactFormValid,
 	resetContactForm,
 } from '@/components/pages/contact/contact-form.util.ts';
+import type { ContactFormTranslations } from '@/components/pages/contact/contact-translations.ts';
+import type { PhotoShootingOffersTranslated } from '@/components/pages/services/pricing-data.ts';
+import PageTitle from '@/components/ui/PageTitle.tsx';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
+import { Combobox } from '@/components/ui/combobox.tsx';
+import { DatePicker, type DatePickerTranslations } from '@/components/ui/datePicker.tsx';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
-function Separator() {
+export function Separator() {
 	return <div className="h-[1px] w-8 bg-gray-300"></div>;
 }
 
@@ -31,6 +32,17 @@ export default function ContactForm({
 	offers?: PhotoShootingOffersTranslated[];
 	datePickerTranslations: DatePickerTranslations;
 }) {
+	const [offerFromUrl, setOfferFromUrl] = useState<string | null>(null);
+
+	useEffect(() => {
+		// check the url for the offer parameter
+		const urlParams = new URLSearchParams(window.location.search);
+		const offer = urlParams.get('offer');
+		if (offer) {
+			setOfferFromUrl(offer);
+		}
+	}, []);
+
 	function onDateChange(date: Date) {
 		if (!date) {
 			return;
@@ -153,7 +165,12 @@ export default function ContactForm({
 
 						<div className="flex flex-col gap-2">
 							<Label>{translations.offers.title}</Label>
-							<Combobox offers={offers} translations={translations} onSelect={onOfferChange} />
+							<Combobox
+								offers={offers}
+								translations={translations}
+								initialValue={offerFromUrl}
+								onSelect={onOfferChange}
+							/>
 							<input type="hidden" name="offer" id="offer" />
 						</div>
 
