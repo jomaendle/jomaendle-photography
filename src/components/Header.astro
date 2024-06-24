@@ -1,7 +1,7 @@
 ---
-import { getLangFromUrl, useTranslations, getNavItemLink } from '@/i18n/utils';
-import MobileMenu from './MobileMenu.astro';
+import { getLangFromUrl, getNavItemLink, useTranslations } from '@/i18n/utils';
 import { LINKS } from '../models/nav-item';
+import MobileMenu from './MobileMenu.astro';
 import { Button } from './ui/button';
 
 const lang = getLangFromUrl(Astro.url);

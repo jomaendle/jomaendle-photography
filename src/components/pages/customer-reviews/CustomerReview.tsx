@@ -8,11 +8,14 @@ import {
 } from '@/components/pages/customer-reviews/customer-review.utils.tsx';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card.tsx';
+import { useState } from 'react';
 
 export interface CustomerReviewPreviewTranslations {
 	title: string;
 	description: string;
 	readMoreReviews: string;
+	readMoreCta: string;
+	readLessCta: string;
 }
 
 export function CustomerReviewPreview({
@@ -68,6 +71,16 @@ export function CustomerReview({
 	customerReviewTranslations: CustomerReviewPreviewTranslations;
 	translatedCustomerReview: CustomerReviewData[];
 }) {
+	const [showMore, setShowMore] = useState<boolean[]>(
+		new Array(translatedCustomerReview.length).fill(false),
+	);
+
+	function toggleShowMore(index: number) {
+		const newShowMore = [...showMore];
+		newShowMore[index] = !newShowMore[index];
+		setShowMore(newShowMore);
+	}
+
 	return (
 		<div className="mx-auto grid w-full max-w-5xl gap-6 lg:gap-12">
 			<CustomerReviewPreview translations={customerReviewTranslations} />
@@ -85,7 +98,16 @@ export function CustomerReview({
 						<CardContent className="flex flex-col gap-4">
 							{review.translation && (
 								<div className="text-sm leading-loose text-gray-500 empty:hidden">
-									<p className="leading-5">{review.translation}</p>
+									<p
+										className={`overflow-hidden leading-5 ${showMore[index] ? null : 'line-clamp-3'}`}
+									>
+										{review.translation}
+									</p>
+									<Button variant="link" size="link" onClick={() => toggleShowMore(index)}>
+										{showMore[index]
+											? customerReviewTranslations.readLessCta
+											: customerReviewTranslations.readMoreCta}
+									</Button>
 								</div>
 							)}
 

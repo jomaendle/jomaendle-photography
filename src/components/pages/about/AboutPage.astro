@@ -1,14 +1,14 @@
 ---
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
-import Layout from '../../../layouts/Layout.astro';
-import LayoutCard from '../../LayoutCard.astro';
-import me from './me.png';
-import { Image } from 'astro:assets';
 import PageTitle from '@/components/ui/PageTitle';
 import { Button } from '@/components/ui/button';
-import { UnsplashData } from './UnsplashData';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { Image } from 'astro:assets';
 import { ExternalLink } from 'lucide-react';
+import Layout from '../../../layouts/Layout.astro';
 import { getPageTitle } from '../../../util/page-title';
+import LayoutCard from '../../LayoutCard.astro';
+import { UnsplashData } from './UnsplashData';
+import me from './me.png';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -31,12 +31,12 @@ const unsplashViewTranslations = {
 			<div
 				class="mt-8 flex w-full flex-col-reverse items-center justify-start gap-12 sm:mt-12 sm:flex-row sm:items-start sm:gap-16 lg:gap-20"
 			>
-				<div class="relative shrink-0 overflow-hidden rounded-xl">
+				<div class="relative shrink-0 overflow-hidden rounded-2xl">
 					<Image
 						src={me}
 						alt="Jo Maendle"
 						height="720"
-						class="relative z-10 aspect-square max-w-[200px] bg-gray-100 object-cover object-right-top md:max-h-[260px] md:max-w-[240px]"
+						class="relative z-10 aspect-[4/5] max-w-[200px] bg-gray-100 object-cover object-right-top md:max-h-[260px] md:max-w-[240px]"
 					/>
 				</div>
 
