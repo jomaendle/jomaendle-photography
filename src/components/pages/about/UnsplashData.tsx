@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import { type UnsplashData } from '@/components/pages/about/unsplash-data.ts';
-import { DownloadIcon, EyeIcon, ImageIcon, UsersIcon, ExternalLinkIcon } from 'lucide-react';
 import { $unsplashStats, readUnsplashStatsFromLocalStorage } from '@/state/unsplash.ts';
-import { Button } from '@/components/ui/button.tsx';
+import { DownloadIcon, EyeIcon, ImageIcon, UsersIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const formatter = new Intl.NumberFormat('de', { notation: 'compact' });
 
@@ -18,18 +17,25 @@ type UnsplashViewTranslations = {
 	cta: string;
 };
 
+const cachedStats: UnsplashData = {
+	views: 319_000_000,
+	downloads: 390_313,
+	totalPhotos: 219,
+	followers: 275,
+};
+
 export function UnsplashData({ translations }: Props) {
-	const [unsplashData, setUnsplashData] = useState<UnsplashData>({
-		views: 0,
-		downloads: 0,
-		totalPhotos: 0,
-		followers: 0,
-	});
+	const [unsplashData, setUnsplashData] = useState<UnsplashData>(cachedStats);
 
 	useEffect(() => {
 		const statsFromStorage = readUnsplashStatsFromLocalStorage();
 
 		if (statsFromStorage?.stats && Object.keys(statsFromStorage.stats).length > 0) {
+			if (statsFromStorage.stats.views === 0) {
+				setUnsplashData(cachedStats);
+				return;
+			}
+
 			setUnsplashData(statsFromStorage.stats);
 			return;
 		}
@@ -46,12 +52,7 @@ export function UnsplashData({ translations }: Props) {
 		} catch (error) {
 			console.error('Failed loading Unsplash data:', error);
 
-			return {
-				views: 0,
-				downloads: 0,
-				totalPhotos: 0,
-				followers: 0,
-			};
+			return cachedStats;
 		}
 	}
 
@@ -87,15 +88,6 @@ export function UnsplashData({ translations }: Props) {
 								</span>
 							</div>
 						))}
-					</div>
-
-					<div>
-						<a href="https://unsplash.com/@leonardo_64" rel="noreferrer" target="_blank">
-							<Button variant="link" size="linkLg" className="flex items-center gap-2">
-								{translations.cta}
-								<ExternalLinkIcon size="12" className="shrink-0" />
-							</Button>
-						</a>
 					</div>
 				</section>
 			)}
