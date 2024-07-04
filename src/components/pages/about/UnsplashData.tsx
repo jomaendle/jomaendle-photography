@@ -59,14 +59,17 @@ export function UnsplashData({ translations }: Props) {
 	return (
 		<>
 			{unsplashData?.views > 0 && (
-				<section className="flex flex-col gap-6 pt-12 text-center md:gap-10">
+				<section className="mt-24 flex flex-col gap-6 text-center md:gap-10">
 					<header className="flex w-full flex-col items-center gap-2">
-						<h3 className="mt-12 text-2xl font-bold">{translations.title}</h3>
+						<h3 className="text-3xl font-bold">{translations.title}</h3>
 						<p className="max-w-lg text-gray-500">{translations.description}</p>
 					</header>
 					<div className="flex grid-cols-2 flex-col gap-4 sm:grid md:gap-6 lg:grid-cols-4">
 						{Object.keys(unsplashData).map((key) => (
-							<div key={key} className="flex flex-col gap-2 rounded-xl bg-gray-100 p-6">
+							<div
+								key={key}
+								className="flex flex-col justify-between gap-2 rounded-xl bg-gray-100 p-4"
+							>
 								<header className="flex items-center gap-2 text-sm">
 									{key === 'downloads' && (
 										<DownloadIcon size="16" className="shrink-0 text-gray-500" />

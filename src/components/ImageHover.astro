@@ -12,12 +12,12 @@ const { label } = Astro.props;
 <div
 	class="fade-in-animation absolute inset-0 flex-col gap-2 bg-gradient-to-t from-black/80 to-50% transition-all group-hover:opacity-100 sm:gap-4 sm:opacity-0"
 >
-	<div class="flex h-full items-end justify-end p-2 text-white sm:p-4">
+	<div class="flex h-full items-end justify-end p-3 pr-1 text-white sm:p-4">
 		<h2 class="leading-2 ml-1 flex-1 text-lg font-medium leading-5 sm:text-2xl">
 			{label}
 		</h2>
 
-		<Button variant="ghost" size="sm">
+		<Button variant="ghost" size="icon">
 			<ArrowRight />
 		</Button>
 	</div>

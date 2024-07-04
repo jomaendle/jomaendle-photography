@@ -32,7 +32,7 @@ const WORK_ITEMS: {
 	},
 	{
 		icon: 'instagram',
-		title: '@jomaendle.photography',
+		title: '@jomaendle_photography',
 		platform: 'Instagram',
 		link: 'https://instagram.com/jomaendle_photography',
 	},
@@ -41,14 +41,16 @@ const WORK_ITEMS: {
 
 <h3 class="text-center text-3xl font-bold">{t('services.moreWork')}</h3>
 
-<div class="mt-4 flex w-full max-w-5xl grid-cols-2 flex-col gap-4 sm:grid md:gap-8 lg:grid-cols-4">
+<div class="mt-4 flex w-full max-w-5xl grid-cols-2 flex-col gap-4 sm:grid md:gap-6 lg:grid-cols-4">
 	{
 		WORK_ITEMS.map((item) => (
 			<a
 				href={item.link}
 				target="_blank"
-				class="flex w-full min-w-[200px] cursor-pointer flex-col items-start gap-2 rounded-xl bg-gray-100 p-4 text-sm transition-all hover:scale-[1.01] hover:shadow-lg"
+				class="flex w-full min-w-[200px] cursor-pointer flex-col justify-between gap-2 rounded-xl bg-gray-100 p-4 text-sm transition-all hover:scale-[1.01] hover:shadow-lg"
 			>
+				<span class="text-gray-600"> {item.title || t(item.titleKey)}</span>
+
 				<div class="flex items-center gap-2">
 					{item.icon === 'earth' && <EarthIcon />}
 					{item.icon === 'unsplash' && (
@@ -71,9 +73,6 @@ const WORK_ITEMS: {
 						</svg>
 					)}
 					<span class="text-lg font-bold">{item.platform}</span>
-				</div>
-				<div>
-					<span class="text-gray-600"> {item.title || t(item.titleKey)}</span>
 				</div>
 			</a>
 		))

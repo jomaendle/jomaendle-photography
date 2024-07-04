@@ -1,4 +1,5 @@
 ---
+import MoreWork from '@/components/pages/services/MoreWork.astro';
 import PageTitle from '@/components/ui/PageTitle';
 import { Button } from '@/components/ui/button';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
@@ -36,7 +37,7 @@ const unsplashViewTranslations = {
 						src={me}
 						alt="Jo Maendle"
 						height="720"
-						class="relative z-10 aspect-[4/5] max-w-[200px] bg-gray-100 object-cover object-right-top md:max-h-[260px] md:max-w-[240px]"
+						class="relative z-10 aspect-[4/5] h-auto max-w-[240px] bg-gray-50 object-contain object-right-top"
 					/>
 				</div>
 
@@ -71,6 +72,10 @@ const unsplashViewTranslations = {
 			</div>
 
 			<UnsplashData client:only="react" translations={unsplashViewTranslations} />
+
+			<div class="flex flex-col items-center pb-4 pt-24">
+				<MoreWork />
+			</div>
 		</main>
 	</LayoutCard>
 </Layout>
