@@ -63,7 +63,6 @@ export function DatePicker({
 					mode="single"
 					selected={date}
 					onSelect={setDate}
-					initialFocus
 					locale={de}
 					disabled={{
 						dayOfWeek: [1, 2, 3, 4],

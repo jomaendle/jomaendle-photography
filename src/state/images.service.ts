@@ -9,6 +9,8 @@ export async function getHeroImages(): Promise<HeroImage[]> {
 	const imagesFromCollection = await getCollection(heroImagesKey);
 	const clientProjects = await getCollection(clientProjectsKey);
 
+	imagesFromCollection[0].data.project;
+
 	if (!Array.isArray(imagesFromCollection)) {
 		return [];
 	}
@@ -21,12 +23,12 @@ export async function getHeroImages(): Promise<HeroImage[]> {
 				quality: 85,
 			});
 
-			const title = clientProjects.find((project) => project.slug === image.data.project.slug)?.data
+			const title = clientProjects.find((project) => project.id === image.data.project?.id)?.data
 				.title;
 
 			return <HeroImage>{
 				...optimizedImage,
-				path: image?.data?.project.slug,
+				path: image?.data?.project?.id,
 				title: title,
 			};
 		}),
